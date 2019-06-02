@@ -25,6 +25,7 @@
     "rimraf": "^2.6.1",
     "source-map-loader": "^0.2.1",
     "style-loader": "^0.22.1",
+    "tslib": "^1.9.3",
     "tslint": "^5.5.0",
     "tslint-loader": "^3.5.3",
     "typescript": "^3.0.1",

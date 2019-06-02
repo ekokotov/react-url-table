@@ -1,8 +1,18 @@
+import React from 'react';
 import {ReactPaginateProps} from "react-paginate";
 
 export interface IHeaderProp {
     name: string,
-    render? (name: string): string
+
+    render?(name: string): string | React.ReactElement
+}
+
+// Functionally the same as Exclude, but for strings only.
+// type Diff<T extends string, U extends string> = ({[P in T]: P } & {[P in U]: never } & { [x: string]: never })[T]
+// type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>
+
+interface IPaginateProps extends Partial<ReactPaginateProps>{
+    pageCount?: number;
 }
 export interface ITableProps {
     url?: string,
@@ -13,7 +23,7 @@ export interface ITableProps {
     headers: IHeaderProp[],
     pageSize?: number
     uniqProp: string,
-    pagination?: ReactPaginateProps
+    pagination?: IPaginateProps
 }
 
 export enum SortingModes {

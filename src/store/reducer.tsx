@@ -1,4 +1,3 @@
-//import initialStore from "./initialStore";
 import {IStore} from "../components/types";
 import {paginate} from "../helper/pagination";
 
