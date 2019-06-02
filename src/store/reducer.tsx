@@ -1,24 +1,26 @@
-import initialStore from "./initialStore";
+//import initialStore from "./initialStore";
 import {IStore} from "../components/types";
+import {paginate} from "../helper/pagination";
 
 export type Action = {
     type: string,
-    payload: any
+    payload?: any
 };
 
-function reduce(state: IStore = initialStore, action: Action): IStore {
+function reduce(state: IStore, action: Action): IStore {
     switch (action.type) {
-        // case 'SET_INITIAL_SETTINGS':
-        //     return {
-        //         ...state,
-        //         ...action.payload
-        //     };
-        case 'SET_DATA':
+        case 'SET_DATA_FROM_URL':
             return {
                 ...state,
                 data: action.payload.data,
-                displayData: action.payload.data.length ? action.payload.data.slice(0, state.pageSize) : action.payload.data,
+                displayData: action.payload.data,
                 inProgress: false
+            };
+        case 'SET_CURRENT_PAGE':
+            return {
+                ...state,
+                currentPage: action.payload.page,
+                displayData: paginate(state.data, state.pageSize, action.payload.page),
             };
         default:
             return state

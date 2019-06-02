@@ -1,6 +1,21 @@
 .table {
     width: 100%;
 }
+
 .table thead {
     background-color: antiquewhite;
+}
+
+.table__pagination li {
+    display: inline-block;
+    padding: 0 5px;
+    cursor: pointer;
+}
+
+.table__pagination a {
+    outline: none;
+}
+
+.table__pagination li.selected {
+    border: 1px solid mediumvioletred;
 }

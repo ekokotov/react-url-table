@@ -56,7 +56,7 @@ const config = {
     ].filter(Boolean)
   },
   resolve: {
-    extensions: ['.ts', '.js', '.tsx']
+    extensions: ['.ts', '.js', '.tsx', '.json']
   },
   plugins: plugins,
   devServer: {

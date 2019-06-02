@@ -4,6 +4,7 @@ import Tbody from './components/tbody';
 import {StoreProvider} from "./store/context";
 import Table from "./components/table";
 import {ITableProps} from "./components/types";
+import Pagination from "./components/pagination";
 
 function UrlTable(props: ITableProps): React.ReactElement {
     return (
@@ -12,6 +13,7 @@ function UrlTable(props: ITableProps): React.ReactElement {
                 <Thead/>
                 <Tbody/>
             </Table>
+            <Pagination/>
         </StoreProvider>
     );
 }

@@ -6,10 +6,16 @@ const initialStore: IStore = {
     fields: [],
     headers: [],
     pageSize: 10,
+    currentPage: 0,
     search: 'global',
     sorting: SortingModes.simple,
     inProgress: true,
-    uniqProp: 'id'
+    uniqProp: 'id',
+    pagination: {
+        pageCount: 1,
+        pageRangeDisplayed: 5,
+        marginPagesDisplayed: 1
+    }
 };
 
 export default initialStore;
