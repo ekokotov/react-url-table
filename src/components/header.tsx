@@ -2,14 +2,19 @@ import React from 'react';
 import {IHeaderProp} from "./types";
 
 interface IProps {
-    data?: IHeaderProp
+    data: IHeaderProp
 }
 
 function Header(props: IProps): React.ReactElement {
-    const {render, name} = props.data;
+    const renderHeader = (data: IHeaderProp) => {
+        if (typeof data === 'string') {
+            return data;
+        }
+        return data.render ? data.render(data.name) : data.name;
+    };
 
     return (
-        <th>{render ? render(name) : name}</th>
+        <th>{renderHeader(props.data)}</th>
     )
 }
 
