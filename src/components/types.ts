@@ -23,7 +23,7 @@ export interface ITableProps {
     search?: 'global' | boolean,
     sorting?: SortingModes | keyof typeof SortingModes,
     fields: string[],
-    headers: IHeaderProp[],
+    headers?: IHeaderProp[],
     pageSize?: number
     uniqProp: string,
     pagination?: IPaginateProps
