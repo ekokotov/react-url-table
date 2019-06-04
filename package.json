@@ -49,6 +49,7 @@
   },
   "version": "0.0.1",
   "dependencies": {
+    "mobx-react-lite": "^1.4.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-paginate": "^6.3.0"
