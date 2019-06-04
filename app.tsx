@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {render} from 'react-dom';
 import UrlTable from "./src";
-import {data} from './mock.json';
+import {data} from './test/mock.json';
 
 const headers = [
     {
