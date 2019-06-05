@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Store} from "../store/context";
+import {TableContext} from "../store/store";
 import Row from "./row";
 import {IStore} from "./types";
 
@@ -8,7 +8,7 @@ interface IProps {
 }
 
 function Tbody(props: React.PropsWithChildren<IProps>): React.ReactElement {
-    const [store]: [IStore] = useContext(Store);
+    const store: IStore = useContext(TableContext);
 
     return (
         <tbody>

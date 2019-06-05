@@ -1,17 +1,20 @@
 import React, {useContext} from 'react';
-import {Store} from "../store/context";
-import {IStore} from "./types";
+import {TableContext} from "../store/store";
+import {IFieldsProp, IStore} from "./types";
+import Cell from "./cell";
 
 interface IProps {
     data: any
 }
 
 function Row(props: React.PropsWithChildren<IProps>): React.ReactElement {
-    const [store]: [IStore] = useContext(Store);
+    const store: IStore = useContext(TableContext);
 
     return (
         <tr>
-            {store.fields.map((prop: string) => <td key={prop}>{props.data[prop]}</td>)}
+            {store.fields.map((field: IFieldsProp) =>
+                <Cell key={store.getHeaderOrFieldValue(field)} field={field} record={props.data}/>
+            )}
         </tr>
     );
 }

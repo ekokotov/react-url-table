@@ -1,103 +1,127 @@
 import React, {useEffect, useState} from "react";
 import {render} from 'react-dom';
 import UrlTable from "./src";
-import {data} from './test/mock.json';
+// import {data} from './test/mock.json';
+import {load} from "./src/helper/http";
 
-const headers = [
+// const headers = [
+//     {
+//         name: 'Name',
+//         render: (title: string): string => `#${title}`
+//     }, {
+//         name: 'Age'
+//     }, {
+//         name: 'Eyes'
+//     }, {
+//         name: 'Phone'
+//     }, {
+//         name: 'Favorite fruit',
+//         render: function (title: string): React.ReactElement {
+//             return <div onClick={() => console.log(title)}><b>🍏 ({title})</b></div>
+//         }
+//     }
+// ];
+const headerPeople = [
     {
-        name: 'Name',
-        render: (title: string): string => `#${title}`
+        name: 'First name'
     }, {
-        name: 'Age'
+        name: 'Last name'
     }, {
-        name: 'Eyes'
+        name: 'Email'
     }, {
-        name: 'Phone'
-    }, {
-        name: 'Favorite fruit',
+        name: 'Avatar',
         render: function (title: string): React.ReactElement {
-            return <div onClick={() => console.log(title)}><b>🍏 ({title})</b></div>
+            return <div onClick={() => console.log(title)}><b>🎩({title})</b></div>
         }
     }
 ];
-// const headerPeople = [
-//     {
-//         name: 'Email',
-//     }, {
-//         name: 'Gender'
-//     }, {
-//         name: 'Cell'
-//     }
-// ];
+const fieldsPeople = [
+    {
+        name: 'first_name'
+    }, {
+        name: 'last_name'
+    }, {
+        name: 'email'
+    }, {
+        name: 'avatar',
+        render: function (avatar: string): React.ReactElement {
+            return <img src={avatar} width={50} height={50} alt="avatar"/>
+        }
+    }
+];
 
 function App(): React.ReactElement {
-    // const [data, setData] = useState([]);
-    // const [page, setPage] = useState(0);
-    //
-    // useEffect(
-    //     () => {
-    //         load(`https://randomuser.me/api/?page=${page}&results=10`)
-    //             .then((data: { results: [] }) => setData(data.results));
-    //     }, [page]
-    // );
+    const [data, setData] = useState([]);
+    const [page, setPage] = useState(1);
+    const [pageSize] = useState(5);
+    const [totalPages, setTotalPages] = useState(1);
+
+    useEffect(
+        () => {
+            load(`https://reqres.in/api/users?page=${page}&per_page=${pageSize}`)
+                .then((res: any) => {
+                    setData(res.data);
+                    setTotalPages(res.total_pages);
+                });
+        }, [page]
+    );
     return (
         <div>
             <UrlTable
-                //url="https://randomuser.me/api/?page=1&results=10"
-                // url="https://next.json-generator.com/api/json/get/4k6xmJ21r"
                 data={data}
-                pageSize={5}
-                headers={headers}
-                fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
+                fields={fieldsPeople}
+                headers={headerPeople} //['First name', 'Last name', 'Email', 'Avatar']
                 pagination={{
-                    // pageCount: 5, // don't specify it
+                    serverPaging: true,
+                    currentPage: page,
+                    pageSize: pageSize,
+                    pageCount: totalPages, // u can don't specify this thing
                     pageRangeDisplayed: 0,
-                    marginPagesDisplayed: 3,
-                    // onPageChange: (page: { selected: number }): void => {
-                    //     setPage(page.selected);
-                    // }
+                    marginPagesDisplayed: 2,
+                    onPageChange: (page: { selected: number }): void => {
+                        setPage(page.selected + 1);
+                    }
                 }}
-                // sorting={'compound'}
-                // search={'global'}
-                uniqProp={'_id'}
+                uniqProp={'email'}
             />
-            <UrlTable
-                //url="https://randomuser.me/api/?page=1&results=10"
-                // url="https://next.json-generator.com/api/json/get/4k6xmJ21r"
-                data={data}
-                pageSize={5}
-                headers={['Name', 'Age', 'EyeColor', 'Phone', 'FavoriteFruit']}
-                fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
-                pagination={{
-                    // pageCount: 5, // don't specify it
-                    pageRangeDisplayed: 0,
-                    marginPagesDisplayed: 3,
-                    // onPageChange: (page: { selected: number }): void => {
-                    //     setPage(page.selected);
-                    // }
-                }}
-                // sorting={'compound'}
-                // search={'global'}
-                uniqProp={'_id'}
-            />
-            <UrlTable
-                //url="https://randomuser.me/api/?page=1&results=10"
-                // url="https://next.json-generator.com/api/json/get/4k6xmJ21r"
-                data={data}
-                pageSize={5}
-                fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
-                pagination={{
-                    // pageCount: 5, // don't specify it
-                    pageRangeDisplayed: 0,
-                    marginPagesDisplayed: 3,
-                    // onPageChange: (page: { selected: number }): void => {
-                    //     setPage(page.selected);
-                    // }
-                }}
-                // sorting={'compound'}
-                // search={'global'}
-                uniqProp={'_id'}
-            />
+            {/*<UrlTable*/}
+            {/*    //url="https://randomuser.me/api/?page=1&results=10"*/}
+            {/*    // url="https://next.json-generator.com/api/json/get/4k6xmJ21r"*/}
+            {/*    data={data}*/}
+            {/*    pageSize={5}*/}
+            {/*    headers={headers}*/}
+            {/*    fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}*/}
+            {/*    pagination={{*/}
+            {/*        // pageCount: 5, // don't specify it*/}
+            {/*        pageRangeDisplayed: 0,*/}
+            {/*        marginPagesDisplayed: 3,*/}
+            {/*        // onPageChange: (page: { selected: number }): void => {*/}
+            {/*        //     setPage(page.selected);*/}
+            {/*        // }*/}
+            {/*    }}*/}
+            {/*    // sorting={'compound'}*/}
+            {/*    // search={'global'}*/}
+            {/*    uniqProp={'_id'}*/}
+            {/*/>*/}
+            {/*<UrlTable*/}
+            {/*    //url="https://randomuser.me/api/?page=1&results=10"*/}
+            {/*    // url="https://next.json-generator.com/api/json/get/4k6xmJ21r"*/}
+            {/*    data={data}*/}
+            {/*    pageSize={5}*/}
+            {/*    headers={['Name', 'Age', 'EyeColor', 'Phone', 'FavoriteFruit']}*/}
+            {/*    fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}*/}
+            {/*    pagination={{*/}
+            {/*        // pageCount: 5, // don't specify it*/}
+            {/*        pageRangeDisplayed: 0,*/}
+            {/*        marginPagesDisplayed: 3,*/}
+            {/*        // onPageChange: (page: { selected: number }): void => {*/}
+            {/*        //     setPage(page.selected);*/}
+            {/*        // }*/}
+            {/*    }}*/}
+            {/*    // sorting={'compound'}*/}
+            {/*    // search={'global'}*/}
+            {/*    uniqProp={'_id'}*/}
+            {/*/>*/}
         </div>
 
     )

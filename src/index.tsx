@@ -1,14 +1,14 @@
 import React from 'react';
 import Thead from './components/thead';
 import Tbody from './components/tbody';
-import {StoreProvider} from "./store/context";
 import Table from "./components/table";
 import {ITableProps} from "./components/types";
 import Pagination from "./components/pagination";
+import {StoreProvider} from "./store/context";
 
 function UrlTable(props: ITableProps): React.ReactElement {
     return (
-        <StoreProvider initialState={props}>
+        <StoreProvider {...props}>
             <Table>
                 <Thead/>
                 <Tbody/>
@@ -18,4 +18,4 @@ function UrlTable(props: ITableProps): React.ReactElement {
     );
 }
 
-export default UrlTable;
+export default React.memo(UrlTable);

@@ -1,20 +1,24 @@
 import React from 'react';
 import {ReactPaginateProps} from "react-paginate";
 
-export interface IHeaderPropObject {
+export interface IHeaderOrFieldPropObject {
     name: string,
 
     render?(name: string): string | React.ReactElement
 }
 
-export type IHeaderProp = IHeaderPropObject | string
+export type IHeaderProp = IHeaderOrFieldPropObject | string
+export type IFieldsProp = IHeaderOrFieldPropObject | string
 
 // Functionally the same as Exclude, but for strings only.
 // type Diff<T extends string, U extends string> = ({[P in T]: P } & {[P in U]: never } & { [x: string]: never })[T]
 // type Omit<T, K extends keyof T> = Pick<T, Diff<keyof T, K>>
 
 interface IPaginateProps extends Partial<ReactPaginateProps> {
-    pageCount?: number;
+    pageCount?: number,
+    currentPage?: number,
+    pageSize?: number,
+    serverPaging: boolean
 }
 
 export interface ITableProps {
@@ -22,9 +26,8 @@ export interface ITableProps {
     data?: any[],
     search?: 'global' | boolean,
     sorting?: SortingModes | keyof typeof SortingModes,
-    fields: string[],
+    fields: IFieldsProp[],
     headers?: IHeaderProp[],
-    pageSize?: number
     uniqProp: string,
     pagination?: IPaginateProps
 }
@@ -38,6 +41,9 @@ export interface IStore extends ITableProps {
     data: any[],
     displayData: any[],
     inProgress: boolean,
-    currentPage: number,
-    pagination: ReactPaginateProps;
+    pagination: IPaginateProps;
+    mergeWithProps: (props: ITableProps) => void,
+    renderHeader: (obj: IHeaderProp | IFieldsProp) => string | React.ReactElement
+    renderField: (field: IFieldsProp, record: Object) => string | React.ReactElement
+    getHeaderOrFieldValue: (obj: IHeaderProp | IFieldsProp) => string
 }

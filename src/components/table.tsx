@@ -1,8 +1,8 @@
 import React, {useContext, useEffect} from 'react';
-import {Store} from "../store/context";
-import {Action} from "../store/reducer";
-import {loadDataFromUrl} from "../store/actions";
+import {TableContext} from "../store/store";
 import {IStore} from "./types";
+import {load} from "../helper/http";
+import {observer} from "mobx-react";
 
 const styles = require('../styles/index.css');
 
@@ -11,15 +11,15 @@ interface IProps {
 }
 
 function Table(props: React.PropsWithChildren<IProps>): React.ReactElement {
-    const [store, dispatch]: [IStore, React.Dispatch<Action>] = useContext(Store);
+    const store: IStore = useContext(TableContext);
 
-    if(store.url) {
-        useEffect(
-            () => {
-                loadDataFromUrl(store.url, dispatch);
-            }, [store.url]
-        );
-    }
+    useEffect(
+        () => {
+            if (store.url) {
+                load(store.url).then((res: any) => store.data = res.results);
+            }
+        }, [store.url]
+    );
 
     return (
         <table className={'table'}>
@@ -28,4 +28,4 @@ function Table(props: React.PropsWithChildren<IProps>): React.ReactElement {
     );
 }
 
-export default Table;
+export default observer(Table);

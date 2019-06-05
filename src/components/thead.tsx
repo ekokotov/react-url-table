@@ -1,27 +1,21 @@
 import React, {useContext} from 'react';
-import {Store} from "../store/context";
+import {TableContext} from "../store/store";
 import Header from "./header";
-import {IHeaderProp, IHeaderPropObject, IStore} from "./types";
+import {IHeaderProp, IStore} from "./types";
 
 interface IProps {
 
 }
 
 function Thead(props: React.PropsWithChildren<IProps>): React.ReactElement {
-    const [store]: [IStore] = useContext(Store);
-    const renderHeader = (header: IHeaderProp): string => {
-        if(typeof header === 'string') {
-            return header;
-        }
-        return header.name;
-    };
+    const store: IStore = useContext(TableContext);
 
     return (
         <thead>
         <tr>
             {
                 store.headers.map((header: IHeaderProp) =>
-                    <Header key={renderHeader(header)} data={header}/>)
+                    <Header key={store.getHeaderOrFieldValue(header)} data={header}/>)
             }
         </tr>
         </thead>

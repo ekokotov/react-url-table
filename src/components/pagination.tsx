@@ -1,18 +1,18 @@
 import React, {useContext} from 'react';
-import ReactPaginate from 'react-paginate';
+import ReactPaginate, {ReactPaginateProps} from 'react-paginate';
 import {IStore} from "./types";
-import {Action} from "../store/reducer";
-import {Store} from "../store/context";
+import {TableContext} from "../store/store";
 
 function Pagination() {
-    const [store, dispatch]: [IStore, React.Dispatch<Action>] = useContext(Store);
+    const store: IStore = useContext(TableContext);
     const onPageChange = (page: { selected: number }): void => {
-        dispatch({type: 'SET_CURRENT_PAGE', payload: {page: page.selected}})
+        store.pagination.currentPage = page.selected;
     };
+    const options = store.pagination as ReactPaginateProps;
 
     return (
         <div className="table__pagination">
-            <ReactPaginate onPageChange={onPageChange} {...store.pagination} />
+            <ReactPaginate onPageChange={onPageChange} {...options} />
         </div>
     );
 }

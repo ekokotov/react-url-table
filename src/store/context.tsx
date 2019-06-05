@@ -1,23 +1,18 @@
-import React, {createContext, useReducer} from 'react';
-import {initializeStore} from './initialStore';
-import reducer, {Action} from './reducer';
-import {IStore, ITableProps} from "../components/types";
-
-export const Store: React.Context<any> = createContext<[IStore, React.Dispatch<Action>]>(null);
-
-interface IProps {
-    initialState: ITableProps
-}
+import React from 'react';
+import {ITableProps} from "../components/types";
+import {useLocalStore} from "mobx-react";
+import {RootStore, TableContext} from "./store";
 
 export const StoreProvider = (
-    props: React.PropsWithChildren<IProps>
+    props: React.PropsWithChildren<ITableProps>
 ): React.ReactElement => {
-    const initialStoreValue = initializeStore(props.initialState);
-    const stateWithDispatch = useReducer(reducer, initialStoreValue);
+    const store = useLocalStore(() => RootStore);
+
+    store.mergeWithProps(props);
 
     return (
-        <Store.Provider value={stateWithDispatch}>
+        <TableContext.Provider value={store}>
             {props.children}
-        </Store.Provider>
+        </TableContext.Provider>
     );
 };
