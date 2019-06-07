@@ -1,6 +1,8 @@
-import {IStore, SortingModes} from "../components/types";
+import {IFieldsProp, IHeaderProp, IStore, SortingModes} from "../components/types";
 import {createContext} from "react";
 import {paginate} from "../helper/pagination";
+import HeaderModel from "./header";
+import IFieldModel from "./field";
 
 export const RootStore = {
     data: [],
@@ -11,30 +13,9 @@ export const RootStore = {
     },
 
     mergeWithProps(props) {
-        Object.assign(this, props)
-    },
-
-    renderHeader(data) {
-        if (typeof data === 'string') {
-            return data;
-        }
-        return data.render ? data.render(data.name) : data.name;
-    },
-
-    renderField(field, record) {
-        if (typeof field === 'string') {
-            return record[field];
-        } else if (field.render) {
-            return field.render(record[field.name]);
-        }
-        return record[field.name];
-    },
-
-    getHeaderOrFieldValue(header) {
-        if (typeof header === 'string') {
-            return header;
-        }
-        return header.name;
+        Object.assign(this, props);
+        this.headers = props.headers.map((header: IHeaderProp, index: number) => new HeaderModel(header, index));
+        this.fields = props.fields.map((field: IFieldsProp, index: number) => new IFieldModel(field, index));
     },
 
     fields: [],
@@ -55,22 +36,4 @@ export const RootStore = {
 
 export const TableContext = createContext(null);
 
-// export function initializeStore(props: ITableProps): IStore {
-//     return {
-//         ...initialStore,
-//         ...props,
-//         ...(!props.url && { // just pass raw data to display
-//             displayData: ,
-//             inProgress: false
-//         }),
-//         ...{
-//             pagination: {
-//                 ...initialStore.pagination,
-//                 ...props.pagination,
-//                 ...(props.data && (props.pagination && !props.pagination.pageCount) && {
-//                     pageCount: Math.round(props.data.length / props.pageSize)
-//                 })
-//             }
-//         }
-//     };
-// }
+// pageCount: Math.round(props.data.length / props.pageSize)

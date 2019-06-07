@@ -1,16 +1,13 @@
-import React, {useContext} from 'react';
-import {IHeaderProp, IStore} from "./types";
-import {TableContext} from "../store/store";
+import React from 'react';
+import HeaderModel from "../store/header";
 
 interface IProps {
-    data: IHeaderProp
+    header: HeaderModel
 }
 
 function Header(props: IProps): React.ReactElement {
-    const store: IStore = useContext(TableContext);
-
     return (
-        <th>{store.renderHeader(props.data)}</th>
+        <th>{props.header.render()}</th>
     )
 }
 

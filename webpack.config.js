@@ -25,7 +25,6 @@ const plugins = [
 
 const config = {
   devtool: isProd ? 'hidden-source-map' : 'source-map',
-  // context: path.resolve('./src'),
   entry: {
     app: './app.tsx'
   },
@@ -51,7 +50,7 @@ const config = {
             }
           }
         : null,
-      // { test: /\.html$/, loader: 'html-loader' },
+      // { __tests__: /\.html$/, loader: 'html-loader' },
       { test: /\.css$/, loaders: ['style-loader', 'css-loader'] }
     ].filter(Boolean)
   },

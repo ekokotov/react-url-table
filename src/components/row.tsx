@@ -1,7 +1,8 @@
 import React, {useContext} from 'react';
-import {TableContext} from "../store/store";
-import {IFieldsProp, IStore} from "./types";
 import Cell from "./cell";
+import FieldModel from "../store/field";
+import {TableContext} from "../store/store";
+import {IStore} from "./types";
 
 interface IProps {
     data: any
@@ -12,8 +13,8 @@ function Row(props: React.PropsWithChildren<IProps>): React.ReactElement {
 
     return (
         <tr>
-            {store.fields.map((field: IFieldsProp) =>
-                <Cell key={store.getHeaderOrFieldValue(field)} field={field} record={props.data}/>
+            {store.fields.map((field: FieldModel) =>
+                <Cell key={field.property} field={field} record={props.data}/>
             )}
         </tr>
     );

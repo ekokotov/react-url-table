@@ -1,6 +1,6 @@
 import React from 'react';
 import {ITableProps} from "../components/types";
-import {useLocalStore} from "mobx-react";
+import {useLocalStore} from 'mobx-react-lite';
 import {RootStore, TableContext} from "./store";
 
 export const StoreProvider = (

@@ -4,7 +4,7 @@ import {IStore} from "./types";
 import {load} from "../helper/http";
 import {observer} from "mobx-react";
 
-const styles = require('../styles/index.css');
+import '../styles/index.css';
 
 interface IProps {
 

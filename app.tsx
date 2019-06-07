@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {render} from 'react-dom';
 import UrlTable from "./src";
-// import {data} from './test/mock.json';
+import {data as dataMock} from './__tests__/mock.json';
 import {load} from "./src/helper/http";
 
 // const headers = [
@@ -30,20 +30,20 @@ const headerPeople = [
         name: 'Email'
     }, {
         name: 'Avatar',
-        render: function (title: string): React.ReactElement {
-            return <div onClick={() => console.log(title)}><b>🎩({title})</b></div>
+        render: function (title: string, property: string): React.ReactElement {
+            return <div onClick={() => console.log(title, property)}><b>🎩({title})</b></div>
         }
     }
 ];
 const fieldsPeople = [
     {
-        name: 'first_name'
+        property: 'first_name'
     }, {
-        name: 'last_name'
+        property: 'last_name'
     }, {
-        name: 'email'
+        property: 'email'
     }, {
-        name: 'avatar',
+        property: 'avatar',
         render: function (avatar: string): React.ReactElement {
             return <img src={avatar} width={50} height={50} alt="avatar"/>
         }
@@ -70,7 +70,7 @@ function App(): React.ReactElement {
             <UrlTable
                 data={data}
                 fields={fieldsPeople}
-                headers={headerPeople} //['First name', 'Last name', 'Email', 'Avatar']
+                headers={headerPeople} // ['First name', 'Last name', 'Email', 'Avatar']
                 pagination={{
                     serverPaging: true,
                     currentPage: page,
@@ -83,6 +83,19 @@ function App(): React.ReactElement {
                     }
                 }}
                 uniqProp={'email'}
+            />
+
+            <UrlTable
+                data={dataMock} uniqProp={'_id'}
+                fields={['name', 'address']}
+                headers={['Name', 'Address']}
+                pagination={{
+                    pageSize: 5,
+                    pageCount: 2,
+                    currentPage: 0,
+                    pageRangeDisplayed: 0,
+                    marginPagesDisplayed: 2
+                }}
             />
             {/*<UrlTable*/}
             {/*    //url="https://randomuser.me/api/?page=1&results=10"*/}

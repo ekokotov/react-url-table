@@ -1,17 +1,15 @@
-import React, {useContext} from 'react';
-import {IFieldsProp, IStore} from "./types";
-import {TableContext} from "../store/store";
+import React from 'react';
+import FieldModel from "../store/field";
 
 interface IProps {
     record: Object,
-    field: IFieldsProp
+    field: FieldModel
 }
 
 function Cell(props: IProps) {
-    const store: IStore = useContext(TableContext);
 
     return (
-        <td>{store.renderField(props.field, props.record)}</td>
+        <td>{props.field.render(props.record)}</td>
     );
 }
 
