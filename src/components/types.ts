@@ -21,7 +21,8 @@ interface IPaginateProps extends Partial<ReactPaginateProps> {
     pageCount?: number,
     currentPage?: number,
     pageSize?: number,
-    serverPaging?: boolean
+    serverPaging?: boolean,
+    show?: boolean
 }
 
 export interface ITableProps {
@@ -32,7 +33,7 @@ export interface ITableProps {
     fields: IFieldsProp[],
     headers?: IHeaderProp[],
     uniqProp: string,
-    pagination?: IPaginateProps
+    pagination?: IPaginateProps | false
 }
 
 export enum SortingModes {

@@ -2,9 +2,13 @@ import React, {useContext} from 'react';
 import ReactPaginate, {ReactPaginateProps} from 'react-paginate';
 import {IStore} from "./types";
 import {TableContext} from "../store/store";
+import {observer} from "mobx-react";
 
-function Pagination() {
+function Pagination(): React.ReactElement {
     const store: IStore = useContext(TableContext);
+    if (!store.pagination.show) {
+        return null;
+    }
     const onPageChange = (page: { selected: number }): void => {
         store.pagination.currentPage = page.selected;
     };
@@ -17,4 +21,4 @@ function Pagination() {
     );
 }
 
-export default Pagination;
+export default observer(Pagination);

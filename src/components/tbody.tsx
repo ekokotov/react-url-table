@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {TableContext} from "../store/store";
 import Row from "./row";
 import {IStore} from "./types";
+import {observer} from "mobx-react";
 
 interface IProps {
 
@@ -19,4 +20,4 @@ function Tbody(props: React.PropsWithChildren<IProps>): React.ReactElement {
     );
 }
 
-export default Tbody;
+export default observer(Tbody);

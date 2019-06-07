@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {render} from 'react-dom';
 import UrlTable from "./src";
-import {data as dataMock} from './__tests__/mock.json';
+// import {data as dataMock} from './__tests__/mock.json';
 import {load} from "./src/helper/http";
 
 // const headers = [
@@ -85,18 +85,6 @@ function App(): React.ReactElement {
                 uniqProp={'email'}
             />
 
-            <UrlTable
-                data={dataMock} uniqProp={'_id'}
-                fields={['name', 'address']}
-                headers={['Name', 'Address']}
-                pagination={{
-                    pageSize: 5,
-                    pageCount: 2,
-                    currentPage: 0,
-                    pageRangeDisplayed: 0,
-                    marginPagesDisplayed: 2
-                }}
-            />
             {/*<UrlTable*/}
             {/*    //url="https://randomuser.me/api/?page=1&results=10"*/}
             {/*    // url="https://next.json-generator.com/api/json/get/4k6xmJ21r"*/}
