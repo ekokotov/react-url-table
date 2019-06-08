@@ -13,7 +13,8 @@
     "importHelpers": true,
     "noImplicitAny": true,
     "suppressImplicitAnyIndexErrors": true,
-    "removeComments": true
+    "removeComments": true,
+    "lib": ["dom"]
   },
   "exclude": ["node_modules", "dist", "__tests__"]
 }

@@ -6,11 +6,13 @@ import Field from "../store/field";
 export interface IHeaderPropObject {
     name: string,
     property?: string,
+
     render?(name: string, property: string): string | React.ReactElement
 }
 
 export interface IFieldPropObject {
     property: string,
+
     render?(value: any, object: Object): string | React.ReactElement
 }
 
@@ -27,6 +29,7 @@ interface IPaginateProps extends Partial<ReactPaginateProps> {
 
 export interface ITableProps {
     url?: string,
+    fetchSuccess?: (res: any) => [],
     data?: any[],
     search?: 'global' | boolean,
     sorting?: SortingModes | keyof typeof SortingModes,
@@ -49,4 +52,5 @@ export interface IStore extends Partial<ITableProps> {
     inProgress: boolean,
     pagination: IPaginateProps,
     mergeWithProps: (props: ITableProps) => void
+    _initPagination: (props: ITableProps) => void
 }

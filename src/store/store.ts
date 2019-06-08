@@ -3,6 +3,7 @@ import {createContext} from "react";
 import {paginate} from "../helper/pagination";
 import HeaderModel from "./header";
 import IFieldModel from "./field";
+import {load} from "../helper/http";
 
 export const RootStore = {
     data: [],
@@ -13,10 +14,6 @@ export const RootStore = {
                 paginate(this.data, this.pagination.pageSize, this.pagination.currentPage)
         }
         return this.data;
-    },
-
-    get showPaging() {
-        return this.pagination.pageCount > 1 && this.pagination.show
     },
 
     fields: [],
@@ -41,13 +38,26 @@ export const RootStore = {
         }
         this.fields = props.fields.map((field: IFieldsProp, index: number) => new IFieldModel(field, index));
         this.uniqProp = props.uniqProp;
+        this.url = props.url;
 
         if (props.data && props.data.length) {
             this.data = props.data;
             this.inProgress = false;
         }
 
-        if (typeof props.pagination === 'boolean' && props.pagination === false) {
+        if (this.url) {
+            load(this.url)
+                .then((res: any) => {
+                    this.data = props.fetchSuccess ? props.fetchSuccess(res) : res
+                })
+                .then((): void => this._initPagination(props));
+        } else {
+            this._initPagination(props)
+        }
+    },
+
+    _initPagination(props) {
+        if (!props.pagination) {
             this.pagination.show = false
         } else if (props.pagination) {
             Object.assign(this.pagination, props.pagination);
@@ -55,8 +65,9 @@ export const RootStore = {
                 this.pagination.pageCount = Math.round(this.data.length / this.pagination.pageSize);
             }
         }
-    },
+    }
 
 } as IStore;
 
+window["__store"] = RootStore;
 export const TableContext = createContext(null);

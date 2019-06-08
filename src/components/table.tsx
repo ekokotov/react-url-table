@@ -11,15 +11,15 @@ interface IProps {
 }
 
 function Table(props: React.PropsWithChildren<IProps>): React.ReactElement {
-    const store: IStore = useContext(TableContext);
-
-    useEffect(
-        () => {
-            if (store.url) {
-                load(store.url).then((res: any) => store.data = res.results);
-            }
-        }, [store.url]
-    );
+    // const store: IStore = useContext(TableContext);
+    //
+    // useEffect(
+    //     () => {
+    //         if (store.url) {
+    //             load(store.url).then((res: any) => store.data = res.results);
+    //         }
+    //     }, [store.url]
+    // );
 
     return (
         <table className={'table'}>

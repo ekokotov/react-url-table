@@ -2,7 +2,7 @@ import 'jsdom-global/register';
 import {mount} from 'enzyme';
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import waitUntil from 'async-wait-until';
+// import waitUntil from 'async-wait-until';
 // import nock from 'nock';
 import React from 'react';
 import UrlTable from "../src";
@@ -83,6 +83,18 @@ describe('Simple example with local data and paging', () => {
                 fields={['name', 'address']}
                 headers={['Name', 'Address']}
                 pagination={false}
+            />
+        );
+        expect(table.find('.table__pagination').exists()).toEqual(false);
+    });
+
+    it('should hide paging with empty pagination', () => {
+        const table = mount(
+            <UrlTable
+                data={data}
+                uniqProp={'_id'}
+                fields={['name', 'address']}
+                headers={['Name', 'Address']}
             />
         );
         expect(table.find('.table__pagination').exists()).toEqual(false);
