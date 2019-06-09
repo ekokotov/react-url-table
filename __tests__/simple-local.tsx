@@ -51,6 +51,19 @@ describe('Simple example with local data and paging', () => {
         expect(table.find('tbody td').first().text()).toEqual(data[0].name);
     });
 
+    it('should render cell with dot pattern (property1.property2)', () => {
+        const table = mount(
+            <UrlTable
+                data={data}
+                uniqProp={'_id'}
+                fields={['name', 'address', 'friends[0].name']}
+                headers={['Name', 'Address', 'Friend']}
+            />
+        );
+
+        expect(table.find('tbody tr').first().find('td').last().text()).toEqual(data[0].friends[0].name);
+    });
+
     it('should show working paging', async () => {
         const PAGE_SIZE = 5;
         const calculatedPageCount = Math.round(data.length / PAGE_SIZE);
