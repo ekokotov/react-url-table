@@ -1,5 +1,6 @@
 import React from "react";
 import {IFieldsProp} from "../components/types";
+import _get from "lodash/get";
 
 class FieldModel {
     property: string;
@@ -19,7 +20,9 @@ class FieldModel {
     }
 
     render(object: Object): string | React.ReactElement {
-        return this.renderHandler ? this.renderHandler(object[this.property], object) : object[this.property];
+        const value = _get(object, this.property);
+
+        return this.renderHandler ? this.renderHandler(value, object) : value;
     }
 }
 

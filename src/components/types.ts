@@ -53,4 +53,5 @@ export interface IStore extends Partial<ITableProps> {
     pagination: IPaginateProps,
     mergeWithProps: (props: ITableProps) => void
     _initPagination: (props: ITableProps) => void
+    _loadByUrl: (props: ITableProps) => void
 }

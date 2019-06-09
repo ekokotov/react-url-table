@@ -99,9 +99,9 @@ function App(): React.ReactElement {
             <UrlTable
                 url="https://randomuser.me/api/?page=1&results=10"
                 fetchSuccess={(res: any): [] => res.results}
-                headers={['Email', 'Gender', 'Cell']}
-                fields={['email', 'gender', 'cell']}
-                uniqProp={'uuid'}
+                headers={['Email', 'Gender', 'Cell', 'State']}
+                fields={['email', 'gender', 'cell', 'location.state']}
+                uniqProp={'login.uuid'}
             />
             {/*<UrlTable*/}
             {/*    //url="https://randomuser.me/api/?page=1&results=10"*/}

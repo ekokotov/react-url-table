@@ -7,15 +7,6 @@ import {load} from "../helper/http";
 
 export const RootStore = {
     data: [],
-
-    get displayData() {
-        if (this.pagination.pageCount > 1) {
-            return this.pagination.serverPaging ? this.data :
-                paginate(this.data, this.pagination.pageSize, this.pagination.currentPage)
-        }
-        return this.data;
-    },
-
     fields: [],
     headers: [],
     search: 'global',
@@ -32,7 +23,16 @@ export const RootStore = {
         marginPagesDisplayed: 1
     },
 
+    get displayData() {
+        if (this.pagination.pageCount > 1) {
+            return this.pagination.serverPaging ? this.data :
+                paginate(this.data, this.pagination.pageSize, this.pagination.currentPage)
+        }
+        return this.data;
+    },
+
     mergeWithProps(props) {
+        this.inProgress = true;
         if (props.headers) {
             this.headers = props.headers.map((header: IHeaderProp, index: number) => new HeaderModel(header, index));
         }
@@ -46,13 +46,20 @@ export const RootStore = {
         }
 
         if (this.url) {
-            load(this.url)
-                .then((res: any) => {
-                    this.data = props.fetchSuccess ? props.fetchSuccess(res) : res
-                })
-                .then((): void => this._initPagination(props));
+            this._loadByUrl(props);
         } else {
             this._initPagination(props)
+        }
+    },
+
+    async _loadByUrl(props) {
+        try {
+            const res: object = await load(this.url);
+            this.inProgress = false;
+            this.data = props.fetchSuccess ? props.fetchSuccess(res) : res;
+            this._initPagination(props);
+        } catch (e) {
+            console.error(e);
         }
     },
 
