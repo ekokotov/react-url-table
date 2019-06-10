@@ -1,7 +1,7 @@
 import React, {useEffect, useState, Fragment} from "react";
 import {render} from 'react-dom';
 import UrlTable from "./src";
-import {data as dataMock} from './__tests__/mock.json';
+import {data as dataMock} from './__tests__/mocks/mock.json';
 import {load} from "./src/helper/http";
 
 const headers = [

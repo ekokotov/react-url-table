@@ -1,27 +1,18 @@
-import 'jsdom-global/register';
-import {mount, render} from 'enzyme';
-import page1 from './page1.json';
-import Enzyme from 'enzyme';
-import {data as mockData} from './mock.json';
-import Adapter from 'enzyme-adapter-react-16';
+import {mount} from 'enzyme';
+import page1 from '../mocks/page1.json';
+import {data as mockData} from '../mocks/mock.json';
 import React from 'react';
-import UrlTable from "../src";
+import UrlTable from "../../src";
 import waitUntil from "async-wait-until";
-// @ts-ignore
-const fetch = require('jest-fetch-mock');
-// @ts-ignore
-global.fetch = fetch;
-
-// automatically unmount and cleanup DOM after the test is finished.
-Enzyme.configure({adapter: new Adapter()});
+import fetch from 'jest-fetch-mock';
 
 describe('Simple load table by URL', () => {
     beforeEach(() => {
-        fetch.resetMocks();
+        global.fetch.resetMocks();
     });
 
     it('Component should render with paging', async () => {
-        fetch.mockResponses([JSON.stringify(mockData), {status: 200}]);
+        global.fetch.mockResponses([JSON.stringify(mockData), {status: 200}]);
 
         const PAGE_SIZE = 5;
         const table = mount(
@@ -47,7 +38,7 @@ describe('Simple load table by URL', () => {
     });
 
     it('Component should render without paging (empty pagination)', async () => {
-        fetch.mockResponses([JSON.stringify(mockData), {status: 200}]);
+        global.fetch.mockResponses([JSON.stringify(mockData), {status: 200}]);
 
         const table = mount(
             <UrlTable
@@ -69,7 +60,7 @@ describe('Simple load table by URL', () => {
     });
 
     it('Component should render with specified data-mapper(fetchSuccess)', async () => {
-        fetch.mockResponses([JSON.stringify(page1), {status: 200}]);
+        global.fetch.mockResponses([JSON.stringify(page1), {status: 200}]);
 
         const table = mount(
             <UrlTable

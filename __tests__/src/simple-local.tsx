@@ -1,14 +1,7 @@
-import 'jsdom-global/register';
 import {mount} from 'enzyme';
-import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-// import waitUntil from 'async-wait-until';
-// import nock from 'nock';
 import React from 'react';
-import UrlTable from "../src";
-import {data} from './mock.json';
-// automatically unmount and cleanup DOM after the test is finished.
-Enzyme.configure({adapter: new Adapter()});
+import UrlTable from "../../src";
+import {data} from '../mocks/mock.json';
 
 describe('Simple example with local data and paging', () => {
     it('Component should render with header', () => {

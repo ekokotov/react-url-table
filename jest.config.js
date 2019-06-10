@@ -124,7 +124,9 @@ module.exports = {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each __tests__
-  // setupFilesAfterEnv: [],
+  setupFilesAfterEnv: [
+    "<rootDir>/__tests__/_setup.ts"
+  ],
 
   // A list of paths to snapshot serializer modules Jest should use for snapshot testing
   // snapshotSerializers: [],
@@ -172,9 +174,9 @@ module.exports = {
   //   "\\\\node_modules\\\\"
   // ],
 
-  // transform: {
-  //   '^.+\\.tsx?$': 'ts-jest',
-  // },
+  transform: {
+    '^.+\\.(ts | tsx)?$': 'ts-jest',
+  },
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,

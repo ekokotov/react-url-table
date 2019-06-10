@@ -1,12 +1,7 @@
-import 'jsdom-global/register';
 import {mount} from 'enzyme';
-import {data} from './mock.json';
-import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import {data} from '../mocks/mock.json';
 import React from 'react';
-import UrlTable from "../src";
-
-Enzyme.configure({adapter: new Adapter()});
+import UrlTable from "../../src";
 
 describe('Rows selecting', () => {
     let selectedRows = [];

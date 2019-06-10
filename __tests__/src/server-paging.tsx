@@ -1,21 +1,12 @@
-import 'jsdom-global/register';
 import {render} from 'react-dom';
-import Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import waitUntil from 'async-wait-until';
-import page1 from './page1.json';
-import page2 from './page2.json';
+import page1 from '../mocks/page1.json';
+import page2 from '../mocks/page2.json';
 import {act} from 'react-dom/test-utils';
-// @ts-ignore
-const fetch = require('jest-fetch-mock');
-// @ts-ignore
-global.fetch = fetch;
-// automatically unmount and cleanup DOM after the test is finished.
-Enzyme.configure({adapter: new Adapter()});
-
+import fetch from 'jest-fetch-mock';
 import React, {useEffect, useState} from "react";
-import {load} from "../src/helper/http";
-import UrlTable from "../src";
+import {load} from "../../src/helper/http";
+import UrlTable from "../../src";
 
 const DEFAULT_PAGE_SIZE = 5;
 
@@ -57,10 +48,11 @@ function TableWithServerPaging(): React.ReactElement {
 
 describe('Example of controlled server paging', () => {
     let container: any;
+
     beforeEach(() => {
         container = document.createElement('div');
         document.body.appendChild(container);
-        fetch.resetMocks()
+        global.fetch.resetMocks()
     });
 
     afterEach(() => {
@@ -70,7 +62,7 @@ describe('Example of controlled server paging', () => {
 
 
     it('Component should render with header', async () => {
-        fetch.mockResponses([JSON.stringify(page1), { status: 200}], [JSON.stringify(page2), { status: 200}]);
+        global.fetch.mockResponses([JSON.stringify(page1), { status: 200}], [JSON.stringify(page2), { status: 200}]);
 
         act(() => {
             render(<TableWithServerPaging/>, container);
