@@ -1,9 +1,10 @@
-import {IFieldsProp, IHeaderProp, IStore, SortingModes} from "../components/types";
+import {IFieldsProp, IHeaderProp, IStore, SelectModes, SortingModes} from "../components/types";
 import {createContext} from "react";
 import {paginate} from "../helper/pagination";
 import HeaderModel from "./header";
 import IFieldModel from "./field";
 import {load} from "../helper/http";
+import {toJS} from "mobx";
 
 export const RootStore = {
     data: [],
@@ -22,6 +23,25 @@ export const RootStore = {
         pageRangeDisplayed: 5,
         marginPagesDisplayed: 1
     },
+    selectMode: false,
+    onSelect: null,
+    selectedItems: [], // Map ?
+
+    _select(row) {
+        if (!this.selectMode) {
+            return;
+        } else if (!this.selectedItems.includes(row)) {
+            if (this.selectMode === SelectModes.single) {
+                this.selectedItems.clear();
+            }
+            this.selectedItems.push(row)
+        } else {
+            this.selectedItems = this.selectedItems.filter((item: object) => item !== row);
+        }
+        if (this.onSelect) {
+            this.onSelect(toJS(this.selectedItems));
+        }
+    },
 
     get displayData() {
         if (this.pagination.pageCount > 1) {
@@ -39,6 +59,8 @@ export const RootStore = {
         this.fields = props.fields.map((field: IFieldsProp, index: number) => new IFieldModel(field, index));
         this.uniqProp = props.uniqProp;
         this.url = props.url;
+        this.selectMode = props.selectMode;
+        this.onSelect = props.onSelect;
 
         if (props.data && props.data.length) {
             this.data = props.data;

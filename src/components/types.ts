@@ -32,16 +32,23 @@ export interface ITableProps {
     fetchSuccess?: (res: any) => [],
     data?: any[],
     search?: 'global' | boolean,
-    sorting?: SortingModes | keyof typeof SortingModes,
+    sorting?: SortingModes | keyof typeof SortingModes | false,
     fields: IFieldsProp[],
     headers?: IHeaderProp[],
     uniqProp: string,
-    pagination?: IPaginateProps | false
+    pagination?: IPaginateProps | false,
+    onSelect?: (record: object) => void,
+    selectMode?: SelectModes| keyof typeof  SelectModes | false,
 }
 
 export enum SortingModes {
     compound,
     simple
+}
+
+export enum SelectModes {
+    single = 'single',
+    multiple = 'multiple'
 }
 
 export interface IStore extends Partial<ITableProps> {
@@ -51,7 +58,10 @@ export interface IStore extends Partial<ITableProps> {
     displayData: any[],
     inProgress: boolean,
     pagination: IPaginateProps,
-    mergeWithProps: (props: ITableProps) => void
-    _initPagination: (props: ITableProps) => void
-    _loadByUrl: (props: ITableProps) => void
+    mergeWithProps: (props: ITableProps) => void,
+    _initPagination: (props: ITableProps) => void,
+    _loadByUrl: (props: ITableProps) => void,
+    selectedItems: any[],
+    _select: (row: object) => any
+    onSelect: (row: object) => any
 }

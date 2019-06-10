@@ -89,7 +89,7 @@ module.exports = {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
-  // preset: null,
+  preset: 'ts-jest',
 
   // Run tests from one or more projects
   // projects: null,
@@ -172,9 +172,9 @@ module.exports = {
   //   "\\\\node_modules\\\\"
   // ],
 
-  transform: {
-    '^.+\\.tsx?$': 'ts-jest',
-  },
+  // transform: {
+  //   '^.+\\.tsx?$': 'ts-jest',
+  // },
 
   // An array of regexp pattern strings that are matched against all modules before the module loader will automatically return a mock for them
   // unmockedModulePathPatterns: undefined,

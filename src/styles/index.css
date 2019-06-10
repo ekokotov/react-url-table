@@ -6,6 +6,10 @@
     background-color: antiquewhite;
 }
 
+.table tbody tr.selected {
+    background-color: aquamarine;
+}
+
 .table__pagination li {
     display: inline-block;
     padding: 0 5px;

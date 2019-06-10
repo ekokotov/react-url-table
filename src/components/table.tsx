@@ -1,26 +1,10 @@
-import React, {useContext, useEffect} from 'react';
-import {TableContext} from "../store/store";
-import {IStore} from "./types";
-import {load} from "../helper/http";
+import React from 'react';
 import {observer} from "mobx-react";
 
 import '../styles/index.css';
+import {ITableProps} from "./types";
 
-interface IProps {
-
-}
-
-function Table(props: React.PropsWithChildren<IProps>): React.ReactElement {
-    // const store: IStore = useContext(TableContext);
-    //
-    // useEffect(
-    //     () => {
-    //         if (store.url) {
-    //             load(store.url).then((res: any) => store.data = res.results);
-    //         }
-    //     }, [store.url]
-    // );
-
+function Table(props: React.PropsWithChildren<ITableProps>): React.ReactElement {
     return (
         <table className={'table'}>
             {props.children}

@@ -101,6 +101,8 @@ function App(): React.ReactElement {
                 fetchSuccess={(res: any): [] => res.results}
                 headers={['Email', 'Gender', 'Cell', 'State']}
                 fields={['email', 'gender', 'cell', 'location.state']}
+                // selectMode={'single'}
+                // onSelect={(record: object) => console.log('Selected records: ', record)}
                 uniqProp={'login.uuid'}
             />
             {/*<UrlTable*/}

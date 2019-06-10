@@ -33,8 +33,8 @@ jest, enzyme, enzyme-adapter-react-16
 - [x] Supports dot getters (like Object.property1.property2)
 - [x] Empty headers
 - [x] after loading data hook to map data from response(aka fetchSuccess)
-- [ ] fire onSelect
-- [ ] multiple selection
+- [x] fire onSelect
+- [x] multiple selection
 - [ ] show loading indicator 
 - [ ] show errors (for example catch data loading errors) 
 - [ ] local client search
