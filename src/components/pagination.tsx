@@ -6,7 +6,7 @@ import {observer} from "mobx-react";
 
 function Pagination(): React.ReactElement {
     const store: IStore = useContext(TableContext);
-    if (!store.pagination.show) {
+    if (!store.pagination.show || store.inProgress && !store.displayData.length) {
         return null;
     }
     const onPageChange = (page: { selected: number }): void => {

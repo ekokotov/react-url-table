@@ -1,9 +1,9 @@
 import React from "react";
-import {IFieldsProp} from "../components/types";
+import {IFieldsProp, IFieldPropObject} from "../components/types";
 import _get from "lodash/get";
 
+interface FieldModel extends IFieldPropObject {}
 class FieldModel {
-    property: string;
     index: number;
 
     renderHandler?(value: any, object: Object): string | React.ReactElement

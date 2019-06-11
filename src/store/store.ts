@@ -24,15 +24,15 @@ export const RootStore = {
         marginPagesDisplayed: 1
     },
     selectMode: false,
-    onSelect: null,
-    selectedItems: [], // Map ?
+    onSelect: undefined,
+    selectedItems: [],
 
     _select(row) {
         if (!this.selectMode) {
             return;
         } else if (!this.selectedItems.includes(row)) {
             if (this.selectMode === SelectModes.single) {
-                this.selectedItems.clear();
+                this.selectedItems.length = 0;
             }
             this.selectedItems.push(row)
         } else {
@@ -76,7 +76,7 @@ export const RootStore = {
 
     async _loadByUrl(props) {
         try {
-            const res: object = await load(this.url);
+            const res = await load(this.url);
             this.inProgress = false;
             this.data = props.fetchSuccess ? props.fetchSuccess(res) : res;
             this._initPagination(props);

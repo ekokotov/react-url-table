@@ -35,7 +35,7 @@ jest, enzyme, enzyme-adapter-react-16
 - [x] after loading data hook to map data from response(aka fetchSuccess)
 - [x] fire onSelect
 - [x] multiple selection
-- [ ] show loading indicator 
+- [x] show loading indicator 
 - [ ] show errors (for example catch data loading errors) 
 - [ ] local client search
 - [ ] map/filter/change data hook before rendering

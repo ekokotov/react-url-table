@@ -3,6 +3,9 @@ import {ReactPaginateProps} from "react-paginate";
 import Header from "../store/header";
 import Field from "../store/field";
 
+type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
+type XOR<T, U> = (T | U) extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
+
 export interface IHeaderPropObject {
     name: string,
     property?: string,
@@ -27,10 +30,7 @@ interface IPaginateProps extends Partial<ReactPaginateProps> {
     show?: boolean
 }
 
-export interface ITableProps {
-    url?: string,
-    fetchSuccess?: (res: any) => [],
-    data?: any[],
+type ITableBase = {
     search?: 'global' | boolean,
     sorting?: SortingModes | keyof typeof SortingModes | false,
     fields: IFieldsProp[],
@@ -38,8 +38,19 @@ export interface ITableProps {
     uniqProp: string,
     pagination?: IPaginateProps | false,
     onSelect?: (record: object) => void,
-    selectMode?: SelectModes| keyof typeof  SelectModes | false,
+    selectMode?: SelectModes | keyof typeof SelectModes | false,
 }
+
+interface ITableWithUrl {
+    url: string,
+    fetchSuccess?: (res: any) => []
+}
+
+interface ITableWithData {
+    data: any[]
+}
+
+export type ITableProps = XOR<ITableWithUrl, ITableWithData> & ITableBase
 
 export enum SortingModes {
     compound,
@@ -51,7 +62,7 @@ export enum SelectModes {
     multiple = 'multiple'
 }
 
-export interface IStore extends Partial<ITableProps> {
+export interface IStore {
     data: any[],
     headers?: Header[],
     fields?: Field[],
@@ -62,6 +73,7 @@ export interface IStore extends Partial<ITableProps> {
     _initPagination: (props: ITableProps) => void,
     _loadByUrl: (props: ITableProps) => void,
     selectedItems: any[],
+    uniqProp: string,
     _select: (row: object) => any
-    onSelect: (row: object) => any
+    onSelect: undefined | ((row: object) => any)
 }

@@ -62,7 +62,7 @@ describe('Example of controlled server paging', () => {
 
 
     it('Component should render with header', async () => {
-        global.fetch.mockResponses([JSON.stringify(page1), { status: 200}], [JSON.stringify(page2), { status: 200}]);
+        global.fetch.mockResponses([JSON.stringify(page1), {status: 200}], [JSON.stringify(page2), {status: 200}]);
 
         act(() => {
             render(<TableWithServerPaging/>, container);
@@ -70,15 +70,15 @@ describe('Example of controlled server paging', () => {
 
         const renderedHeader = container.querySelectorAll('thead th');
         const body = container.querySelector('tbody');
-        const paging = container.querySelector('.table__pagination ul');
 
-        expect(body.innerHTML).toBe('');
+        expect(body.querySelectorAll('tr:not(.table__progress)').length).toBe(0);
 
         expect(renderedHeader[0].textContent).toEqual('First name');
         expect(renderedHeader[renderedHeader.length - 1].textContent).toEqual('Avatar');
 
         await waitUntil(() => body.innerHTML !== '');
 
+        const paging = container.querySelector('.table__pagination ul');
         expect(paging.querySelectorAll('li').length).toBe(page1.total_pages + 2);
         expect(paging.querySelector('li.selected').textContent).toBe('1');
         expect(body.querySelectorAll('tr').length).toBe(DEFAULT_PAGE_SIZE);

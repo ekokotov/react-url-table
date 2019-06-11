@@ -1,5 +1,5 @@
 import React, {useEffect, useState, Fragment} from "react";
-import {render} from 'react-dom';
+import {render} from "react-dom";
 import UrlTable from "./src";
 import {data as dataMock} from './__tests__/mocks/mock.json';
 import {load} from "./src/helper/http";
@@ -98,9 +98,13 @@ function App(): React.ReactElement {
             <h1>Load by URL with fetchSuccess callback</h1>
             <UrlTable
                 url="https://randomuser.me/api/?page=1&results=10"
+                // data={[]}
                 fetchSuccess={(res: any): [] => res.results}
                 headers={['Email', 'Gender', 'Cell', 'State']}
                 fields={['email', 'gender', 'cell', 'location.state']}
+                pagination={{
+                    pageSize: 5
+                }}
                 // selectMode={'single'}
                 // onSelect={(record: object) => console.log('Selected records: ', record)}
                 uniqProp={'login.uuid'}
