@@ -1,15 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const nodeEnv = process.env.NODE_ENV || 'development';
-const isProd = nodeEnv === 'production';
 
 const plugins = [
-  new webpack.DefinePlugin({
-    'process.env': {
-      NODE_ENV: JSON.stringify(nodeEnv)
-    }
-  }),
   new HtmlWebpackPlugin({
     template: path.resolve('./index.html')
   }),
@@ -24,7 +17,7 @@ const plugins = [
 ];
 
 const config = {
-  devtool: isProd ? 'hidden-source-map' : 'source-map',
+  devtool: 'source-map',
   entry: {
     app: './app.tsx'
   },
@@ -40,19 +33,8 @@ const config = {
         exclude: [/\/node_modules\//],
         use: ['awesome-typescript-loader', 'source-map-loader']
       },
-      !isProd
-        ? {
-            test: /\.(js|ts)$/,
-            loader: 'istanbul-instrumenter-loader',
-            exclude: [/\/node_modules\//],
-            query: {
-              esModules: true
-            }
-          }
-        : null,
-      // { __tests__: /\.html$/, loader: 'html-loader' },
-      { test: /\.css$/, loaders: ['style-loader', 'css-loader'] }
-    ].filter(Boolean)
+      {test: /\.css$/, loaders: ['style-loader', 'css-loader']}
+    ]
   },
   resolve: {
     extensions: ['.ts', '.js', '.tsx', '.json']

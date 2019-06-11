@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {TableContext} from "../store/store";
+import {TableContext} from "../store/context";
 import Row from "./row";
 import {IStore} from "./types";
 import {observer} from "mobx-react";
@@ -16,7 +16,7 @@ function Tbody(props: React.PropsWithChildren<IProps>): React.ReactElement {
     return (
         <tbody>
         {store.inProgress ? <Loading/> :
-            store.displayData.map((data: any) => <Row key={_get(data, store.uniqProp)} data={data}/>)}
+            store.displayData.map((data: any) => <Row key={_get(data, store.props.uniqProp)} data={data}/>)}
         </tbody>
     );
 }

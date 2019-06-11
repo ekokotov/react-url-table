@@ -1,5 +1,6 @@
 import React from 'react';
 import FieldModel from "../store/field";
+import {observer} from "mobx-react";
 
 interface IProps {
     record: Object,
@@ -13,4 +14,4 @@ function Cell(props: IProps) {
     );
 }
 
-export default Cell;
+export default observer(Cell);

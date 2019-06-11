@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import {IStore} from "./types";
-import {TableContext} from "../store/store";
+import {TableContext} from "../store/context";
+import {observer} from "mobx-react";
 
 function Loading() {
     const store: IStore = useContext(TableContext);
@@ -12,4 +13,4 @@ function Loading() {
     );
 }
 
-export default Loading;
+export default observer(Loading);

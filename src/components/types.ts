@@ -22,7 +22,7 @@ export interface IFieldPropObject {
 export type IHeaderProp = IHeaderPropObject | string
 export type IFieldsProp = IFieldPropObject | string
 
-interface IPaginateProps extends Partial<ReactPaginateProps> {
+export interface IPaginateProps extends Partial<ReactPaginateProps> {
     pageCount?: number,
     currentPage?: number,
     pageSize?: number,
@@ -36,7 +36,7 @@ type ITableBase = {
     fields: IFieldsProp[],
     headers?: IHeaderProp[],
     uniqProp: string,
-    pagination?: IPaginateProps | false,
+    pagination?:  IPaginateProps | false ,
     onSelect?: (record: object) => void,
     selectMode?: SelectModes | keyof typeof SelectModes | false,
 }
@@ -63,17 +63,16 @@ export enum SelectModes {
 }
 
 export interface IStore {
+    props: React.ComponentProps<any>,
     data: any[],
+    _data: any[],
     headers?: Header[],
     fields?: Field[],
     displayData: any[],
     inProgress: boolean,
-    pagination: IPaginateProps,
-    mergeWithProps: (props: ITableProps) => void,
-    _initPagination: (props: ITableProps) => void,
-    _loadByUrl: (props: ITableProps) => void,
-    selectedItems: any[],
-    uniqProp: string,
-    _select: (row: object) => void
-    onSelect: undefined | ((row: object) => any)
+    loadByUrl: () => void,
+    selectedItems: {},
+    select: (row: object) => void,
+    pageCount: number,
+    currentPage: number,
 }

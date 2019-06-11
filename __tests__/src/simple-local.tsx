@@ -94,13 +94,14 @@ describe('Simple example with local data and paging', () => {
         expect(table.find('.table__pagination').exists()).toEqual(false);
     });
 
-    it('should hide paging with empty pagination', () => {
+    it('should hide paging with local data and pagination={false}', () => {
         const table = mount(
             <UrlTable
                 data={data}
                 uniqProp={'_id'}
                 fields={['name', 'address']}
                 headers={['Name', 'Address']}
+                pagination={false}
             />
         );
         expect(table.find('.table__pagination').exists()).toEqual(false);

@@ -1,102 +1,77 @@
-import {IFieldsProp, IHeaderProp, IStore, SelectModes, SortingModes} from "../components/types";
-import {createContext} from "react";
+import {IFieldsProp, IHeaderProp, IStore, ITableProps, SelectModes} from "../components/types";
 import {paginate} from "../helper/pagination";
 import HeaderModel from "./header";
 import IFieldModel from "./field";
 import {load} from "../helper/http";
-import {toJS} from "mobx";
+import {useLocalStore, useAsObservableSource} from 'mobx-react';
 
-export const RootStore = {
-    data: [],
-    fields: [],
-    headers: [],
-    search: 'global',
-    sorting: SortingModes.simple,
-    inProgress: true,
-    uniqProp: 'id',
-    pagination: {
-        show: true,
-        serverPaging: false,
-        pageSize: 10,
+export function useRootStore(props: ITableProps): IStore {
+    const observableProps: ITableProps = useAsObservableSource(props);
+
+    return useLocalStore((): IStore => ({
+        props: observableProps,
+        _data: undefined,
+        inProgress: false,
         currentPage: 0,
-        pageCount: 1,
-        pageRangeDisplayed: 5,
-        marginPagesDisplayed: 1
-    },
-    selectMode: false,
-    onSelect: undefined,
-    selectedItems: [],
+        selectedItems: {},
 
-    _select(row) {
-        if (!this.selectMode) {
-            return;
-        } else if (!this.selectedItems.includes(row)) {
-            if (this.selectMode === SelectModes.single) {
-                this.selectedItems.length = 0;
+        select(row) {
+            if (this.props.selectMode) {
+                const uniqPropValue = row[this.props.uniqProp];
+
+                if (!this.selectedItems.hasOwnProperty(uniqPropValue)) {
+                    if (this.props.selectMode === SelectModes.single) {
+                        this.selectedItems = {};
+                    }
+                    this.selectedItems[uniqPropValue] = row;
+                } else {
+                    // const {[uniqPropValue]: _, ...result} = this.selectedItems;
+                    // this.selectedItems = result;
+                    delete this.selectedItems[uniqPropValue];
+                }
+
+                if (this.props.onSelect) {
+                    this.props.onSelect(Object.values(this.selectedItems));
+                }
             }
-            this.selectedItems.push(row)
-        } else {
-            this.selectedItems = this.selectedItems.filter((item: object) => item !== row);
-        }
-        if (this.onSelect) {
-            this.onSelect(toJS(this.selectedItems));
-        }
-    },
+        },
 
-    get displayData() {
-        if (this.pagination.pageCount > 1) {
-            return this.pagination.serverPaging ? this.data :
-                paginate(this.data, this.pagination.pageSize, this.pagination.currentPage)
-        }
-        return this.data;
-    },
+        get displayData() {
+            const pageCount = this.props.pagination.pageCount || Math.round(this.data.length / this.props.pagination.pageSize);
 
-    mergeWithProps(props) {
-        this.inProgress = true;
-        if (props.headers) {
-            this.headers = props.headers.map((header: IHeaderProp, index: number) => new HeaderModel(header, index));
-        }
-        this.fields = props.fields.map((field: IFieldsProp, index: number) => new IFieldModel(field, index));
-        this.uniqProp = props.uniqProp;
-        this.url = props.url;
-        this.selectMode = props.selectMode;
-        this.onSelect = props.onSelect;
-
-        if (props.data && props.data.length) {
-            this.data = props.data;
-            this.inProgress = false;
-        }
-
-        if (this.url) {
-            this._loadByUrl(props);
-        } else {
-            this._initPagination(props)
-        }
-    },
-
-    async _loadByUrl(props) {
-        try {
-            const res = await load(this.url);
-            this.inProgress = false;
-            this.data = props.fetchSuccess ? props.fetchSuccess(res) : res;
-            this._initPagination(props);
-        } catch (e) {
-            console.error(e);
-        }
-    },
-
-    _initPagination(props) {
-        if (!props.pagination) {
-            this.pagination.show = false
-        } else if (props.pagination) {
-            Object.assign(this.pagination, props.pagination);
-            if (this.data.length && !this.pagination.serverPaging && !props.pagination.pageCount) {
-                this.pagination.pageCount = Math.round(this.data.length / this.pagination.pageSize);
+            if (pageCount > 1) {
+                return this.props.pagination.serverPaging ? this.props.data :
+                    paginate(this.data, this.props.pagination.pageSize, this.currentPage)
             }
-        }
-    }
+            return this.data;
+        },
 
-} as IStore;
+        get headers() {
+            return this.props.headers.map((header: IHeaderProp, index: number) => new HeaderModel(header, index))
+        },
 
-window["__store"] = RootStore;
-export const TableContext = createContext(null);
+        get fields() {
+            return this.props.fields.map((field: IFieldsProp, index: number) => new IFieldModel(field, index));
+        },
+
+        get data() {
+            return this._data || this.props.data;
+        },
+
+        get pageCount() {
+            return this.props.pagination.pageCount || this.props.pagination && this.data && Math.round(this.data.length / this.props.pagination.pageSize);
+        },
+
+        async loadByUrl() {
+            this.inProgress = true;
+            try {
+                const res = await load(this.props.url);
+                this.inProgress = false;
+                this._data = this.props.fetchSuccess ? this.props.fetchSuccess(res) : res;
+            } catch (e) {
+                console.error(e);
+            }
+        },
+
+    }));
+}

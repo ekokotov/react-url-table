@@ -1,5 +1,6 @@
 import React from 'react';
 import HeaderModel from "../store/header";
+import {observer} from "mobx-react";
 
 interface IProps {
     header: HeaderModel
@@ -11,4 +12,4 @@ function Header(props: IProps): React.ReactElement {
     )
 }
 
-export default Header;
+export default observer(Header);

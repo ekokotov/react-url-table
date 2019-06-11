@@ -46,6 +46,7 @@ describe('Simple load table by URL', () => {
                 headers={['Name', 'Age', 'Eyes', 'Phone', 'Favorite fruit']}
                 fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
                 uniqProp={'_id'}
+                pagination={false}
             />
         );
         const renderedHeader = table.find('thead th');
@@ -54,7 +55,6 @@ describe('Simple load table by URL', () => {
         expect(renderedHeader.last().text()).toEqual('Favorite fruit');
 
         await waitUntil(() => table.update());
-
         expect(table.find('.table__pagination').exists()).toEqual(false);
         expect(table.find('tbody tr').length > 1).toEqual(true);
     });

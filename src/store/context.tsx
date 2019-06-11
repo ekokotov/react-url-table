@@ -1,14 +1,13 @@
-import React from 'react';
+import React, {createContext} from 'react';
 import {ITableProps} from "../components/types";
-import {useLocalStore} from 'mobx-react-lite';
-import {RootStore, TableContext} from "./store";
+import {useRootStore} from "./store";
+
+export const TableContext = createContext(null);
 
 export const StoreProvider = (
     props: React.PropsWithChildren<ITableProps>
 ): React.ReactElement => {
-    const store = useLocalStore(() => RootStore);
-
-    store.mergeWithProps(props);
+    const store = useRootStore(props);
 
     return (
         <TableContext.Provider value={store}>
