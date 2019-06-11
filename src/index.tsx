@@ -9,7 +9,7 @@ import {StoreProvider} from "./store/context";
 function UrlTable(props: ITableProps): React.ReactElement {
     return (
         <StoreProvider {...props}>
-            <Table {...props}>
+            <Table>
                 <Thead/>
                 <Tbody/>
             </Table>

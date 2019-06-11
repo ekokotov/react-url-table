@@ -6,17 +6,17 @@ import {observer} from "mobx-react";
 
 function Pagination(): React.ReactElement {
     const store: IStore = useContext(TableContext);
-    if (!store.pagination.show || store.inProgress && !store.displayData.length) {
-        return null;
-    }
     const onPageChange = (page: { selected: number }): void => {
         store.pagination.currentPage = page.selected;
     };
-    const options = store.pagination as ReactPaginateProps;
+
+    if (!store.pagination.show || store.inProgress && !store.displayData.length) {
+        return null;
+    }
 
     return (
         <div className="table__pagination">
-            <ReactPaginate onPageChange={onPageChange} {...options} />
+            <ReactPaginate onPageChange={onPageChange} {...store.pagination as ReactPaginateProps} />
         </div>
     );
 }

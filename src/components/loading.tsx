@@ -1,13 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {IStore} from "./types";
+import {TableContext} from "../store/store";
 
-interface IProps {
-    colspan: number
-}
+function Loading() {
+    const store: IStore = useContext(TableContext);
 
-function Loading(props: IProps) {
     return (
         <tr className="table__progress">
-            <td colSpan={props.colspan}>Loading...</td>
+            <td colSpan={store.fields.length}>Loading...</td>
         </tr>
     );
 }

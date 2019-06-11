@@ -74,6 +74,6 @@ export interface IStore {
     _loadByUrl: (props: ITableProps) => void,
     selectedItems: any[],
     uniqProp: string,
-    _select: (row: object) => any
+    _select: (row: object) => void
     onSelect: undefined | ((row: object) => any)
 }

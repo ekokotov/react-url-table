@@ -12,9 +12,10 @@ interface IProps {
 
 function Row(props: React.PropsWithChildren<IProps>): React.ReactElement {
     const store: IStore = useContext(TableContext);
+    const selectRecord = (): void => store._select(props.data);
 
     return (
-        <tr onClick={() => store._select(props.data)} className={classNames({
+        <tr onClick={selectRecord} className={classNames({
             'selected': store.selectedItems.includes(props.data)
         })}>
             {store.fields.map((field: FieldModel) =>

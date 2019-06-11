@@ -2,9 +2,8 @@ import React from 'react';
 import {observer} from "mobx-react";
 
 import '../styles/index.css';
-import {ITableProps} from "./types";
 
-function Table(props: React.PropsWithChildren<ITableProps>): React.ReactElement {
+function Table(props: React.PropsWithChildren<any>): React.ReactElement {
     return (
         <table className={'table'}>
             {props.children}
