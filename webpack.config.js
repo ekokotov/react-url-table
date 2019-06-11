@@ -28,10 +28,9 @@ const config = {
   module: {
     rules: [
       {
-        enforce: 'pre',
         test: /\.tsx?$/,
         exclude: [/\/node_modules\//],
-        use: ['awesome-typescript-loader', 'source-map-loader']
+        use: ['awesome-typescript-loader']
       },
       {test: /\.css$/, loaders: ['style-loader', 'css-loader']}
     ]
