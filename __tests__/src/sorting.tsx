@@ -17,7 +17,6 @@ describe('Rows selecting', () => {
     it('load By url and sort locally (sorting={"simple"}) without pagination', async () => {
         global.fetch.mockResponses([JSON.stringify(mockData), {status: 200}]);
 
-
         const table = mount(
             <UrlTable
                 url="https://next.json-generator.com/api/json/get/4k6xmJ21r"
@@ -228,7 +227,6 @@ describe('Rows selecting', () => {
                 uniqProp={'_id'}
             />
         );
-
 
         const body = table.find('table tbody');
         const thead = table.find('table thead');

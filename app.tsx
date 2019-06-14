@@ -95,9 +95,6 @@ function App(): React.ReactElement {
                 url="https://next.json-generator.com/api/json/get/4k6xmJ21r"
                 headers={headers}
                 fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
-                pagination={{
-                    pageSize: 5
-                }}
                 uniqProp={'_id'}
             />
             {/*<h1>Load by URL with fetchSuccess callback</h1>*/}

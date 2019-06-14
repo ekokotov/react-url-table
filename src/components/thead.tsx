@@ -12,7 +12,7 @@ function Thead(): React.ReactElement {
         <thead>
             <tr>
                 {
-                    store.headers.map((header: HeaderModel) =>
+                    store.headers && store.headers.map((header: HeaderModel) =>
                         <Header key={header.name} header={header}/>)
                 }
             </tr>

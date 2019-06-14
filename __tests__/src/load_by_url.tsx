@@ -117,7 +117,7 @@ describe('Simple load table by URL', () => {
             <UrlTable
                 url="https://reqres.in/api/users?page=1&per_page=5"
                 loadingComponent={
-                    (isLoading) => <div>loading: <mark>{isLoading.toString()}</mark></div>}
+                    (isLoading) => <div>loading: <mark>{isLoading && isLoading.toString()}</mark></div>}
                 fetchSuccess={(res: any): [] => res.data}
                 headers={['Email', 'First name', 'Last name']}
                 fields={['email', 'first_name', 'last_name']}

@@ -10,7 +10,7 @@ import {StoreProvider} from "./store/context";
 class UrlTable extends PureComponent<ITableProps> {
     state = {} as ITableProps;
 
-    static getDerivedStateFromProps(nextProps: ITableProps): object {
+    static getDerivedStateFromProps(nextProps: ITableProps): ITableProps {
         return _merge({
             data: [],
             fields: [],

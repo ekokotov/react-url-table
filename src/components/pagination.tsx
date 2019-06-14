@@ -4,7 +4,7 @@ import {IStore} from "../@typings/types";
 import {TableContext} from "../store/context";
 import {observer} from "mobx-react";
 
-function Pagination(): React.ReactElement {
+function Pagination(): React.ReactElement | null {
     const store: IStore = useContext(TableContext);
     const onPageChange = (page: { selected: number }): void => {
         store.currentPage = page.selected;

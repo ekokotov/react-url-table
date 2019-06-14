@@ -1,13 +1,13 @@
 import React, {createContext} from 'react';
-import {ITableProps} from "../@typings/types";
+import {IStore, ITableProps} from "../@typings/types";
 import {useRootStore} from "./store";
 
-export const TableContext = createContext(null);
+export const TableContext = createContext({} as IStore);
 
 export const StoreProvider = (
     props: React.PropsWithChildren<ITableProps>
 ): React.ReactElement => {
-    const store = useRootStore(props);
+    const store: IStore = useRootStore(props);
 
     return (
         <TableContext.Provider value={store}>

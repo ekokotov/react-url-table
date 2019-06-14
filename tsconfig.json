@@ -8,7 +8,7 @@
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "jsx": "react",
-    "strict": false,
+    "strict": true,
     "experimentalDecorators": true,
     "outDir": "dist",
     "importHelpers": true,

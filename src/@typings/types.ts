@@ -25,8 +25,8 @@ export interface IPaginateProps extends Partial<ReactPaginateProps> {
     pageCount?: number,
     currentPage?: number,
     pageSize?: number,
-    serverPaging?: boolean,
-    show?: boolean
+    serverPaging?: boolean
+    // show?: boolean
 }
 
 type ITableBase = {
@@ -36,7 +36,7 @@ type ITableBase = {
     headers?: IHeaderProp[],
     uniqProp: string,
     pagination?: IPaginateProps | false,
-    onSelect?: (record: object) => void,
+    onSelect?: (record: any[]) => void,
     selectMode?: keyof typeof SelectModes | false,
     loading?: boolean
     loadingComponent?: (isLoading?: boolean) => React.ReactElement
@@ -71,17 +71,17 @@ export enum SelectModes {
 export interface IStore {
     props: ITableProps,
     data: any[],
-    _data: any[],
+    _data: any[] | undefined,
     headers?: Header[],
-    fields?: Field[],
+    fields: Field[],
     displayData: any[],
     inProgress: boolean,
     isLoading: boolean,
     loadByUrl: () => void,
-    selectedItems: object,
-    sorting: object,
+    selectedItems: { [x: string]: any; },
+    sorting: { [x: string]: any; },
     sortedData: any[],
-    select: (row: object) => void,
+    select: (row: { [x: string]: any; }) => void,
     sort: (header: Header) => void,
     pageCount: number,
     currentPage: number,

@@ -17,7 +17,7 @@ import {useAsObservableSource, useLocalStore} from 'mobx-react';
 export function useRootStore(props: ITableProps): IStore {
     const observableProps = useAsObservableSource<ITableProps>(props);
 
-    return useLocalStore<IStore>(() => ({
+    return useLocalStore(() => <IStore>({
         props: observableProps,
         _data: undefined,
         inProgress: false,
@@ -49,7 +49,7 @@ export function useRootStore(props: ITableProps): IStore {
         },
 
         sort(header) {
-            if (this.isLoading || this.props.pagination.serverPaging) {
+            if (this.isLoading || (this.props.pagination && this.props.pagination.serverPaging)) {
                 return;
             }
             const property = this.fields[header.index].property;
@@ -67,13 +67,18 @@ export function useRootStore(props: ITableProps): IStore {
             this.currentPage = 0;
         },
 
-        get displayData() {
-            const pageCount = this.props.pagination.pageCount ||
-                Math.round(this.sortedData.length / this.props.pagination.pageSize);
+        get pageCount() {
+            if (!this.props.pagination) {
+                return 1;
+            }
+            return this.props.pagination.pageCount ||
+                this.props.pagination.pageSize && Math.round(this.sortedData.length / this.props.pagination.pageSize) || 1;
+        },
 
-            if (pageCount > 1) {
+        get displayData() {
+            if ( this.pageCount > 1 && this.props.pagination) {
                 return this.props.pagination.serverPaging ? this.props.data :
-                    paginate(this.sortedData, this.props.pagination.pageSize, this.currentPage)
+                    this.props.pagination.pageSize && paginate(this.sortedData, this.props.pagination.pageSize, this.currentPage)
             }
             return this.sortedData;
         },
@@ -86,7 +91,7 @@ export function useRootStore(props: ITableProps): IStore {
         },
 
         get headers() {
-            return this.props.headers.map((header: IHeaderProp, index: number) => new HeaderModel(header, index))
+            return this.props.headers && this.props.headers.map((header: IHeaderProp, index: number) => new HeaderModel(header, index))
         },
 
         get fields() {
@@ -97,17 +102,15 @@ export function useRootStore(props: ITableProps): IStore {
             return this._data || this.props.data;
         },
 
-        get pageCount() {
-            return this.props.pagination.pageCount || this.props.pagination &&
-                this.data && Math.round(this.data.length / this.props.pagination.pageSize);
-        },
-
         async loadByUrl() {
+            if (!this.props.url) {
+                return
+            }
             this.inProgress = true;
             try {
                 const res = await load(this.props.url);
                 this.inProgress = false;
-                this._data = this.props.fetchSuccess ? this.props.fetchSuccess(res) : res;
+                this._data = <any[]>(this.props.fetchSuccess ? this.props.fetchSuccess(res) : res);
             } catch (e) {
                 console.error(e);
             }
