@@ -15,6 +15,7 @@ class UrlTable extends PureComponent<ITableProps> {
             data: [],
             fields: [],
             headers: [],
+            loading: false,
             uniqProp: 'id',
             selectMode: false,
             onSelect: undefined,

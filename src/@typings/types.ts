@@ -8,7 +8,7 @@ export interface IHeaderPropObject {
     name: string,
     property?: string,
 
-    render?(name: string, property: string): string | React.ReactElement
+    render?(name: string): string | React.ReactElement
 }
 
 export interface IFieldPropObject {
@@ -37,6 +37,8 @@ type ITableBase = {
     pagination?: IPaginateProps | false,
     onSelect?: (record: object) => void,
     selectMode?: keyof typeof SelectModes | false,
+    loading?: boolean
+    loadingComponent?: (isLoading?: boolean) => React.ReactElement
 }
 
 interface ITableWithUrl {
@@ -73,6 +75,7 @@ export interface IStore {
     fields?: Field[],
     displayData: any[],
     inProgress: boolean,
+    isLoading: boolean,
     loadByUrl: () => void,
     selectedItems: object,
     sorting: object,

@@ -30,8 +30,8 @@ const headerPeople = [
         name: 'Email'
     }, {
         name: 'Avatar',
-        render: function (title: string, property: string): React.ReactElement {
-            return <div onClick={() => console.log(title, property)}><b>🎩({title})</b></div>
+        render: function (title: string): React.ReactElement {
+            return <div onClick={() => console.log(title)}><b>🎩({title})</b></div>
         }
     }
 ];
@@ -50,41 +50,53 @@ const fieldsPeople = [
     }
 ];
 
+class LoadingClass extends React.Component<{ isLoading: boolean }> {
+    render() {
+        return <div>
+            loading: <mark>{this.props.isLoading.toString()}</mark>
+        </div>
+    }
+}
+
 function App(): React.ReactElement {
-    // const [data, setData] = useState([]);
-    // const [page, setPage] = useState(1);
-    // const [pageSize] = useState(5);
-    // const [totalPages, setTotalPages] = useState(1);
-    //
-    // useEffect(
-    //     () => {
-    //         load(`https://reqres.in/api/users?page=${page}&per_page=${pageSize}`)
-    //             .then((res: any) => {
-    //                 setData(res.data);
-    //                 setTotalPages(res.total_pages);
-    //             });
-    //     }, [page]
-    // );
+    const [data, setData] = useState([]);
+    const [page, setPage] = useState(1);
+    const [loading, setLoading] = useState(true);
+    const [pageSize] = useState(5);
+    const [totalPages, setTotalPages] = useState(1);
+
+    useEffect(
+        () => {
+            load(`https://reqres.in/api/users?page=${page}&per_page=${pageSize}`)
+                .then((res: any) => {
+                    setData(res.data);
+                    setTotalPages(res.total_pages);
+                    setLoading(false)
+                });
+        }, [page]
+    );
     return (
         <Fragment>
-            {/*<h1>Server paging</h1>*/}
-            {/*<UrlTable*/}
-            {/*    data={data}*/}
-            {/*    fields={fieldsPeople}*/}
-            {/*    headers={headerPeople} // ['First name', 'Last name', 'Email', 'Avatar']*/}
-            {/*    pagination={{*/}
-            {/*        serverPaging: true,*/}
-            {/*        currentPage: page,*/}
-            {/*        pageSize: pageSize,*/}
-            {/*        pageCount: totalPages, // u can don't specify this thing*/}
-            {/*        pageRangeDisplayed: 0,*/}
-            {/*        marginPagesDisplayed: 2,*/}
-            {/*        onPageChange: (page: { selected: number }): void => {*/}
-            {/*            setPage(page.selected + 1);*/}
-            {/*        }*/}
-            {/*    }}*/}
-            {/*    uniqProp={'email'}*/}
-            {/*/>*/}
+            <h1>Server paging</h1>
+            <UrlTable
+                data={data}
+                fields={fieldsPeople}
+                loading={loading}
+                loadingComponent={(isLoading: boolean) => <LoadingClass isLoading={isLoading}/>}
+                headers={headerPeople} // ['First name', 'Last name', 'Email', 'Avatar']
+                pagination={{
+                    serverPaging: true,
+                    currentPage: page,
+                    pageSize: pageSize,
+                    pageCount: totalPages, // u can don't specify this thing
+                    pageRangeDisplayed: 0,
+                    marginPagesDisplayed: 2,
+                    onPageChange: (page: { selected: number }): void => {
+                        setPage(page.selected + 1);
+                    }
+                }}
+                uniqProp={'email'}
+            />
             {/*<h1>Load by URL</h1>*/}
             {/*<UrlTable*/}
             {/*    url="https://next.json-generator.com/api/json/get/4k6xmJ21r"*/}
@@ -95,30 +107,31 @@ function App(): React.ReactElement {
             {/*    }}*/}
             {/*    uniqProp={'_id'}*/}
             {/*/>*/}
-            <h1>Load by URL with fetchSuccess callback</h1>
-            <UrlTable
-                url="https://randomuser.me/api/?page=1&results=10"
-                sorting={'simple'}
-                fetchSuccess={(res: any): [] => res.results}
-                headers={['Email', 'Gender', 'Cell', 'State']}
-                fields={['email', 'gender', 'cell', 'location.state']}
-                pagination={{
-                    pageSize: 5
-                }}
-                // selectMode={'single'}
-                // onSelect={(record: object) => console.log('Selected records: ', record)}
-                uniqProp={'login.uuid'}
-            />
-            <UrlTable
-                url="https://next.json-generator.com/api/json/get/4k6xmJ21r"
-                headers={['Name', 'Age', 'Eyes', 'Phone', 'Favorite fruit']}
-                fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
-                uniqProp={'_id'}
-                pagination={{
-                    pageSize: 5,
-                    marginPagesDisplayed: 1000
-                }}
-            />
+            {/*<h1>Load by URL with fetchSuccess callback</h1>*/}
+            {/*<UrlTable*/}
+            {/*    url="https://randomuser.me/api/?page=1&results=10"*/}
+            {/*    sorting={'simple'}*/}
+            {/*    fetchSuccess={(res: any): [] => res.results}*/}
+            {/*    headers={['Email', 'Gender', 'Cell', 'State']}*/}
+            {/*    fields={['email', 'gender', 'cell', 'location.state']}*/}
+            {/*    pagination={{*/}
+            {/*        pageSize: 5*/}
+            {/*    }}*/}
+            {/*    // selectMode={'single'}*/}
+            {/*    // onSelect={(record: object) => console.log('Selected records: ', record)}*/}
+            {/*    uniqProp={'login.uuid'}*/}
+            {/*/>*/}
+            {/*<h1>Load by URL with compound sorting</h1>*/}
+            {/*<UrlTable*/}
+            {/*    url="https://next.json-generator.com/api/json/get/4k6xmJ21r"*/}
+            {/*    sorting={'compound'}*/}
+            {/*    headers={['Name', 'Age', 'Eyes', 'Phone', 'Favorite fruit']}*/}
+            {/*    fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}*/}
+            {/*    uniqProp={'_id'}*/}
+            {/*    pagination={{*/}
+            {/*        pageSize: 5,*/}
+            {/*    }}*/}
+            {/*/>*/}
         </Fragment>
 
     )

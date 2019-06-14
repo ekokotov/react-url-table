@@ -5,18 +5,16 @@ export interface IHeaderModel extends IHeaderPropObject {
 }
 
 class HeaderModel implements IHeaderModel {
-    property?: string;
     name: string;
     index: number;
 
-    renderHandler?(name: string, property: string): string | React.ReactElement
+    renderHandler?(name: string): string | React.ReactElement
 
     constructor(props: IHeaderProp, index: number) {
         this.index = index;
         if (typeof props === 'string') {
             this.name = props;
         } else {
-            this.property = props.property;
             this.renderHandler = props.render;
             this.name = props.name;
         }
@@ -24,7 +22,7 @@ class HeaderModel implements IHeaderModel {
     }
 
     render(): string | React.ReactElement {
-        return this.renderHandler ? this.renderHandler(this.name, this.property) : this.name;
+        return this.renderHandler ? this.renderHandler(this.name) : this.name;
     }
 }
 

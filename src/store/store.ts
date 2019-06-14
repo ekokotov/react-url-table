@@ -44,8 +44,12 @@ export function useRootStore(props: ITableProps): IStore {
             }
         },
 
+        get isLoading() {
+            return this.props.loading || this.inProgress
+        },
+
         sort(header) {
-            if (this.inProgress) {
+            if (this.isLoading || this.props.pagination.serverPaging) {
                 return;
             }
             const property = this.fields[header.index].property;

@@ -36,6 +36,7 @@ jest, enzyme, enzyme-adapter-react-16
 - [x] fire onSelect
 - [x] multiple selection
 - [x] show loading indicator 
+- [x] show custom loading indicator 
 - [ ] show errors (for example catch data loading errors) 
 - [ ] local client search
 - [ ] map/filter/change data hook before rendering
@@ -43,7 +44,7 @@ jest, enzyme, enzyme-adapter-react-16
 - [x] simple client sorting
 - [x] client multiple-field sorting
 - [ ] sorting order panel
-- [ ] simple server sorting
+- [ ] server sorting example?
 - [ ] editable cells
 - [ ] editable one column cells and lock others
 - [ ] reorder rows (drag-n-drop)

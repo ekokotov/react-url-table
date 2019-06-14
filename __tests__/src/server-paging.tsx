@@ -12,6 +12,7 @@ const DEFAULT_PAGE_SIZE = 5;
 
 function TableWithServerPaging(): React.ReactElement {
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
     const [pageSize] = useState(DEFAULT_PAGE_SIZE);
     const [totalPages, setTotalPages] = useState(1);
@@ -22,6 +23,7 @@ function TableWithServerPaging(): React.ReactElement {
                 .then((res: any) => {
                     setData(res.data);
                     setTotalPages(res.total_pages);
+                    setLoading(false);
                 });
         }, [page]
     );
@@ -30,6 +32,7 @@ function TableWithServerPaging(): React.ReactElement {
             data={data}
             fields={['first_name', 'last_name', 'email', 'avatar']}
             headers={['First name', 'Last name', 'Email', 'Avatar']}
+            loading={loading}
             pagination={{
                 serverPaging: true,
                 currentPage: page,
@@ -75,6 +78,10 @@ describe('Example of controlled server paging', () => {
 
         expect(renderedHeader[0].textContent).toEqual('First name');
         expect(renderedHeader[renderedHeader.length - 1].textContent).toEqual('Avatar');
+
+        const loading = body.querySelector('.table__progress');
+        expect(loading).not.toEqual(undefined);
+        expect(loading.textContent).toEqual('Loading...');
 
         await waitUntil(() => body.innerHTML !== '');
 

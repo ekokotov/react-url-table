@@ -15,7 +15,7 @@ function Tbody(props: React.PropsWithChildren<IProps>): React.ReactElement {
 
     return (
         <tbody>
-        {store.inProgress ? <Loading/> :
+        {store.isLoading ? <Loading/> :
             store.displayData.map((data: any) => <Row key={_get(data, store.props.uniqProp)} data={data}/>)}
         </tbody>
     );

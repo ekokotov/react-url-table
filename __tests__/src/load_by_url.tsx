@@ -109,4 +109,31 @@ describe('Simple load table by URL', () => {
         expect(table.find('tbody tr').length > 1).toEqual(true);
         expect(table.find('tbody .table__progress').exists()).toEqual(false);
     });
+
+    it('should show custom progress component while data loading', async () => {
+        global.fetch.mockResponses([JSON.stringify(page1), {status: 200}]);
+
+        const table = mount(
+            <UrlTable
+                url="https://reqres.in/api/users?page=1&per_page=5"
+                loadingComponent={
+                    (isLoading) => <div>loading: <mark>{isLoading.toString()}</mark></div>}
+                fetchSuccess={(res: any): [] => res.data}
+                headers={['Email', 'First name', 'Last name']}
+                fields={['email', 'first_name', 'last_name']}
+                uniqProp={'id'}
+            />
+        );
+        const loading = table.find('tbody .table__progress');
+
+        expect(loading.exists()).toEqual(true);
+        expect(loading.text()).toEqual('loading: true');
+        expect(table.find('.table__pagination').exists()).toEqual(false);
+
+        await waitUntil(() => table.update());
+
+        expect(table.find('tbody tr').length > 1).toEqual(true);
+        expect(table.find('tbody .table__progress').exists()).toEqual(false);
+    });
+
 });

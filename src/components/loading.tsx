@@ -5,10 +5,11 @@ import {observer} from "mobx-react";
 
 function Loading() {
     const store: IStore = useContext(TableContext);
+    const loadingComponent = store.props.loadingComponent ? store.props.loadingComponent(store.isLoading) : 'Loading...';
 
     return (
         <tr className="table__progress">
-            <td colSpan={store.fields.length}>Loading...</td>
+            <td colSpan={store.fields.length}>{loadingComponent}</td>
         </tr>
     );
 }

@@ -17,6 +17,7 @@ describe('Rows selecting', () => {
     it('load By url and sort locally (sorting={"simple"}) without pagination', async () => {
         global.fetch.mockResponses([JSON.stringify(mockData), {status: 200}]);
 
+
         const table = mount(
             <UrlTable
                 url="https://next.json-generator.com/api/json/get/4k6xmJ21r"
@@ -136,5 +137,79 @@ describe('Rows selecting', () => {
         expect(
             table.find('table tbody').find('tr').last().find('td').first().text()
         ).toEqual(sortedByNameMockDataDesc[sortedByNameMockDataDesc.length - 1].name);
+    });
+
+
+    it('sort locally (sorting={"compound"}) by 2 properties without pagination', async () => {
+        const sortedByAgeMockDataAsc = _orderBy(mockData, ['age'], ['asc']);
+        const sortedByNameAscAndAgeAscData = _orderBy(mockData, ['age', 'name'], ['asc', 'asc']);
+        const sortedByNameDescandAgeAscData = _orderBy(mockData, ['age', 'name'], ['asc', 'desc']);
+
+        const table = mount(
+            <UrlTable
+                data={mockData}
+                headers={['Name', 'Age', 'Eyes', 'Phone', 'Favorite fruit']}
+                fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
+                pagination={false}
+                sorting={'compound'}
+                uniqProp={'_id'}
+            />
+        );
+
+        const body = table.find('table tbody');
+        const thead = table.find('table thead');
+
+        expect(body.find('tr').first().find('td').first().text()).toEqual(mockData[0].name);
+        expect(body.find('tr').last().find('td').first().text()).toEqual(mockData[mockData.length - 1].name);
+        const nameHeader = thead.find('th').first();
+        const ageHeader = thead.find('th').at(1);
+
+        ageHeader.simulate('click');
+        await table.update();
+
+        expect(ageHeader.render().hasClass('header__sorted--asc')).toEqual(true);
+        await table.update();
+
+        expect(
+            table.find('table tbody').find('tr').first().find('td').at(1).text()
+        ).toEqual(sortedByAgeMockDataAsc[0].age.toString());
+
+        expect(
+            table.find('table tbody').find('tr').last().find('td').at(1).text()
+        ).toEqual(sortedByAgeMockDataAsc[sortedByAgeMockDataAsc.length - 1].age.toString());
+
+        nameHeader.simulate('click');
+        await table.update();
+
+        expect(nameHeader.render().hasClass('header__sorted--asc')).toEqual(true);
+
+        expect(
+            table.find('table tbody').find('tr').first().find('td').first().text()
+        ).toEqual(sortedByNameAscAndAgeAscData[0].name);
+
+        expect(
+            table.find('table tbody').find('tr').last().find('td').first().text()
+        ).toEqual(sortedByNameAscAndAgeAscData[sortedByNameAscAndAgeAscData.length - 1].name);
+
+        nameHeader.simulate('click');
+        await table.update();
+
+        expect(nameHeader.render().hasClass('header__sorted--desc')).toEqual(true);
+
+        expect(
+            table.find('table tbody').find('tr').first().find('td').first().text()
+        ).toEqual(sortedByNameDescandAgeAscData[0].name);
+
+        expect(
+            table.find('table tbody').find('tr').last().find('td').first().text()
+        ).toEqual(sortedByNameDescandAgeAscData[sortedByNameDescandAgeAscData.length - 1].name);
+
+        expect(
+            table.find('table tbody').find('tr').first().find('td').at(1).text()
+        ).toEqual(sortedByAgeMockDataAsc[0].age.toString());
+
+        expect(
+            table.find('table tbody').find('tr').last().find('td').at(1).text()
+        ).toEqual(sortedByAgeMockDataAsc[sortedByAgeMockDataAsc.length - 1].age.toString());
     });
 });
