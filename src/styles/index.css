@@ -1,9 +1,29 @@
+:root {
+    --sortedThBorder: 2px solid aqua;
+}
+
 .table {
     width: 100%;
 }
 
 .table thead {
     background-color: antiquewhite;
+}
+
+.table thead th {
+    cursor: pointer;
+}
+
+.table__header {
+    outline: none;
+}
+
+.table__header.header__sorted--desc {
+    border-bottom: var(--sortedThBorder);
+}
+
+.table__header.header__sorted--asc {
+    border-top: var(--sortedThBorder);
 }
 
 .table tbody tr.selected {

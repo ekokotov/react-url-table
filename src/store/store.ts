@@ -1,19 +1,29 @@
-import {IFieldsProp, IHeaderProp, IStore, ITableProps, SelectModes} from "../components/types";
+import {
+    IFieldsProp,
+    IHeaderProp,
+    IStore,
+    ITableProps,
+    SelectModes,
+    SortingModes,
+    SortingValues
+} from "../@typings/types";
 import {paginate} from "../helper/pagination";
 import HeaderModel from "./header";
 import IFieldModel from "./field";
 import {load} from "../helper/http";
-import {useLocalStore, useAsObservableSource} from 'mobx-react';
+import _orderBy from 'lodash/orderBy';
+import {useAsObservableSource, useLocalStore} from 'mobx-react';
 
 export function useRootStore(props: ITableProps): IStore {
-    const observableProps: ITableProps = useAsObservableSource(props);
+    const observableProps = useAsObservableSource<ITableProps>(props);
 
-    return useLocalStore((): IStore => ({
+    return useLocalStore<IStore>(() => ({
         props: observableProps,
         _data: undefined,
         inProgress: false,
         currentPage: 0,
         selectedItems: {},
+        sorting: {},
 
         select(row) {
             if (this.props.selectMode) {
@@ -25,8 +35,6 @@ export function useRootStore(props: ITableProps): IStore {
                     }
                     this.selectedItems[uniqPropValue] = row;
                 } else {
-                    // const {[uniqPropValue]: _, ...result} = this.selectedItems;
-                    // this.selectedItems = result;
                     delete this.selectedItems[uniqPropValue];
                 }
 
@@ -36,12 +44,39 @@ export function useRootStore(props: ITableProps): IStore {
             }
         },
 
+        sort(header) {
+            if (this.inProgress) {
+                return;
+            }
+            const property = this.fields[header.index].property;
+
+            if (this.sorting[property]) {
+                this.sorting[property] = this.sorting[property] === SortingValues.ASC ? SortingValues.DESC
+                    : SortingValues.ASC;
+            } else if (this.props.sorting === SortingModes.simple) {
+                this.sorting = {
+                    [property]: SortingValues.ASC
+                };
+            } else {
+                this.sorting[property] = SortingValues.ASC;
+            }
+            this.currentPage = 0;
+        },
+
         get displayData() {
-            const pageCount = this.props.pagination.pageCount || Math.round(this.data.length / this.props.pagination.pageSize);
+            const pageCount = this.props.pagination.pageCount ||
+                Math.round(this.sortedData.length / this.props.pagination.pageSize);
 
             if (pageCount > 1) {
                 return this.props.pagination.serverPaging ? this.props.data :
-                    paginate(this.data, this.props.pagination.pageSize, this.currentPage)
+                    paginate(this.sortedData, this.props.pagination.pageSize, this.currentPage)
+            }
+            return this.sortedData;
+        },
+
+        get sortedData() {
+            if (Object.keys(this.sorting).length) {
+                return _orderBy(this.data, Object.keys(this.sorting), Object.values(this.sorting));
             }
             return this.data;
         },
@@ -59,7 +94,8 @@ export function useRootStore(props: ITableProps): IStore {
         },
 
         get pageCount() {
-            return this.props.pagination.pageCount || this.props.pagination && this.data && Math.round(this.data.length / this.props.pagination.pageSize);
+            return this.props.pagination.pageCount || this.props.pagination &&
+                this.data && Math.round(this.data.length / this.props.pagination.pageSize);
         },
 
         async loadByUrl() {

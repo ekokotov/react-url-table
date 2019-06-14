@@ -98,7 +98,7 @@ function App(): React.ReactElement {
             <h1>Load by URL with fetchSuccess callback</h1>
             <UrlTable
                 url="https://randomuser.me/api/?page=1&results=10"
-                // data={[]}
+                sorting={'simple'}
                 fetchSuccess={(res: any): [] => res.results}
                 headers={['Email', 'Gender', 'Cell', 'State']}
                 fields={['email', 'gender', 'cell', 'location.state']}
@@ -108,6 +108,16 @@ function App(): React.ReactElement {
                 // selectMode={'single'}
                 // onSelect={(record: object) => console.log('Selected records: ', record)}
                 uniqProp={'login.uuid'}
+            />
+            <UrlTable
+                url="https://next.json-generator.com/api/json/get/4k6xmJ21r"
+                headers={['Name', 'Age', 'Eyes', 'Phone', 'Favorite fruit']}
+                fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
+                uniqProp={'_id'}
+                pagination={{
+                    pageSize: 5,
+                    marginPagesDisplayed: 1000
+                }}
             />
         </Fragment>
 

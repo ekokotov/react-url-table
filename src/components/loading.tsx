@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {IStore} from "./types";
+import {IStore} from "../@typings/types";
 import {TableContext} from "../store/context";
 import {observer} from "mobx-react";
 

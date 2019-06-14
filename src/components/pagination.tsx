@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import ReactPaginate, {ReactPaginateProps} from 'react-paginate';
-import {IStore} from "./types";
+import {IStore} from "../@typings/types";
 import {TableContext} from "../store/context";
 import {observer} from "mobx-react";
 
@@ -13,6 +13,7 @@ function Pagination(): React.ReactElement {
     if (store.pageCount > 1 && !store.inProgress && store.displayData.length) {
         return <div className="table__pagination">
             <ReactPaginate onPageChange={onPageChange} {...store.props.pagination as ReactPaginateProps}
+                           forcePage={store.currentPage}
                            pageCount={store.pageCount}/>
         </div>;
     }

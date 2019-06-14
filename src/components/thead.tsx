@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {TableContext} from "../store/context";
 import Header from "./header";
-import {IStore} from "./types";
+import {IStore} from "../@typings/types";
 import HeaderModel from "../store/header";
 import {observer} from "mobx-react";
 

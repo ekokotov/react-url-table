@@ -1,9 +1,12 @@
 import React from "react";
-import {IHeaderProp, IHeaderPropObject} from "../components/types";
+import {IHeaderProp, IHeaderPropObject} from "../@typings/types";
 
-interface HeaderModel extends IHeaderPropObject {}
+export interface IHeaderModel extends IHeaderPropObject {
+}
 
-class HeaderModel implements HeaderModel {
+class HeaderModel implements IHeaderModel {
+    property?: string;
+    name: string;
     index: number;
 
     renderHandler?(name: string, property: string): string | React.ReactElement

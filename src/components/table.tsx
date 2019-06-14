@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from 'react';
 import {observer} from "mobx-react";
 
 import '../styles/index.css';
-import {IStore} from "./types";
+import {IStore} from "../@typings/types";
 import {TableContext} from "../store/context";
 
 function Table(props: React.PropsWithChildren<any>): React.ReactElement {

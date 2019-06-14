@@ -40,8 +40,9 @@ jest, enzyme, enzyme-adapter-react-16
 - [ ] local client search
 - [ ] map/filter/change data hook before rendering
 - [ ] server search
-- [ ] simple client sorting
-- [ ] client multiple-field sorting
+- [x] simple client sorting
+- [x] client multiple-field sorting
+- [ ] sorting order panel
 - [ ] simple server sorting
 - [ ] editable cells
 - [ ] editable one column cells and lock others

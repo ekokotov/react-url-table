@@ -3,7 +3,7 @@ import _merge from 'lodash/merge';
 import Thead from './components/thead';
 import Tbody from './components/tbody';
 import Table from "./components/table";
-import {ITableProps, SortingModes} from "./components/types";
+import {ITableProps, SortingModes} from "./@typings/types";
 import Pagination from "./components/pagination";
 import {StoreProvider} from "./store/context";
 

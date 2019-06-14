@@ -1,5 +1,5 @@
 import React from "react";
-import {IFieldsProp, IFieldPropObject} from "../components/types";
+import {IFieldsProp, IFieldPropObject} from "../@typings/types";
 import _get from "lodash/get";
 
 interface FieldModel extends IFieldPropObject {}
