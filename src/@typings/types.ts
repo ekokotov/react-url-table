@@ -7,6 +7,7 @@ import {XOR} from "./utils";
 export interface IHeaderPropObject {
     name: string,
     property?: string,
+    sortable?: boolean,
 
     render?(name: string): string | React.ReactElement
 }

@@ -7,13 +7,15 @@ import {load} from "./src/helper/http";
 const headers = [
     {
         name: 'Name',
-        render: (title: string): string => `#${title}`
+        render: (title: string): string => `#${title}`,
     }, {
         name: 'Age'
     }, {
-        name: 'Eyes'
+        name: 'Eyes',
+        sortable: false
     }, {
-        name: 'Phone'
+        name: 'Phone',
+        sortable: false
     }, {
         name: 'Favorite fruit',
         render: function (title: string): React.ReactElement {
@@ -50,63 +52,54 @@ const fieldsPeople = [
     }
 ];
 
-class LoadingClass extends React.Component<{ isLoading: boolean }> {
-    render() {
-        return <div>
-            loading: <mark>{this.props.isLoading.toString()}</mark>
-        </div>
-    }
-}
-
 function App(): React.ReactElement {
-    const [data, setData] = useState([]);
-    const [page, setPage] = useState(1);
-    const [loading, setLoading] = useState(true);
-    const [pageSize] = useState(5);
-    const [totalPages, setTotalPages] = useState(1);
-
-    useEffect(
-        () => {
-            load(`https://reqres.in/api/users?page=${page}&per_page=${pageSize}`)
-                .then((res: any) => {
-                    setData(res.data);
-                    setTotalPages(res.total_pages);
-                    setLoading(false)
-                });
-        }, [page]
-    );
+    // const [data, setData] = useState([]);
+    // const [page, setPage] = useState(1);
+    // const [loading, setLoading] = useState(true);
+    // const [pageSize] = useState(5);
+    // const [totalPages, setTotalPages] = useState(1);
+    //
+    // useEffect(
+    //     () => {
+    //         load(`https://reqres.in/api/users?page=${page}&per_page=${pageSize}`)
+    //             .then((res: any) => {
+    //                 setData(res.data);
+    //                 setTotalPages(res.total_pages);
+    //                 setLoading(false)
+    //             });
+    //     }, [page]
+    // );
     return (
         <Fragment>
-            <h1>Server paging</h1>
-            <UrlTable
-                data={data}
-                fields={fieldsPeople}
-                loading={loading}
-                loadingComponent={(isLoading: boolean) => <LoadingClass isLoading={isLoading}/>}
-                headers={headerPeople} // ['First name', 'Last name', 'Email', 'Avatar']
-                pagination={{
-                    serverPaging: true,
-                    currentPage: page,
-                    pageSize: pageSize,
-                    pageCount: totalPages, // u can don't specify this thing
-                    pageRangeDisplayed: 0,
-                    marginPagesDisplayed: 2,
-                    onPageChange: (page: { selected: number }): void => {
-                        setPage(page.selected + 1);
-                    }
-                }}
-                uniqProp={'email'}
-            />
-            {/*<h1>Load by URL</h1>*/}
+            {/*<h1>Server paging</h1>*/}
             {/*<UrlTable*/}
-            {/*    url="https://next.json-generator.com/api/json/get/4k6xmJ21r"*/}
-            {/*    headers={headers}*/}
-            {/*    fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}*/}
+            {/*    data={data}*/}
+            {/*    fields={fieldsPeople}*/}
+            {/*    loading={loading}*/}
+            {/*    headers={headerPeople} // ['First name', 'Last name', 'Email', 'Avatar']*/}
             {/*    pagination={{*/}
-            {/*        pageSize: 5*/}
+            {/*        serverPaging: true,*/}
+            {/*        currentPage: page,*/}
+            {/*        pageSize: pageSize,*/}
+            {/*        pageCount: totalPages, // u can don't specify this thing*/}
+            {/*        pageRangeDisplayed: 0,*/}
+            {/*        marginPagesDisplayed: 2,*/}
+            {/*        onPageChange: (page: { selected: number }): void => {*/}
+            {/*            setPage(page.selected + 1);*/}
+            {/*        }*/}
             {/*    }}*/}
-            {/*    uniqProp={'_id'}*/}
+            {/*    uniqProp={'email'}*/}
             {/*/>*/}
+            <h1>Load by URL</h1>
+            <UrlTable
+                url="https://next.json-generator.com/api/json/get/4k6xmJ21r"
+                headers={headers}
+                fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
+                pagination={{
+                    pageSize: 5
+                }}
+                uniqProp={'_id'}
+            />
             {/*<h1>Load by URL with fetchSuccess callback</h1>*/}
             {/*<UrlTable*/}
             {/*    url="https://randomuser.me/api/?page=1&results=10"*/}

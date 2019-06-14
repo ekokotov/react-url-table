@@ -7,6 +7,7 @@ export interface IHeaderModel extends IHeaderPropObject {
 class HeaderModel implements IHeaderModel {
     name: string;
     index: number;
+    sortable: boolean = true;
 
     renderHandler?(name: string): string | React.ReactElement
 
@@ -17,6 +18,9 @@ class HeaderModel implements IHeaderModel {
         } else {
             this.renderHandler = props.render;
             this.name = props.name;
+            if (props.sortable === false) {
+                this.sortable = props.sortable;
+            }
         }
         return this;
     }

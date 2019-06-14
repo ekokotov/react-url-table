@@ -42,6 +42,7 @@ jest, enzyme, enzyme-adapter-react-16
 - [ ] map/filter/change data hook before rendering
 - [ ] server search
 - [x] simple client sorting
+- [x] configurable property sorting
 - [x] client multiple-field sorting
 - [ ] sorting order panel
 - [ ] server sorting example?

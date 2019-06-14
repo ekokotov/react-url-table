@@ -212,4 +212,52 @@ describe('Rows selecting', () => {
             table.find('table tbody').find('tr').last().find('td').at(1).text()
         ).toEqual(sortedByAgeMockDataAsc[sortedByAgeMockDataAsc.length - 1].age.toString());
     });
+
+    it('lock few fields of sorting (sorting={"simple"}) ', async () => {
+        const sortedByNameDataAsc = _orderBy(mockData, ['name'], ['asc']);
+        const headers = [
+            {name: 'Name'},
+            {name: 'Age', sortable: false}
+        ];
+        const table = mount(
+            <UrlTable
+                data={mockData}
+                headers={headers}
+                fields={['name', 'age']}
+                pagination={false}
+                uniqProp={'_id'}
+            />
+        );
+
+
+        const body = table.find('table tbody');
+        const thead = table.find('table thead');
+
+        expect(body.find('tr').first().find('td').first().text()).toEqual(mockData[0].name);
+        expect(body.find('tr').last().find('td').first().text()).toEqual(mockData[mockData.length - 1].name);
+
+        const nameHeader = thead.find('th').first();
+        const ageHeader = thead.find('th').at(1);
+
+        nameHeader.simulate('click');
+        await table.update();
+
+        expect(nameHeader.render().hasClass('header__sorted--asc')).toEqual(true);
+        await table.update();
+
+        expect(
+            table.find('table tbody').find('tr').first().find('td').first().text()
+        ).toEqual(sortedByNameDataAsc[0].name);
+
+        expect(
+            table.find('table tbody').find('tr').last().find('td').first().text()
+        ).toEqual(sortedByNameDataAsc[sortedByNameDataAsc.length - 1].name);
+        const prevBody = table.find('tbody').html();
+
+        ageHeader.simulate('click');
+        await table.update();
+
+        expect(ageHeader.render().hasClass('header__sorted--asc')).toEqual(false);
+        expect(table.find('tbody').html()).toEqual(prevBody)
+    });
 });

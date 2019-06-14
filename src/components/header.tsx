@@ -10,12 +10,13 @@ interface IProps {
 }
 
 function Header(props: IProps): React.ReactElement {
+    const header = props.header;
     const store: IStore = useContext(TableContext);
-    const property: string = store.fields[props.header.index].property;
+    const property: string = store.fields[header.index].property;
     const sortingOptions = store.sorting[property];
-    const sortingEvent = () => store.sort(props.header);
+    const sortingEvent = () => store.sort(header);
     const getHeaderEvents: object = {
-        onClick: (store.props.sorting ? sortingEvent : null)
+        onClick: (store.props.sorting && header.sortable ? sortingEvent : null)
     };
 
     return (
