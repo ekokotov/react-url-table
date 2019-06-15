@@ -22,7 +22,7 @@ function Header(props: IProps): React.ReactElement {
     return (
         <th {...getHeaderEvents}
             className={classNames('table__header', {
-                [`header__sorted--${sortingOptions}`]: sortingOptions
+                [`header__sorted--${sortingOptions && sortingOptions.order}`]: sortingOptions
             })}>
             {props.header.render()}
         </th>

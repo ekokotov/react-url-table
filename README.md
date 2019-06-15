@@ -44,7 +44,7 @@ jest, enzyme, enzyme-adapter-react-16
 - [x] simple client sorting
 - [x] configurable property sorting
 - [x] client multiple-field sorting
-- [ ] sorting order panel
+- [x] sorting order panel
 - [ ] server sorting example?
 - [ ] editable cells
 - [ ] editable one column cells and lock others

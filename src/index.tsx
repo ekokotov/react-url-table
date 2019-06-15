@@ -6,6 +6,7 @@ import Table from "./components/table";
 import {ITableProps, SortingModes} from "./@typings/types";
 import Pagination from "./components/pagination";
 import {StoreProvider} from "./store/context";
+import SortingPanel from "./components/sorting-panel";
 
 class UrlTable extends PureComponent<ITableProps> {
     state = {} as ITableProps;
@@ -27,11 +28,13 @@ class UrlTable extends PureComponent<ITableProps> {
             },
             search: 'global',
             sorting: SortingModes.simple,
+            showSortingPanel: true,
         }, nextProps);
     }
 
     render() {
         return <StoreProvider {...this.state}>
+            {this.state.sorting && this.state.showSortingPanel && <SortingPanel/>}
             <Table>
                 <Thead/>
                 <Tbody/>

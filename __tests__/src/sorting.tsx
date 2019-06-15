@@ -1,7 +1,7 @@
 import {mount} from 'enzyme';
 import {data as mockData} from '../mocks/mock.json';
 import _orderBy from 'lodash/orderBy';
-import React, {Fragment} from 'react';
+import React from 'react';
 import fetch from 'jest-fetch-mock';
 import UrlTable from "../../src";
 import waitUntil from "async-wait-until";
@@ -41,10 +41,10 @@ describe('Rows selecting', () => {
 
         firstTh.simulate('click');
 
-        await table.update();
+        await waitUntil(() => table.update());
 
         expect(firstTh.render().hasClass('header__sorted--asc')).toEqual(true);
-        await table.update();
+        await waitUntil(() => table.update());
         expect(
             table.find('table tbody').find('tr').first().find('td').first().text()
         ).toEqual(sortedByNameMockDataAsc[0].name);
@@ -55,7 +55,7 @@ describe('Rows selecting', () => {
 
         firstTh.simulate('click');
 
-        await table.update();
+        await waitUntil(() => table.update());
 
         expect(firstTh.render().hasClass('header__sorted--desc')).toEqual(true);
         expect(
@@ -103,12 +103,12 @@ describe('Rows selecting', () => {
         const firstTh = thead.find('th').first();
 
         firstTh.simulate('click');
-        await table.update();
+        await waitUntil(() => table.update());
 
         expect(paging.find('li.selected').text()).toBe('1');
         expect(firstTh.render().hasClass('header__sorted--asc')).toEqual(true);
         expect(firstTh.render().hasClass('header__sorted--asc')).toEqual(true);
-        await table.update();
+        await waitUntil(() => table.update());
 
         expect(
             table.find('table tbody').find('tr').first().find('td').first().text()
@@ -122,7 +122,7 @@ describe('Rows selecting', () => {
         ).toEqual(sortedByNameMockDataAsc[sortedByNameMockDataAsc.length - 1].name);
 
         firstTh.simulate('click');
-        await table.update();
+        await waitUntil(() => table.update());
 
         expect(firstTh.render().hasClass('header__sorted--desc')).toEqual(true);
         expect(
@@ -164,10 +164,10 @@ describe('Rows selecting', () => {
         const ageHeader = thead.find('th').at(1);
 
         ageHeader.simulate('click');
-        await table.update();
+        await waitUntil(() => table.update());
 
         expect(ageHeader.render().hasClass('header__sorted--asc')).toEqual(true);
-        await table.update();
+        await waitUntil(() => table.update());
 
         expect(
             table.find('table tbody').find('tr').first().find('td').at(1).text()
@@ -178,7 +178,7 @@ describe('Rows selecting', () => {
         ).toEqual(sortedByAgeMockDataAsc[sortedByAgeMockDataAsc.length - 1].age.toString());
 
         nameHeader.simulate('click');
-        await table.update();
+        await waitUntil(() => table.update());
 
         expect(nameHeader.render().hasClass('header__sorted--asc')).toEqual(true);
 
@@ -191,7 +191,7 @@ describe('Rows selecting', () => {
         ).toEqual(sortedByNameAscAndAgeAscData[sortedByNameAscAndAgeAscData.length - 1].name);
 
         nameHeader.simulate('click');
-        await table.update();
+        await waitUntil(() => table.update());
 
         expect(nameHeader.render().hasClass('header__sorted--desc')).toEqual(true);
 
@@ -238,10 +238,10 @@ describe('Rows selecting', () => {
         const ageHeader = thead.find('th').at(1);
 
         nameHeader.simulate('click');
-        await table.update();
+        await waitUntil(() => table.update());
 
         expect(nameHeader.render().hasClass('header__sorted--asc')).toEqual(true);
-        await table.update();
+        await waitUntil(() => table.update());
 
         expect(
             table.find('table tbody').find('tr').first().find('td').first().text()
@@ -253,9 +253,177 @@ describe('Rows selecting', () => {
         const prevBody = table.find('tbody').html();
 
         ageHeader.simulate('click');
-        await table.update();
+        await waitUntil(() => table.update());
 
         expect(ageHeader.render().hasClass('header__sorted--asc')).toEqual(false);
         expect(table.find('tbody').html()).toEqual(prevBody)
+    });
+
+    it('show sorting panel badges and react to table sorting', async () => {
+        const table = mount(
+            <UrlTable
+                data={mockData}
+                headers={['Name', 'Age']}
+                fields={['name', 'age']}
+                pagination={false}
+                uniqProp={'_id'}
+            />
+        );
+
+        const thead = table.find('table thead');
+
+        const nameHeader = thead.find('th').first();
+
+        nameHeader.simulate('click');
+        await waitUntil(() => table.update());
+
+        expect(nameHeader.render().hasClass('header__sorted--asc')).toEqual(true);
+        const sortingPanel = table.find('.table__sorting-panel');
+
+        expect(sortingPanel.exists()).toEqual(true);
+        const badge = sortingPanel.find('.table__sorting__badge');
+
+        expect(badge.length).toBe(1);
+        expect(badge.render().hasClass('table__sorting__badge--asc')).toBe(true);
+
+        nameHeader.simulate('click');
+        await waitUntil(() => table.update());
+
+        expect(badge.length).toBe(1);
+        expect(badge.render().hasClass('table__sorting__badge--desc')).toBe(true);
+    });
+
+
+    it('sorting using sorting badge table should react sorting (sorting ={compound})', async () => {
+        let sortingPanel, badges;
+        const table = mount(
+            <UrlTable
+                data={mockData}
+                headers={['Name', 'Age']}
+                fields={['name', 'age']}
+                sorting={'compound'}
+                uniqProp={'_id'}
+            />
+        );
+
+        const thead = table.find('table thead');
+
+        const nameHeader = thead.find('th').first();
+        const ageHeader = thead.find('th').last();
+
+        ageHeader.simulate('click');
+        await waitUntil(() => table.update());
+
+        expect(ageHeader.render().hasClass('header__sorted--asc')).toEqual(true);
+        sortingPanel = table.find('.table__sorting-panel');
+
+        expect(sortingPanel.exists()).toEqual(true);
+        badges = sortingPanel.find('.table__sorting__badge');
+
+        expect(badges.length).toBe(1);
+        expect(badges.render().hasClass('table__sorting__badge--asc')).toBe(true);
+
+        ageHeader.simulate('click');
+        await waitUntil(() => table.update());
+
+        expect(ageHeader.render().hasClass('header__sorted--desc')).toEqual(true);
+
+        nameHeader.simulate('click');
+        await waitUntil(() => table.update());
+
+        sortingPanel = table.find('.table__sorting-panel');
+        badges = sortingPanel.find('.table__sorting__badge');
+
+        expect(badges.length).toBe(2);
+        expect(badges.first().render().hasClass('table__sorting__badge--desc')).toBe(true);
+        expect(badges.last().render().hasClass('table__sorting__badge--asc')).toBe(true);
+    });
+
+    it('remove sorting sorting using sorting badge table should react sorting (sorting ={compound})', async () => {
+        let sortingPanel, badges, removeSortingBtn;
+        const table = mount(
+            <UrlTable
+                data={mockData}
+                headers={['Name', 'Age']}
+                fields={['name', 'age']}
+                sorting={'compound'}
+                uniqProp={'_id'}
+            />
+        );
+
+        const thead = table.find('table thead');
+
+        const nameHeader = thead.find('th').first();
+        const ageHeader = thead.find('th').last();
+
+        ageHeader.simulate('click');
+        await waitUntil(() => table.update());
+
+        sortingPanel = table.find('.table__sorting-panel');
+        badges = sortingPanel.find('.table__sorting__badge');
+        expect(badges.length).toBe(1);
+
+        nameHeader.simulate('click');
+        await waitUntil(() => table.update());
+
+        sortingPanel = table.find('.table__sorting-panel');
+        badges = sortingPanel.find('.table__sorting__badge');
+        expect(badges.length).toBe(2);
+
+        removeSortingBtn = badges.find('.table__sorting__badge--close').first();
+        removeSortingBtn.simulate('click');
+        await waitUntil(() => table.update());
+
+        sortingPanel = table.find('.table__sorting-panel');
+        badges = sortingPanel.find('.table__sorting__badge');
+        removeSortingBtn = badges.find('.table__sorting__badge--close').first();
+        expect(sortingPanel.find('.table__sorting__badge').length).toBe(1);
+
+        removeSortingBtn.simulate('click');
+        await waitUntil(() => table.update());
+        sortingPanel = table.find('.table__sorting-panel');
+        expect(sortingPanel.find('.table__sorting__badge').length).toBe(0);
+    });
+
+    it('don\'t show sorting panel with sorting={"false"}', async () => {
+        const table = mount(
+            <UrlTable
+                data={mockData}
+                headers={['Name', 'Age']}
+                fields={['name', 'age']}
+                sorting={false}
+                uniqProp={'_id'}
+            />
+        );
+        const thead = table.find('table thead');
+
+        const nameHeader = thead.find('th').first();
+
+        nameHeader.simulate('click');
+        await waitUntil(() => table.update());
+
+        const sortingPanel = table.find('.table__sorting-panel');
+        expect(sortingPanel.exists()).toEqual(false);
+    });
+
+    it('don\'t show sorting panel with sortingPanel={"false"}', async () => {
+        const table = mount(
+            <UrlTable
+                data={mockData}
+                headers={['Name', 'Age']}
+                fields={['name', 'age']}
+                showSortingPanel={false}
+                uniqProp={'_id'}
+            />
+        );
+        const thead = table.find('table thead');
+
+        const nameHeader = thead.find('th').first();
+
+        nameHeader.simulate('click');
+        await waitUntil(() => table.update());
+
+        const sortingPanel = table.find('.table__sorting-panel');
+        expect(sortingPanel.exists()).toEqual(false);
     });
 });

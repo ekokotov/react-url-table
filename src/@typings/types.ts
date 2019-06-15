@@ -32,6 +32,7 @@ export interface IPaginateProps extends Partial<ReactPaginateProps> {
 type ITableBase = {
     search?: 'global' | boolean,
     sorting?: keyof typeof SortingModes | false,
+    showSortingPanel?: boolean,
     fields: IFieldsProp[],
     headers?: IHeaderProp[],
     uniqProp: string,
@@ -68,6 +69,11 @@ export enum SelectModes {
     multiple = 'multiple'
 }
 
+export interface ISortingOptions {
+    order: SortingValues,
+    headerName: string
+}
+
 export interface IStore {
     props: ITableProps,
     data: any[],
@@ -79,7 +85,8 @@ export interface IStore {
     isLoading: boolean,
     loadByUrl: () => void,
     selectedItems: { [x: string]: any; },
-    sorting: { [x: string]: any; },
+    sorting: { [property: string]: ISortingOptions },
+    removeFromSorting: (property: string) => void,
     sortedData: any[],
     select: (row: { [x: string]: any; }) => void,
     sort: (header: Header) => void,

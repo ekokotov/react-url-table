@@ -53,17 +53,29 @@ export function useRootStore(props: ITableProps): IStore {
                 return;
             }
             const property = this.fields[header.index].property;
+            const headerName = header.name;
 
             if (this.sorting[property]) {
-                this.sorting[property] = this.sorting[property] === SortingValues.ASC ? SortingValues.DESC
+                this.sorting[property].order = this.sorting[property].order === SortingValues.ASC ? SortingValues.DESC
                     : SortingValues.ASC;
             } else if (this.props.sorting === SortingModes.simple) {
                 this.sorting = {
-                    [property]: SortingValues.ASC
+                    [property]: {
+                        headerName,
+                        order: SortingValues.ASC
+                    }
                 };
             } else {
-                this.sorting[property] = SortingValues.ASC;
+                this.sorting[property] = {
+                    headerName,
+                    order: SortingValues.ASC
+                };
             }
+            this.currentPage = 0;
+        },
+
+        removeFromSorting(property) {
+            delete this.sorting[property];
             this.currentPage = 0;
         },
 
@@ -76,7 +88,7 @@ export function useRootStore(props: ITableProps): IStore {
         },
 
         get displayData() {
-            if ( this.pageCount > 1 && this.props.pagination) {
+            if (this.pageCount > 1 && this.props.pagination) {
                 return this.props.pagination.serverPaging ? this.props.data :
                     this.props.pagination.pageSize && paginate(this.sortedData, this.props.pagination.pageSize, this.currentPage)
             }
@@ -85,7 +97,7 @@ export function useRootStore(props: ITableProps): IStore {
 
         get sortedData() {
             if (Object.keys(this.sorting).length) {
-                return _orderBy(this.data, Object.keys(this.sorting), Object.values(this.sorting));
+                return _orderBy(this.data, Object.keys(this.sorting), Object.values(this.sorting).map(v => v.order));
             }
             return this.data;
         },

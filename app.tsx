@@ -12,10 +12,8 @@ const headers = [
         name: 'Age'
     }, {
         name: 'Eyes',
-        sortable: false
     }, {
         name: 'Phone',
-        sortable: false
     }, {
         name: 'Favorite fruit',
         render: function (title: string): React.ReactElement {
@@ -94,6 +92,8 @@ function App(): React.ReactElement {
             <UrlTable
                 url="https://next.json-generator.com/api/json/get/4k6xmJ21r"
                 headers={headers}
+                sorting={"compound"}
+                // showSortingPanel={true}
                 fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
                 uniqProp={'_id'}
             />
