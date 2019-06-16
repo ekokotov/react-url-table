@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {Fragment, useContext, useEffect} from 'react';
 import {observer} from "mobx-react";
 
 import '../styles/index.css';
@@ -17,10 +17,14 @@ function Table(props: React.PropsWithChildren<any>): React.ReactElement {
         }
     }, [store.props.url]);
 
-    return (
-        <table className={'table'}>
-            {props.children}
-        </table>
+    return (<Fragment>
+            <table className={'table'}>
+                {props.children}
+            </table>
+            {store.error && <div className="table__error">
+              <h3>{store.error}</h3>
+            </div>}
+        </Fragment>
     );
 }
 

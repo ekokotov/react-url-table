@@ -78,6 +78,7 @@ export interface IStore {
     props: ITableProps,
     data: any[],
     _data: any[] | undefined,
+    error: undefined | string,
     headers?: Header[],
     fields: Field[],
     displayData: any[],

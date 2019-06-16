@@ -37,7 +37,7 @@ jest, enzyme, enzyme-adapter-react-16
 - [x] multiple selection
 - [x] show loading indicator 
 - [x] show custom loading indicator 
-- [ ] show errors (for example catch data loading errors) 
+- [x] show error (for example catch data loading errors) 
 - [ ] local client search
 - [ ] map/filter/change data hook before rendering
 - [ ] server search

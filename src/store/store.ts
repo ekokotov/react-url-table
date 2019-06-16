@@ -24,6 +24,7 @@ export function useRootStore(props: ITableProps): IStore {
         currentPage: 0,
         selectedItems: {},
         sorting: {},
+        error: undefined,
 
         select(row) {
             if (this.props.selectMode) {
@@ -45,7 +46,7 @@ export function useRootStore(props: ITableProps): IStore {
         },
 
         get isLoading() {
-            return this.props.loading || this.inProgress
+            return this.props.loading || this.inProgress && !this.error
         },
 
         sort(header) {
@@ -124,6 +125,7 @@ export function useRootStore(props: ITableProps): IStore {
                 this.inProgress = false;
                 this._data = <any[]>(this.props.fetchSuccess ? this.props.fetchSuccess(res) : res);
             } catch (e) {
+                this.error = e.message;
                 console.error(e);
             }
         },

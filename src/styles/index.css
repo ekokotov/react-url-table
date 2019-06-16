@@ -77,3 +77,10 @@
     background-color: #00feff;
     cursor: pointer;
 }
+
+/* error */
+.table__error {
+    color: crimson;
+    background-color: lightpink;
+    text-align: center;
+}
