@@ -6,7 +6,9 @@ import Table from "./components/table";
 import {ITableProps, SortingModes} from "./@typings/types";
 import Pagination from "./components/pagination";
 import {StoreProvider} from "./store/context";
-import SortingPanel from "./components/sorting-panel";
+import SortingPanel from "./components/controls-panel/sorting";
+import SearchInput from "./components/controls-panel/searchInput";
+import Index from "./components/controls-panel";
 
 class UrlTable extends PureComponent<ITableProps> {
     state = {} as ITableProps;
@@ -34,7 +36,10 @@ class UrlTable extends PureComponent<ITableProps> {
 
     render() {
         return <StoreProvider {...this.state}>
-            {this.state.sorting && this.state.showSortingPanel && <SortingPanel/>}
+            <Index>
+                {this.state.sorting && this.state.showSortingPanel && <SortingPanel/>}
+                <SearchInput/>
+            </Index>
             <Table>
                 <Thead/>
                 <Tbody/>

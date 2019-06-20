@@ -88,9 +88,11 @@ export interface IStore {
     selectedItems: { [x: string]: any; },
     sorting: { [property: string]: ISortingOptions },
     removeFromSorting: (property: string) => void,
-    sortedData: any[],
+    filteredAndSortedData: any[],
     select: (row: { [x: string]: any; }) => void,
     sort: (header: Header) => void,
     pageCount: number,
     currentPage: number,
+    searchQuery: string
+    search: (query: string) => void
 }

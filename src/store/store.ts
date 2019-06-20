@@ -25,6 +25,12 @@ export function useRootStore(props: ITableProps): IStore {
         selectedItems: {},
         sorting: {},
         error: undefined,
+        searchQuery: '',
+
+        search(query: string) {
+            this.searchQuery = query;
+            this.currentPage = 0;
+        },
 
         select(row) {
             if (this.props.selectMode) {
@@ -85,22 +91,38 @@ export function useRootStore(props: ITableProps): IStore {
                 return 1;
             }
             return this.props.pagination.pageCount ||
-                this.props.pagination.pageSize && Math.round(this.sortedData.length / this.props.pagination.pageSize) || 1;
+                this.props.pagination.pageSize && Math.round(this.filteredAndSortedData.length / this.props.pagination.pageSize) || 1;
         },
 
         get displayData() {
             if (this.pageCount > 1 && this.props.pagination) {
-                return this.props.pagination.serverPaging ? this.props.data :
-                    this.props.pagination.pageSize && paginate(this.sortedData, this.props.pagination.pageSize, this.currentPage)
+
+                if (!this.props.pagination.serverPaging && this.props.pagination.pageSize) {
+                    return paginate(this.filteredAndSortedData, this.props.pagination.pageSize, this.currentPage)
+                }
+                // else {
+                //     filteredData = <any[]>this.props.data;
+                // }
             }
-            return this.sortedData;
+
+            return this.filteredAndSortedData;
         },
 
-        get sortedData() {
-            if (Object.keys(this.sorting).length) {
-                return _orderBy(this.data, Object.keys(this.sorting), Object.values(this.sorting).map(v => v.order));
+        get filteredAndSortedData() {
+            let filteredData = this.data;
+
+            if (this.searchQuery.length) {
+                filteredData = filteredData.filter(row =>
+                    this.fields.some(field =>
+                        row[field.property].toString().indexOf(this.searchQuery) !== -1
+                    ));
             }
-            return this.data;
+
+            if (Object.keys(this.sorting).length) {
+                return _orderBy(filteredData, Object.keys(this.sorting), Object.values(this.sorting).map(v => v.order));
+            }
+
+            return filteredData;
         },
 
         get headers() {
@@ -119,7 +141,9 @@ export function useRootStore(props: ITableProps): IStore {
             if (!this.props.url) {
                 return
             }
+
             this.inProgress = true;
+
             try {
                 const res = await load(this.props.url);
                 this.inProgress = false;
@@ -129,6 +153,5 @@ export function useRootStore(props: ITableProps): IStore {
                 console.error(e);
             }
         },
-
     }));
 }

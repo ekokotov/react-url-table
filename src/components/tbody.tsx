@@ -12,7 +12,14 @@ interface IProps {
 
 function Tbody(props: React.PropsWithChildren<IProps>): React.ReactElement {
     const store: IStore = useContext(TableContext);
-
+    if (store.searchQuery) {
+        return <tbody>
+        <tr>
+            <td>{store.searchQuery}</td>
+        </tr>
+        </tbody>
+    }
+    ;
     return (
         <tbody>
         {store.isLoading ? <Loading/> :

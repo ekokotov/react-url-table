@@ -88,15 +88,15 @@ function App(): React.ReactElement {
             {/*    }}*/}
             {/*    uniqProp={'email'}*/}
             {/*/>*/}
-            <h1>Load by URL</h1>
-            <UrlTable
-                url="https://next.json-generator.com/api/json/get/4k6xmJ21r"
-                headers={headers}
-                sorting={"compound"}
-                // showSortingPanel={true}
-                fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
-                uniqProp={'_id'}
-            />
+            {/*<h1>Load by URL</h1>*/}
+            {/*<UrlTable*/}
+            {/*    url="https://next.json-generator.com/api/json/get/4k6xmJ21r"*/}
+            {/*    headers={headers}*/}
+            {/*    sorting={"compound"}*/}
+            {/*    // showSortingPanel={true}*/}
+            {/*    fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}*/}
+            {/*    uniqProp={'_id'}*/}
+            {/*/>*/}
             {/*<h1>Load by URL with fetchSuccess callback</h1>*/}
             {/*<UrlTable*/}
             {/*    url="https://randomuser.me/api/?page=1&results=10"*/}
@@ -122,6 +122,16 @@ function App(): React.ReactElement {
             {/*        pageSize: 5,*/}
             {/*    }}*/}
             {/*/>*/}
+            <UrlTable
+                data={dataMock}
+                headers={['Name', 'Age', 'Company', 'Balance']}
+                fields={['name', 'age', 'company', 'balance']}
+                uniqProp={'_id'}
+                sorting={'compound'}
+                pagination={{
+                    pageSize: 5,
+                }}
+            />
         </Fragment>
 
     )

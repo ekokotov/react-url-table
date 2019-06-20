@@ -15,7 +15,7 @@ function Header(props: IProps): React.ReactElement {
     const property: string = store.fields[header.index].property;
     const sortingOptions = store.sorting[property];
     const sortingEvent = () => store.sort(header);
-    const getHeaderEvents: object = {
+    const getHeaderEvents: Object = {
         onClick: (store.props.sorting && header.sortable ? sortingEvent : null)
     };
 

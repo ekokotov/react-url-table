@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
-import {ISortingOptions, IStore} from "../../@typings/types";
-import {TableContext} from "../../store/context";
+import {ISortingOptions, IStore} from "../../../@typings/types";
+import {TableContext} from "../../../store/context";
 import Badge from "./badge";
 import {observer} from "mobx-react";
 
