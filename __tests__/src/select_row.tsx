@@ -2,7 +2,8 @@ import {mount} from 'enzyme';
 import {data} from '../mocks/mock.json';
 import React from 'react';
 import UrlTable from "../../src";
-
+import {IRecord} from "../../src/@typings/types";
+const mockData = data as IRecord[];
 describe('Rows selecting', () => {
     let selectedRows = [];
 
@@ -10,7 +11,7 @@ describe('Rows selecting', () => {
         selectedRows = [];
     });
 
-    const onSelect = jest.fn((records: any[]) => {
+    const onSelect = jest.fn((records: IRecord[]) => {
         // console.log('Selected records: ', records);
         selectedRows = records;
     });
@@ -18,7 +19,7 @@ describe('Rows selecting', () => {
     it('show single-row row selecting (selectMode={"single"})', async () => {
         const table = mount(
             <UrlTable
-                data={data}
+                data={mockData}
                 headers={['Name', 'Age', 'Eyes', 'Phone', 'Favorite fruit']}
                 fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
                 selectMode={'single'}
@@ -37,7 +38,7 @@ describe('Rows selecting', () => {
     it('no row selecting (without selectMode={})', async () => {
         const table = mount(
             <UrlTable
-                data={data}
+                data={mockData}
                 headers={['Name', 'Age', 'Eyes', 'Phone', 'Favorite fruit']}
                 fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
                 uniqProp={'_id'}
@@ -53,7 +54,7 @@ describe('Rows selecting', () => {
     it('no row selecting (without selectMode={"multiple"})', async () => {
         const table = mount(
             <UrlTable
-                data={data}
+                data={mockData}
                 headers={['Name', 'Age', 'Eyes', 'Phone', 'Favorite fruit']}
                 fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
                 selectMode={'multiple'}

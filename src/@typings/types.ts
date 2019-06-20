@@ -15,7 +15,7 @@ export interface IHeaderPropObject {
 export interface IFieldPropObject {
     property: string,
 
-    render?(value: any, object: Object): string | React.ReactElement
+    render?(value: any, object: IRecord): string | React.ReactElement
 }
 
 export type IHeaderProp = IHeaderPropObject | string
@@ -24,9 +24,8 @@ export type IFieldsProp = IFieldPropObject | string
 export interface IPaginateProps extends Partial<ReactPaginateProps> {
     pageCount?: number,
     currentPage?: number,
-    pageSize?: number,
+    pageSize: number,
     serverPaging?: boolean
-    // show?: boolean
 }
 
 type ITableBase = {
@@ -37,7 +36,7 @@ type ITableBase = {
     headers?: IHeaderProp[],
     uniqProp: string,
     pagination?: IPaginateProps | false,
-    onSelect?: (record: any[]) => void,
+    onSelect?: (record: IRecord[]) => void,
     selectMode?: keyof typeof SelectModes | false,
     loading?: boolean
     loadingComponent?: (isLoading?: boolean) => React.ReactElement
@@ -49,7 +48,7 @@ interface ITableWithUrl {
 }
 
 interface ITableWithData {
-    data: any[]
+    data: IRecord[]
 }
 
 export type ITableProps = XOR<ITableWithUrl, ITableWithData> & ITableBase
@@ -74,25 +73,32 @@ export interface ISortingOptions {
     headerName: string
 }
 
+export type IFilterFunction<T> = (data: T[]) => T[];
+
+export interface IRecord {
+    (prop: string): any;
+}
+
 export interface IStore {
     props: ITableProps,
-    data: any[],
-    _data: any[] | undefined,
+    _data: IRecord[] | undefined,
     error: undefined | string,
     headers?: Header[],
     fields: Field[],
-    displayData: any[],
+    displayData: { data: IRecord[], pageCount: number },
     inProgress: boolean,
     isLoading: boolean,
     loadByUrl: () => void,
-    selectedItems: { [x: string]: any; },
+    selectedItems: { [x: string]: IRecord; },
     sorting: { [property: string]: ISortingOptions },
     removeFromSorting: (property: string) => void,
-    filteredAndSortedData: any[],
-    select: (row: { [x: string]: any; }) => void,
+    select: (row: IRecord) => void,
     sort: (header: Header) => void,
-    pageCount: number,
     currentPage: number,
     searchQuery: string
-    search: (query: string) => void
+    search: (query: string) => void,
+    filters: () => Function[],
+    searchFilter: IFilterFunction<IRecord>,
+    sortFilter: IFilterFunction<IRecord>,
+    paginateFilter: (data: IRecord[]) => { data: IRecord[], pageCount: number },
 }

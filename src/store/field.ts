@@ -1,12 +1,12 @@
 import React from "react";
-import {IFieldsProp, IFieldPropObject} from "../@typings/types";
+import {IFieldsProp, IFieldPropObject, IRecord} from "../@typings/types";
 import _get from "lodash/get";
 
 interface FieldModel extends IFieldPropObject {}
 class FieldModel {
     index: number;
 
-    renderHandler?(value: any, object: Object): string | React.ReactElement
+    renderHandler?(value: any, object: IRecord): string | React.ReactElement
 
     constructor(props: IFieldsProp, index: number) {
         this.index = index;
@@ -19,7 +19,7 @@ class FieldModel {
         return this;
     }
 
-    render(object: Object): string | React.ReactElement {
+    render(object: IRecord): string | React.ReactElement {
         const value = _get(object, this.property);
 
         return this.renderHandler ? this.renderHandler(value, object) : value;

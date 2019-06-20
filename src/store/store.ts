@@ -1,13 +1,13 @@
 import {
     IFieldsProp,
-    IHeaderProp,
+    IHeaderProp, IRecord,
     IStore,
     ITableProps,
     SelectModes,
     SortingModes,
     SortingValues
 } from "../@typings/types";
-import {paginate} from "../helper/pagination";
+import {calculatePageCount, paginate} from "../helper/pagination";
 import HeaderModel from "./header";
 import IFieldModel from "./field";
 import {load} from "../helper/http";
@@ -26,6 +26,42 @@ export function useRootStore(props: ITableProps): IStore {
         sorting: {},
         error: undefined,
         searchQuery: '',
+
+        filters() {
+            return [
+                this.searchFilter,
+                this.sortFilter,
+                this.paginateFilter,
+            ]
+        },
+
+        searchFilter(data) {
+            if (this.searchQuery.length) {
+                data = data.filter(row =>
+                    this.fields.some(field =>
+                        row[field.property].toString().indexOf(this.searchQuery) !== -1
+                    ));
+            }
+            return data;
+        },
+
+        sortFilter(data) {
+            if (Object.keys(this.sorting).length) {
+                return _orderBy(data, Object.keys(this.sorting), Object.values(this.sorting).map(v => v.order));
+            }
+            return data;
+        },
+
+        paginateFilter(data) {
+            let _data = data;
+
+            if (this.props.pagination && _data.length > this.props.pagination.pageSize
+                && !this.props.pagination.serverPaging && this.props.pagination.pageSize) {
+                _data = paginate<IRecord>(data, this.props.pagination.pageSize, this.currentPage)
+            }
+
+            return {data: _data, pageCount: calculatePageCount(data, this.props.pagination)};
+        },
 
         search(query: string) {
             this.searchQuery = query;
@@ -86,43 +122,10 @@ export function useRootStore(props: ITableProps): IStore {
             this.currentPage = 0;
         },
 
-        get pageCount() {
-            if (!this.props.pagination) {
-                return 1;
-            }
-            return this.props.pagination.pageCount ||
-                this.props.pagination.pageSize && Math.round(this.filteredAndSortedData.length / this.props.pagination.pageSize) || 1;
-        },
-
         get displayData() {
-            if (this.pageCount > 1 && this.props.pagination) {
-
-                if (!this.props.pagination.serverPaging && this.props.pagination.pageSize) {
-                    return paginate(this.filteredAndSortedData, this.props.pagination.pageSize, this.currentPage)
-                }
-                // else {
-                //     filteredData = <any[]>this.props.data;
-                // }
-            }
-
-            return this.filteredAndSortedData;
-        },
-
-        get filteredAndSortedData() {
-            let filteredData = this.data;
-
-            if (this.searchQuery.length) {
-                filteredData = filteredData.filter(row =>
-                    this.fields.some(field =>
-                        row[field.property].toString().indexOf(this.searchQuery) !== -1
-                    ));
-            }
-
-            if (Object.keys(this.sorting).length) {
-                return _orderBy(filteredData, Object.keys(this.sorting), Object.values(this.sorting).map(v => v.order));
-            }
-
-            return filteredData;
+            return this.filters().reduce((f: Function, g: Function) => (args: IRecord[]) => g(f(args)))(
+                this._data || this.props.data
+            );
         },
 
         get headers() {
@@ -131,10 +134,6 @@ export function useRootStore(props: ITableProps): IStore {
 
         get fields() {
             return this.props.fields.map((field: IFieldsProp, index: number) => new IFieldModel(field, index));
-        },
-
-        get data() {
-            return this._data || this.props.data;
         },
 
         async loadByUrl() {
@@ -147,7 +146,7 @@ export function useRootStore(props: ITableProps): IStore {
             try {
                 const res = await load(this.props.url);
                 this.inProgress = false;
-                this._data = <any[]>(this.props.fetchSuccess ? this.props.fetchSuccess(res) : res);
+                this._data = <IRecord[]>(this.props.fetchSuccess ? this.props.fetchSuccess(res) : res);
             } catch (e) {
                 this.error = e.message;
                 console.error(e);
