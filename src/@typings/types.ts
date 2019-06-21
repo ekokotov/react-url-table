@@ -97,7 +97,7 @@ export interface IStore {
     currentPage: number,
     searchQuery: string
     search: (query: string) => void,
-    filters: () => Function[],
+    filterHandlers: () => Function[],
     searchFilter: IFilterFunction<IRecord>,
     sortFilter: IFilterFunction<IRecord>,
     paginateFilter: (data: IRecord[]) => { data: IRecord[], pageCount: number },

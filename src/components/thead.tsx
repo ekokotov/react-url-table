@@ -10,12 +10,12 @@ function Thead(): React.ReactElement {
 
     return (
         <thead>
-            <tr>
-                {
-                    store.headers && store.headers.map((header: HeaderModel) =>
-                        <Header key={header.name} header={header}/>)
-                }
-            </tr>
+        <tr>
+            {
+                store.headers && store.headers.map((header: HeaderModel) =>
+                    <Header key={header.name} header={header}/>)
+            }
+        </tr>
         </thead>
     )
 }

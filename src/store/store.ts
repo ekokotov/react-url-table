@@ -27,7 +27,7 @@ export function useRootStore(props: ITableProps): IStore {
         error: undefined,
         searchQuery: '',
 
-        filters() {
+        filterHandlers() {
             return [
                 this.searchFilter,
                 this.sortFilter,
@@ -123,7 +123,7 @@ export function useRootStore(props: ITableProps): IStore {
         },
 
         get displayData() {
-            return this.filters().reduce((f: Function, g: Function) => (args: IRecord[]) => g(f(args)))(
+            return this.filterHandlers().reduce((f: Function, g: Function) => (args: IRecord[]) => g(f(args)))(
                 this._data || this.props.data
             );
         },

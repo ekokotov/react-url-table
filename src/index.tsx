@@ -8,7 +8,7 @@ import Pagination from "./components/pagination";
 import {StoreProvider} from "./store/context";
 import SortingPanel from "./components/controls-panel/sorting";
 import SearchInput from "./components/controls-panel/searchInput";
-import Index from "./components/controls-panel";
+import ControlsPanel from "./components/controls-panel";
 
 class UrlTable extends PureComponent<ITableProps> {
     state = {} as ITableProps;
@@ -36,10 +36,10 @@ class UrlTable extends PureComponent<ITableProps> {
 
     render() {
         return <StoreProvider {...this.state}>
-            <Index>
+            <ControlsPanel>
                 {this.state.sorting && this.state.showSortingPanel && <SortingPanel/>}
                 <SearchInput/>
-            </Index>
+            </ControlsPanel>
             <Table>
                 <Thead/>
                 <Tbody/>
