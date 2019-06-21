@@ -1,7 +1,7 @@
 import React from 'react';
 import {ReactPaginateProps} from "react-paginate";
-import Header from "../store/header";
-import Field from "../store/field";
+import Header from "../store/models/header";
+import Field from "../store/models/field";
 import {XOR} from "./utils";
 
 export interface IHeaderPropObject {

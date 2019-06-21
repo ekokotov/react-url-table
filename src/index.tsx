@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import _merge from 'lodash/merge';
-import Thead from './components/thead';
-import Tbody from './components/tbody';
+import Thead from './components/head/thead';
+import Tbody from './components/body/tbody';
 import Table from "./components/table";
 import {ITableProps, SortingModes} from "./@typings/types";
 import Pagination from "./components/pagination";
@@ -44,7 +44,7 @@ class UrlTable extends PureComponent<ITableProps> {
                 <Thead/>
                 <Tbody/>
             </Table>
-            <Pagination/>
+            {this.state.pagination && <Pagination/>}
         </StoreProvider>
     }
 }

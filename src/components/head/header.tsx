@@ -1,9 +1,9 @@
 import React, {useContext} from 'react';
 import classNames from 'classnames';
-import HeaderModel from "../store/header";
+import HeaderModel from "../../store/models/header";
 import {observer} from "mobx-react";
-import {IStore} from "../@typings/types";
-import {TableContext} from "../store/context";
+import {IStore} from "../../@typings/types";
+import {TableContext} from "../../store/context";
 
 interface IProps {
     header: HeaderModel

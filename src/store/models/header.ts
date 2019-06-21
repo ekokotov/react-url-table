@@ -1,5 +1,5 @@
 import React from "react";
-import {IHeaderProp, IHeaderPropObject} from "../@typings/types";
+import {IHeaderProp, IHeaderPropObject} from "../../@typings/types";
 
 export interface IHeaderModel extends IHeaderPropObject {
 }

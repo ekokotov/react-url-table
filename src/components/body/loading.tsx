@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
-import {IStore} from "../@typings/types";
-import {TableContext} from "../store/context";
+import {IStore} from "../../@typings/types";
+import {TableContext} from "../../store/context";
 import {observer} from "mobx-react";
 
 function Loading() {

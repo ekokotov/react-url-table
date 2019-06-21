@@ -8,8 +8,8 @@ import {
     SortingValues
 } from "../@typings/types";
 import {calculatePageCount, paginate} from "../helper/pagination";
-import HeaderModel from "./header";
-import IFieldModel from "./field";
+import HeaderModel from "./models/header";
+import IFieldModel from "./models/field";
 import {load} from "../helper/http";
 import _orderBy from 'lodash/orderBy';
 import {useAsObservableSource, useLocalStore} from 'mobx-react';

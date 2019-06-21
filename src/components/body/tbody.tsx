@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
-import {TableContext} from "../store/context";
+import {TableContext} from "../../store/context";
 import Row from "./row";
-import {IStore} from "../@typings/types";
+import {IStore} from "../../@typings/types";
 import {observer} from "mobx-react";
 import _get from "lodash/get";
 import Loading from "./loading";

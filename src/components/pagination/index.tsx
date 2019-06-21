@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import ReactPaginate, {ReactPaginateProps} from 'react-paginate';
-import {IStore} from "../@typings/types";
-import {TableContext} from "../store/context";
+import {IStore} from "../../@typings/types";
+import {TableContext} from "../../store/context";
 import {observer} from "mobx-react";
 
 function Pagination(): React.ReactElement | null {

@@ -1,7 +1,7 @@
 import React from 'react';
-import FieldModel from "../store/field";
+import FieldModel from "../../store/models/field";
 import {observer} from "mobx-react";
-import {IRecord} from "../@typings/types";
+import {IRecord} from "../../@typings/types";
 
 interface IProps {
     record: IRecord,

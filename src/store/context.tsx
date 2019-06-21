@@ -1,6 +1,6 @@
 import React, {createContext} from 'react';
 import {IStore, ITableProps} from "../@typings/types";
-import {useRootStore} from "./store";
+import {useRootStore} from "./index";
 
 export const TableContext = createContext({} as IStore);
 

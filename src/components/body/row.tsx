@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
 import Cell from "./cell";
-import FieldModel from "../store/field";
-import {TableContext} from "../store/context";
-import {IStore} from "../@typings/types";
+import FieldModel from "../../store/models/field";
+import {TableContext} from "../../store/context";
+import {IStore} from "../../@typings/types";
 import classNames from 'classnames';
 import {observer} from "mobx-react";
 

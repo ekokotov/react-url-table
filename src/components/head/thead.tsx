@@ -1,8 +1,8 @@
 import React, {useContext} from 'react';
-import {TableContext} from "../store/context";
+import {TableContext} from "../../store/context";
 import Header from "./header";
-import {IStore} from "../@typings/types";
-import HeaderModel from "../store/header";
+import {IStore} from "../../@typings/types";
+import HeaderModel from "../../store/models/header";
 import {observer} from "mobx-react";
 
 function Thead(): React.ReactElement {
