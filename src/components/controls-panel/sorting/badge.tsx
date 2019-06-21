@@ -8,7 +8,6 @@ interface IProps extends ISortingOptions {
 }
 
 function Badge(props: IProps): JSX.Element {
-
     return (
         <div className={`table__sorting__badge table__sorting__badge--${props.order}`}>
             {props.headerName}

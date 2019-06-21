@@ -1,46 +1,78 @@
 :root {
-    --sortedThBorder: 2px solid aqua;
+    --accentColor: #15a5fb;
+    --backGroundColor: #1d324b;
+    --backGroundDarkColor: #0e2440;;
+    --cellBorderColor: #263a55;
+    --thTextColor: #9de4ff;
+    --sortedThBorder: 2px solid var(--thTextColor);
+    --baseFont: Helvetica-light, Helvetica Neue, Helvetica, Arial, sans-serif;
+    --fontColor: #617da1;
+    font-family: var(--baseFont);
+    color: var(--fontColor);
 }
 
 .table {
     width: 100%;
+    background-color: var(--backGroundColor);
+    border-collapse: collapse;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
 .table thead {
-    background-color: antiquewhite;
+    background-color: var(--accentColor);
 }
 
 .table thead th {
     cursor: pointer;
+    color: var(--thTextColor);
+    text-align: left;
 }
 
 .table__header {
     outline: none;
 }
 
-.table__header.header__sorted--desc, .table__sorting-panel .table__sorting__badge.table__sorting__badge--desc {
-    border-bottom: var(--sortedThBorder);
+.table__header.header__sorted--desc {
+    box-shadow: inset 0 -2px 0;
 }
 
-.table__header.header__sorted--asc, .table__sorting-panel .table__sorting__badge.table__sorting__badge--asc {
-    border-top: var(--sortedThBorder);
+.table__header.header__sorted--asc {
+    box-shadow: inset 0 2px 0;
+}
+
+.table tbody tr:not(.selected):hover {
+    background-color: var(--cellBorderColor);
 }
 
 .table tbody tr.selected {
     background-color: aquamarine;
 }
 
+.table td, .table th {
+    border: 1px solid var(--cellBorderColor);
+    padding: 7px 11px;
+}
+
 .table__progress td {
     text-align: center;
-    padding: 10px 0;
 }
 
 /* pagination */
 .table__pagination li {
-    display: inline-block;
-    padding: 0 5px;
+    display: inline-flex;
+    margin-left: 5px;
+    min-width: 22px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     user-select: none;
+    color: var(--backGroundDarkColor);
+}
+
+.table__pagination li:hover, .table__pagination li.disabled {
+    color: var(--fontColor);
 }
 
 .table__pagination a {
@@ -48,7 +80,9 @@
 }
 
 .table__pagination li.selected {
-    border: 1px solid mediumvioletred;
+    border: 1px solid var(--accentColor);
+    color: var(--accentColor);
+    border-radius: 50%;
 }
 
 /* controls panel */
@@ -65,24 +99,50 @@
 }
 
 .table__sorting-panel .table__sorting__badge {
+    font-size: 12px;
     margin-left: 10px;
-    padding: 3px 5px;
-    background-color: rgba(0, 255, 255, 0.2);
-    border-radius: 7px;
+    padding-left: 5px;
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--accentColor);
+    color: var(--accentColor);
+    border-radius: 25px;
+}
+
+.table__sorting-panel .table__sorting__badge:hover .table__sorting__badge--close {
+    visibility: visible;
 }
 
 .table__sorting-panel .table__sorting__badge--close {
-    color: gray;
-    font-size: 12px;
+    visibility: hidden;
+    font-size: 10px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     margin-left: 5px;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 100%;
+    border: 1px solid var(--accentColor);
+    position: relative;
+    left: 1px;
     border-radius: 50%;
-    background-color: #00feff;
     cursor: pointer;
+}
+
+.table__sorting-panel .table__sorting__badge.table__sorting__badge--asc:before,
+.table__sorting-panel .table__sorting__badge.table__sorting__badge--desc:before {
+    content: "";
+    -webkit-mask-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 129 129' xmlns:xlink='http://www.w3.org/1999/xlink' enable-background='new 0 0 129 129'%3E%3Cg%3E%3Cpath d='m121.4,61.6l-54-54c-0.7-0.7-1.8-1.2-2.9-1.2s-2.2,0.5-2.9,1.2l-54,54c-1.6,1.6-1.6,4.2 0,5.8 0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2l47-47v98.1c0,2.3 1.8,4.1 4.1,4.1s4.1-1.8 4.1-4.1v-98.1l47,47c1.6,1.6 4.2,1.6 5.8,0s1.5-4.2 1.42109e-14-5.8z'/%3E%3C/g%3E%3C/svg%3E%0A");
+    mask-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 129 129' xmlns:xlink='http://www.w3.org/1999/xlink' enable-background='new 0 0 129 129'%3E%3Cg%3E%3Cpath d='m121.4,61.6l-54-54c-0.7-0.7-1.8-1.2-2.9-1.2s-2.2,0.5-2.9,1.2l-54,54c-1.6,1.6-1.6,4.2 0,5.8 0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2l47-47v98.1c0,2.3 1.8,4.1 4.1,4.1s4.1-1.8 4.1-4.1v-98.1l47,47c1.6,1.6 4.2,1.6 5.8,0s1.5-4.2 1.42109e-14-5.8z'/%3E%3C/g%3E%3C/svg%3E%0A");
+    background-color: var(--accentColor);
+    height: 15px;
+    width: 15px;
+    background-repeat: no-repeat;
+    margin-right: 5px;
+}
+
+.table__sorting-panel .table__sorting__badge.table__sorting__badge--desc:before {
+    transform: rotate(180deg);
 }
 
 /* error */

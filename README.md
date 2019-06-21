@@ -35,10 +35,10 @@ jest, enzyme, enzyme-adapter-react-16
 - [x] after loading data hook to map data from response(aka fetchSuccess)
 - [x] fire onSelect
 - [x] multiple selection
-- [x] show loading indicator 
-- [x] show custom loading indicator 
-- [x] show error (for example catch data loading errors) 
-- [ ] local client search
+- [x] show loading indicator
+- [x] show custom loading indicator
+- [x] show error (for example catch data loading errors)
+- [x] local client search
 - [ ] map/filter/change data hook before rendering
 - [ ] server search
 - [x] simple client sorting
@@ -52,7 +52,7 @@ jest, enzyme, enzyme-adapter-react-16
 - [ ] reorder columns (drag-n-drop)
 - [ ] resize column width
 - [ ] custom row pattern/component
-- [ ] styling
+- [X] styling
 - [ ] column highlighting (CSS only)
 - [ ] Themes supporting
 - [ ] prepare and register with NPM
