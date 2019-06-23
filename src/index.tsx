@@ -19,7 +19,6 @@ class UrlTable extends PureComponent<ITableProps> {
             fields: [],
             headers: [],
             loading: false,
-            uniqProp: 'id',
             selectMode: false,
             onSelect: undefined,
             pagination: {
@@ -28,7 +27,7 @@ class UrlTable extends PureComponent<ITableProps> {
                 pageRangeDisplayed: 5,
                 marginPagesDisplayed: 1
             },
-            search: 'global',
+            search: false,
             sorting: SortingModes.simple,
             showSortingPanel: true,
         }, nextProps);
@@ -38,7 +37,7 @@ class UrlTable extends PureComponent<ITableProps> {
         return <StoreProvider {...this.state}>
             <ControlsPanel>
                 {this.state.sorting && this.state.showSortingPanel && <SortingPanel/>}
-                <SearchInput/>
+                {this.state.search && <SearchInput/>}
             </ControlsPanel>
             <Table>
                 <Thead/>

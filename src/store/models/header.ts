@@ -8,6 +8,7 @@ class HeaderModel implements IHeaderModel {
     name: string;
     index: number;
     sortable: boolean = true;
+    searchable: boolean = true;
 
     renderHandler?(name: string): string | React.ReactElement
 
@@ -18,6 +19,9 @@ class HeaderModel implements IHeaderModel {
         } else {
             this.renderHandler = props.render;
             this.name = props.name;
+            if (props.searchable === false) {
+                this.searchable = props.searchable;
+            }
             if (props.sortable === false) {
                 this.sortable = props.sortable;
             }

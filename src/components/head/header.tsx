@@ -12,7 +12,7 @@ interface IProps {
 function Header(props: IProps): React.ReactElement {
     const header = props.header;
     const store: IStore = useContext(TableContext);
-    const property: string = store.fields[header.index].property;
+    const property = store.fields[header.index].property;
     const sortingOptions = store.sorting[property];
     const sortingEvent = () => store.sort(header);
     const getHeaderEvents: Object = {
@@ -24,7 +24,7 @@ function Header(props: IProps): React.ReactElement {
             className={classNames('table__header', {
                 [`header__sorted--${sortingOptions && sortingOptions.order}`]: sortingOptions
             })}>
-            {props.header.render()}
+            {header.render()}
         </th>
     )
 }

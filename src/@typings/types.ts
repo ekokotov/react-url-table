@@ -8,6 +8,7 @@ export interface IHeaderPropObject {
     name: string,
     property?: string,
     sortable?: boolean,
+    searchable?: boolean,
 
     render?(name: string): string | React.ReactElement
 }
@@ -29,7 +30,7 @@ export interface IPaginateProps extends Partial<ReactPaginateProps> {
 }
 
 type ITableBase = {
-    search?: 'global' | boolean,
+    search?: boolean,
     sorting?: keyof typeof SortingModes | false,
     showSortingPanel?: boolean,
     fields: IFieldsProp[],
@@ -75,9 +76,7 @@ export interface ISortingOptions {
 
 export type IFilterFunction<T> = (data: T[]) => T[];
 
-export interface IRecord {
-    (prop: string): any;
-}
+export type IRecord = Object;
 
 export interface IStore {
     props: ITableProps,

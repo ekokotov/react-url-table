@@ -124,9 +124,10 @@ function App(): React.ReactElement {
             {/*/>*/}
             <UrlTable
                 data={dataMock}
-                headers={['Name', 'Age', 'Company', 'Balance']}
+                headers={[{name: 'Name', searchable: false}, {name: 'Age'}, {name: 'Company'}, {name: 'Balance'}]}
                 fields={['name', 'age', 'company', 'balance']}
                 uniqProp={'_id'}
+                search={true}
                 sorting={'compound'}
                 pagination={{
                     pageSize: 5,

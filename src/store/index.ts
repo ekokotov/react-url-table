@@ -37,10 +37,13 @@ export function useRootStore(props: ITableProps): IStore {
 
         searchFilter(data) {
             if (this.searchQuery.length) {
-                data = data.filter(row =>
-                    this.fields.some(field =>
-                        row[field.property].toString().indexOf(this.searchQuery) !== -1
-                    ));
+                data = data.filter(row => this.fields.some(field => {
+                        const searchable = this.headers && this.headers[field.index].searchable;
+
+                        return searchable && row[field.property].toString().toLowerCase()
+                            .indexOf(this.searchQuery.toLowerCase()) !== -1
+                    }
+                ));
             }
             return data;
         },
