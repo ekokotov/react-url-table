@@ -5,6 +5,7 @@ import {IStore} from "../../@typings/types";
 import {observer} from "mobx-react";
 import _get from "lodash/get";
 import Loading from "./loading";
+import NoData from "./no-data";
 
 interface IProps {
 
@@ -15,6 +16,7 @@ function Tbody(props: React.PropsWithChildren<IProps>): React.ReactElement {
 
     return (
         <tbody>
+        {!store.isLoading && !store.displayData.data.length && <NoData/>}
         {store.isLoading ? <Loading/> :
             store.displayData.data.map((data: any) => <Row key={_get(data, store.props.uniqProp)} data={data}/>)}
         </tbody>

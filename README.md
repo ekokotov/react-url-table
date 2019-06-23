@@ -53,7 +53,8 @@ jest, enzyme, enzyme-adapter-react-16
 - [ ] reorder columns (drag-n-drop)
 - [ ] resize column width
 - [ ] custom row pattern/component
+- [x] custom cell pattern/component
 - [X] styling
-- [ ] column highlighting (CSS only)
+- [x] column highlighting (CSS only)
 - [ ] Themes supporting
 - [ ] prepare and register with NPM

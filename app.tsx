@@ -128,6 +128,7 @@ function App(): React.ReactElement {
                 fields={['name', 'age', 'company', 'balance']}
                 uniqProp={'_id'}
                 search={true}
+                selectMode={'single'}
                 sorting={'compound'}
                 pagination={{
                     pageSize: 5,
