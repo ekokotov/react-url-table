@@ -2,7 +2,7 @@ import {mount} from 'enzyme';
 import {data as mockData} from '../mocks/mock.json';
 import _orderBy from 'lodash/orderBy';
 import React from 'react';
-import fetch from 'jest-fetch-mock';
+import fetch from 'jest-fetch';
 import UrlTable from "../../src";
 import waitUntil from "async-wait-until";
 
@@ -11,11 +11,11 @@ describe('Rows selecting', () => {
     const sortedByNameMockDataDesc = _orderBy(mockData, ['name'], ['desc']);
 
     beforeEach(() => {
-        global.fetch.resetMocks();
+        fetch.resetMocks();
     });
 
     it('load By url and sort locally (sorting={"simple"}) without pagination', async () => {
-        global.fetch.mockResponses([JSON.stringify(mockData), {status: 200}]);
+        fetch.mockResponseOnce(`${[JSON.stringify(mockData)]}`);
 
         const table = mount(
             <UrlTable
@@ -69,7 +69,8 @@ describe('Rows selecting', () => {
 
 
     it('load By url and sort locally (sorting={"simple"}) with pagination', async () => {
-        global.fetch.mockResponses([JSON.stringify(mockData), {status: 200}]);
+        fetch.mockResponseOnce(`${[JSON.stringify(mockData)]}`);
+
         const pageSize = 5;
         const totalPages = Math.round(mockData.length / pageSize);
         const table = mount(

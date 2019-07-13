@@ -3,7 +3,7 @@ import waitUntil from 'async-wait-until';
 import page1 from '../mocks/page1.json';
 import page2 from '../mocks/page2.json';
 import {act} from 'react-dom/test-utils';
-import fetch from 'jest-fetch-mock';
+import fetch from 'jest-fetch';
 import React, {useEffect, useState} from "react";
 import {load} from "../../src/helper/http";
 import UrlTable from "../../src";
@@ -55,7 +55,7 @@ describe('Example of controlled server paging', () => {
     beforeEach(() => {
         container = document.createElement('div');
         document.body.appendChild(container);
-        global.fetch.resetMocks()
+        fetch.resetMocks()
     });
 
     afterEach(() => {
@@ -65,7 +65,7 @@ describe('Example of controlled server paging', () => {
 
 
     it('Component should render with header', async () => {
-        global.fetch.mockResponses([JSON.stringify(page1), {status: 200}], [JSON.stringify(page2), {status: 200}]);
+        fetch.mockResponseOnce(`${[JSON.stringify(page1)]}`);
 
         act(() => {
             render(<TableWithServerPaging/>, container);
@@ -92,6 +92,8 @@ describe('Example of controlled server paging', () => {
         expect(body.querySelector('td').textContent).toContain('George');
 
         const prevHTML = container.innerHTML;
+
+        fetch.mockResponseOnce(`${[JSON.stringify(page2)]}`);
 
         act(() => {
             paging.querySelector('li.selected')

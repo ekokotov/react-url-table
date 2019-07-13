@@ -4,15 +4,15 @@ import {data as mockData} from '../mocks/mock.json';
 import React from 'react';
 import UrlTable from "../../src";
 import waitUntil from "async-wait-until";
-import fetch from 'jest-fetch-mock';
+import fetch from 'jest-fetch';
 
 describe('Simple load table by URL', () => {
     beforeEach(() => {
-        global.fetch.resetMocks();
+        fetch.resetMocks();
     });
 
     it('Component should render with paging', async () => {
-        global.fetch.mockResponses([JSON.stringify(mockData), {status: 200}]);
+        fetch.mockResponse(`${[JSON.stringify(mockData)]}`);
 
         const PAGE_SIZE = 5;
         const table = mount(
@@ -38,7 +38,7 @@ describe('Simple load table by URL', () => {
     });
 
     it('Component should render without paging (empty pagination)', async () => {
-        global.fetch.mockResponses([JSON.stringify(mockData), {status: 200}]);
+        fetch.mockResponseOnce(`${[JSON.stringify(mockData)]}`);
 
         const table = mount(
             <UrlTable
@@ -60,7 +60,7 @@ describe('Simple load table by URL', () => {
     });
 
     it('Component should render with specified data-mapper(fetchSuccess)', async () => {
-        global.fetch.mockResponses([JSON.stringify(page1), {status: 200}]);
+        fetch.mockResponseOnce(`${[JSON.stringify(page1)]}`);
 
         const table = mount(
             <UrlTable
@@ -83,7 +83,7 @@ describe('Simple load table by URL', () => {
     });
 
     it('should show progress component while data loading', async () => {
-        global.fetch.mockResponses([JSON.stringify(page1), {status: 200}]);
+        fetch.mockResponseOnce(`${[JSON.stringify(page1)]}`);
 
         const table = mount(
             <UrlTable
@@ -111,7 +111,7 @@ describe('Simple load table by URL', () => {
     });
 
     it('should show custom progress component while data loading', async () => {
-        global.fetch.mockResponses([JSON.stringify(page1), {status: 200}]);
+        fetch.mockResponseOnce(`${[JSON.stringify(page1)]}`);
 
         const table = mount(
             <UrlTable
