@@ -1,3 +1,8 @@
 table.table {
     width: 850px;
 }
+
+/* hide overlay */
+.storybook-readme-story > div:nth-child(2n) {
+    display: none;
+}

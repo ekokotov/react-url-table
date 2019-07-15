@@ -7,7 +7,7 @@ const users = [
     "address": "482 Verona Place, Homeland, Iowa, 2579",
     "name": {
       "firstName": "Kristina",
-      "surname": "Dean"
+      "surName": "Dean"
     }
   },
   {
@@ -16,7 +16,7 @@ const users = [
     "address": "748 Canton Court, Zeba, Connecticut, 4664",
     "name": {
       "firstName": "May",
-      "surname": "Lynch"
+      "surName": "Lynch"
     }
   },
   {
@@ -25,7 +25,7 @@ const users = [
     "address": "132 Turner Place, Hailesboro, Arizona, 6688",
     "name": {
       "firstName": "Elva",
-      "surname": "Silva"
+      "surName": "Silva"
     }
   },
   {
@@ -34,7 +34,7 @@ const users = [
     "address": "140 Raleigh Place, Onton, Florida, 6948",
     "name": {
       "firstName": "Paulette",
-      "surname": "Hahn"
+      "surName": "Hahn"
     }
   },
   {
@@ -43,7 +43,7 @@ const users = [
     "address": "883 Ocean Court, Cashtown, Montana, 3506",
     "name": {
       "firstName": "Melissa",
-      "surname": "Cain"
+      "surName": "Cain"
     }
   },
   {
@@ -52,7 +52,7 @@ const users = [
     "address": "361 Drew Street, Emerald, Marshall Islands, 9268",
     "name": {
       "firstName": "Ana",
-      "surname": "Odonnell"
+      "surName": "Odonnell"
     }
   },
   {
@@ -61,15 +61,16 @@ const users = [
     "address": "796 Lincoln Place, Williams, Virgin Islands, 9050",
     "name": {
       "firstName": "Genevieve",
-      "surname": "Knowles"
+      "surName": "Knowles"
     }
   }
 ]
+
 ... 
 <UrlTable
-    data={users}
-    uniqProp={'_id'}
-    fields={['fullname', 'address']}
-    headers={['Name', 'Address']}
-/>
+        data={data}
+        uniqProp={'_id'}
+        headers={['First name', 'Surname', 'Address']}
+        fields={['name.firstName', 'name.surName', 'address']}
+    />
 ```

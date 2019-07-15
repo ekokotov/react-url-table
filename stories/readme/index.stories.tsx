@@ -4,7 +4,7 @@ import '../styles.css';
 // @ts-ignore
 import Readme from './readme.md'
 
-storiesOf('Usage', module)
+storiesOf('Readme', module)
     .addParameters(
         {
             readme: {
