@@ -55,6 +55,6 @@ jest, enzyme, enzyme-adapter-react-16
 - [ ] custom row pattern/component
 - [x] custom cell pattern/component
 - [X] styling
-- [x] column highlighting (CSS only)
+- [ ] column highlighting (CSS only)
 - [ ] Themes supporting
 - [ ] prepare and register with NPM

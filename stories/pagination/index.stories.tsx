@@ -17,7 +17,7 @@ storiesOf('Pagination', module)
         {
             readme: {
                 sidebar: BasicMD
-            },
+            }
         }
     ).add('Default', () =>
     <UrlTable
@@ -31,7 +31,7 @@ storiesOf('Pagination', module)
         {
             readme: {
                 sidebar: DisabledMD
-            },
+            }
         }
     ).add('Without pagination', () =>
     <UrlTable
@@ -46,7 +46,7 @@ storiesOf('Pagination', module)
         {
             readme: {
                 sidebar: CustomPageSizeMD
-            },
+            }
         }
     ).add('Custom settings', () =>
     <UrlTable
@@ -63,7 +63,7 @@ storiesOf('Pagination', module)
         {
             readme: {
                 sidebar: CustomPageCountMD
-            },
+            }
         }
     ).add('Custom page count', () =>
     <UrlTable
