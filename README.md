@@ -39,7 +39,6 @@ jest, enzyme, enzyme-adapter-react-16
 - [x] show error (for example catch data loading errors)
 - [x] local client search
 - [x] local client partial search (by specified fields)
-- [ ] map/filter/change data hook before rendering
 - [x] simple client sorting
 - [x] configurable property sorting
 - [x] client multiple-field sorting

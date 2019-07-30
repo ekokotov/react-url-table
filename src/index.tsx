@@ -1,5 +1,4 @@
-import React, {PureComponent} from 'react';
-import _merge from 'lodash/merge';
+import React from 'react';
 import Thead from './components/head/thead';
 import Tbody from './components/body/tbody';
 import Table from "./components/table";
@@ -10,41 +9,34 @@ import SortingPanel from "./components/controls-panel/sorting";
 import SearchInput from "./components/controls-panel/searchInput";
 import ControlsPanel from "./components/controls-panel";
 
-class UrlTable extends PureComponent<ITableProps> {
-    state = {} as ITableProps;
-
-    static getDerivedStateFromProps(nextProps: ITableProps): ITableProps {
-        return _merge({
-            data: [],
-            fields: [],
-            headers: [],
-            loading: false,
-            selectMode: false,
-            onSelect: undefined,
-            pagination: {
-                pageSize: 10,
-                pageRangeDisplayed: 5,
-                marginPagesDisplayed: 1
-            },
-            search: false,
-            sorting: SortingModes.simple,
-            showSortingPanel: true,
-        }, nextProps);
-    }
-
-    render() {
-        return <StoreProvider {...this.state}>
-            <ControlsPanel>
-                {this.state.sorting && this.state.showSortingPanel && <SortingPanel/>}
-                {this.state.search && <SearchInput/>}
-            </ControlsPanel>
-            <Table>
-                <Thead/>
-                <Tbody/>
-            </Table>
-            {this.state.pagination && <Pagination/>}
-        </StoreProvider>
-    }
+function UrlTable(props: ITableProps) {
+    return <StoreProvider {...props}>
+        <ControlsPanel>
+            {props.sorting && props.showSortingPanel && <SortingPanel/>}
+            {props.search && <SearchInput/>}
+        </ControlsPanel>
+        <Table>
+            <Thead/>
+            <Tbody/>
+        </Table>
+        {props.pagination && <Pagination/>}
+    </StoreProvider>
 }
+
+UrlTable.defaultProps = {
+    data: [],
+    fields: [],
+    headers: [],
+    selectMode: false,
+    onSelect: undefined,
+    pagination: {
+        pageSize: 10,
+        pageRangeDisplayed: 5,
+        marginPagesDisplayed: 1
+    },
+    search: false,
+    sorting: SortingModes.simple,
+    showSortingPanel: true,
+};
 
 export default UrlTable;
