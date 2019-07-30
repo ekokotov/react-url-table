@@ -25,8 +25,7 @@ export type IFieldsProp = IFieldPropObject | string
 export interface IPaginateProps extends Partial<ReactPaginateProps> {
     pageCount?: number,
     currentPage?: number,
-    pageSize: number,
-    serverPaging?: boolean
+    pageSize: number
 }
 
 type ITableBase = {
@@ -39,7 +38,6 @@ type ITableBase = {
     pagination?: IPaginateProps | false,
     onSelect?: (record: IRecord[]) => void,
     selectMode?: keyof typeof SelectModes | false,
-    loading?: boolean
     loadingComponent?: (isLoading?: boolean) => React.ReactElement
 }
 

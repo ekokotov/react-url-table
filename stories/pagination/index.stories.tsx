@@ -76,13 +76,3 @@ storiesOf('Pagination', module)
             pageCount: 2
         }}
     />)
-
-//     .addParameters(
-//         {
-//             readme: {
-//                 sidebar: CustomPageCountMD
-//             },
-//         }
-//     ).add('Server side pagination', () => {
-//
-// })

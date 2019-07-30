@@ -58,8 +58,7 @@ export function useRootStore(props: ITableProps): IStore {
         paginateFilter(data) {
             let _data = data;
 
-            if (this.props.pagination && _data.length > this.props.pagination.pageSize
-                && !this.props.pagination.serverPaging && this.props.pagination.pageSize) {
+            if (this.props.pagination && _data.length > this.props.pagination.pageSize && this.props.pagination.pageSize) {
                 _data = paginate<IRecord>(data, this.props.pagination.pageSize, this.currentPage)
             }
 
@@ -91,11 +90,11 @@ export function useRootStore(props: ITableProps): IStore {
         },
 
         get isLoading() {
-            return this.props.loading || this.inProgress && !this.error
+            return this.inProgress && !this.error
         },
 
         sort(header) {
-            if (this.isLoading || (this.props.pagination && this.props.pagination.serverPaging)) {
+            if (this.isLoading) {
                 return;
             }
             const property = this.fields[header.index].property;

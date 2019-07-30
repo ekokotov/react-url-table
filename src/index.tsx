@@ -22,7 +22,6 @@ class UrlTable extends PureComponent<ITableProps> {
             selectMode: false,
             onSelect: undefined,
             pagination: {
-                serverPaging: false,
                 pageSize: 10,
                 pageRangeDisplayed: 5,
                 marginPagesDisplayed: 1

@@ -5,7 +5,7 @@ import UrlTable from "../../src";
 import {IRecord} from "../../src/@typings/types";
 const mockData = data as IRecord[];
 describe('Rows selecting', () => {
-    let selectedRows = [];
+    let selectedRows: IRecord[] = [];
 
     afterEach(() => {
         selectedRows = [];

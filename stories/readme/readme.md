@@ -16,9 +16,8 @@
 | showSortingPanel | Boolean                               | no       | true     | show soring panel with badges of current sorting state                                                                                                                                                                                                                                   |
 | onSelect         | Function                              | no       | -        | (record: SelectedRows[]) => void.  This function will be called by table row clicking/selecting.                                                                                                                                                                                         |
 | selectMode       | String or Boolean                     | no       | false    | single                                                                                                                                                                          \| multiple \| false . Highlight and execute `onSelect` callback by selecting one or few table rows. |
-| loading          | Boolean                               | no       | false    | show or not loading component while data is loading                                                                                                                                                                                                                                      |
 | loadingComponent | Function                              | no       | -        | (isLoading?: boolean) => React.ReactElement. Use custom Loading component                                                                                                                                                                                                                |
-| pagination       | IPaginateProps or Boolean             | no       |   <code>{<br/>serverPaging: false,<br/>pageSize: 10,<br/>pageRangeDisplayed: 5,<br/>marginPagesDisplayed: 1<br/>},</code>    |    For pagination it uses [react-paginate](https://www.npmjs.com/package/react-paginate) component.  You can pass any `react-paginate` property to `pagination`. <br>Set `false` to hide pagination.                                                                                                                                                                                                                                                                                |
+| pagination       | IPaginateProps or Boolean             | no       |   <code>{<br/>pageSize: 10,<br/>pageRangeDisplayed: 5,<br/>marginPagesDisplayed: 1<br/>},</code>    |    For pagination it uses [react-paginate](https://www.npmjs.com/package/react-paginate) component.  You can pass any `react-paginate` property to `pagination`. <br>Set `false` to hide pagination.                                                                                                                                                                                                                                                                                |
 
 > NOTE: existing of property `data` or `url` is required to display table.
 ### Configurable Cell:
@@ -51,8 +50,7 @@ import {ReactPaginateProps} from "react-paginate";
 interface IPaginateProps extends Partial<ReactPaginateProps> {
     pageCount?: number,
     currentPage?: number,
-    pageSize: number,
-    serverPaging?: boolean
+    pageSize: number
 }
 ```
 

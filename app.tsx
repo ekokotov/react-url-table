@@ -51,43 +51,8 @@ const fieldsPeople = [
 ];
 
 function App(): React.ReactElement {
-    // const [data, setData] = useState([]);
-    // const [page, setPage] = useState(1);
-    // const [loading, setLoading] = useState(true);
-    // const [pageSize] = useState(5);
-    // const [totalPages, setTotalPages] = useState(1);
-    //
-    // useEffect(
-    //     () => {
-    //         load(`https://reqres.in/api/users?page=${page}&per_page=${pageSize}`)
-    //             .then((res: any) => {
-    //                 setData(res.data);
-    //                 setTotalPages(res.total_pages);
-    //                 setLoading(false)
-    //             });
-    //     }, [page]
-    // );
     return (
         <Fragment>
-            {/*<h1>Server paging</h1>*/}
-            {/*<UrlTable*/}
-            {/*    data={data}*/}
-            {/*    fields={fieldsPeople}*/}
-            {/*    loading={loading}*/}
-            {/*    headers={headerPeople} // ['First name', 'Last name', 'Email', 'Avatar']*/}
-            {/*    pagination={{*/}
-            {/*        serverPaging: true,*/}
-            {/*        currentPage: page,*/}
-            {/*        pageSize: pageSize,*/}
-            {/*        pageCount: totalPages, // u can don't specify this thing*/}
-            {/*        pageRangeDisplayed: 0,*/}
-            {/*        marginPagesDisplayed: 2,*/}
-            {/*        onPageChange: (page: { selected: number }): void => {*/}
-            {/*            setPage(page.selected + 1);*/}
-            {/*        }*/}
-            {/*    }}*/}
-            {/*    uniqProp={'email'}*/}
-            {/*/>*/}
             {/*<h1>Load by URL</h1>*/}
             {/*<UrlTable*/}
             {/*    url="https://next.json-generator.com/api/json/get/4k6xmJ21r"*/}
