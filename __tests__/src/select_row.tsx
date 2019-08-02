@@ -24,7 +24,7 @@ describe('Rows selecting', () => {
                 fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
                 selectMode={'single'}
                 onSelect={onSelect}
-                uniqProp={'_id'}
+                indexField={'_id'}
             />
         );
 
@@ -41,7 +41,7 @@ describe('Rows selecting', () => {
                 data={mockData}
                 headers={['Name', 'Age', 'Eyes', 'Phone', 'Favorite fruit']}
                 fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
-                uniqProp={'_id'}
+                indexField={'_id'}
             />
         );
 
@@ -59,7 +59,7 @@ describe('Rows selecting', () => {
                 fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
                 selectMode={'multiple'}
                 onSelect={onSelect}
-                uniqProp={'_id'}
+                indexField={'_id'}
             />
         );
 

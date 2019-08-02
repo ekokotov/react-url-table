@@ -6,12 +6,7 @@ export const TableContext = createContext({} as IStore);
 
 export const StoreProvider = (
     props: React.PropsWithChildren<ITableProps>
-): React.ReactElement => {
-    const store: IStore = useRootStore(props);
-
-    return (
-        <TableContext.Provider value={store}>
-            {props.children}
-        </TableContext.Provider>
-    );
-};
+): React.ReactElement =>
+    <TableContext.Provider value={useRootStore(props)}>
+        {props.children}
+    </TableContext.Provider>;

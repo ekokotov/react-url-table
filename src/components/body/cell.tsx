@@ -2,13 +2,18 @@ import React from 'react';
 import FieldModel from "../../store/models/field";
 import {observer} from "mobx-react";
 import {IRecord} from "../../@typings/types";
+import EditableCell from "./editable-cell";
 
 interface IProps {
     record: IRecord,
-    field: FieldModel
+    field: FieldModel,
+    editable: boolean | undefined
 }
 
 function Cell(props: IProps) {
+    if (props.editable) {
+        return <EditableCell {...props}/>
+    }
 
     return (
         <td>{props.field.render(props.record)}</td>

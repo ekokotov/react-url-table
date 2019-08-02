@@ -4,6 +4,6 @@
    fetchSuccess={res => res.data}
     headers={['Email', 'First name', 'Last name']}
     fields={['email', 'first_name', 'last_name']}
-    uniqProp={'id'}
+    indexField={'id'}
 />
 ```

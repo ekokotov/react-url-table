@@ -22,7 +22,7 @@ storiesOf('Pagination', module)
     ).add('Default', () =>
     <UrlTable
         data={data}
-        uniqProp={'_id'}
+        indexField={'_id'}
         fields={['fullname', 'address']}
         headers={['Name', 'Address']}
     />)
@@ -36,7 +36,7 @@ storiesOf('Pagination', module)
     ).add('Without pagination', () =>
     <UrlTable
         data={data}
-        uniqProp={'_id'}
+        indexField={'_id'}
         fields={['fullname', 'address']}
         headers={['Name', 'Address']}
         pagination={false}
@@ -51,7 +51,7 @@ storiesOf('Pagination', module)
     ).add('Custom settings', () =>
     <UrlTable
         data={data}
-        uniqProp={'_id'}
+        indexField={'_id'}
         fields={['fullname', 'address']}
         headers={['Name', 'Address']}
         pagination={{
@@ -68,7 +68,7 @@ storiesOf('Pagination', module)
     ).add('Custom page count', () =>
     <UrlTable
         data={data}
-        uniqProp={'_id'}
+        indexField={'_id'}
         fields={['fullname', 'address']}
         headers={['Name', 'Address']}
         pagination={{

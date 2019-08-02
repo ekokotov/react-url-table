@@ -23,7 +23,7 @@ describe('Rows selecting', () => {
                 headers={['Name', 'Age', 'Eyes', 'Phone', 'Favorite fruit']}
                 fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
                 pagination={false}
-                uniqProp={'_id'}
+                indexField={'_id'}
             />
         );
         const loading = table.find('tbody .table__progress');
@@ -82,7 +82,7 @@ describe('Rows selecting', () => {
                     pageSize: pageSize,
                     marginPagesDisplayed: 100
                 }}
-                uniqProp={'_id'}
+                indexField={'_id'}
             />
         );
         const loading = table.find('tbody .table__progress');
@@ -152,7 +152,7 @@ describe('Rows selecting', () => {
                 fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
                 pagination={false}
                 sorting={'compound'}
-                uniqProp={'_id'}
+                indexField={'_id'}
             />
         );
 
@@ -225,7 +225,7 @@ describe('Rows selecting', () => {
                 headers={headers}
                 fields={['name', 'age']}
                 pagination={false}
-                uniqProp={'_id'}
+                indexField={'_id'}
             />
         );
 
@@ -267,7 +267,7 @@ describe('Rows selecting', () => {
                 headers={['Name', 'Age']}
                 fields={['name', 'age']}
                 pagination={false}
-                uniqProp={'_id'}
+                indexField={'_id'}
             />
         );
 
@@ -303,7 +303,7 @@ describe('Rows selecting', () => {
                 headers={['Name', 'Age']}
                 fields={['name', 'age']}
                 sorting={'compound'}
-                uniqProp={'_id'}
+                indexField={'_id'}
             />
         );
 
@@ -348,7 +348,7 @@ describe('Rows selecting', () => {
                 headers={['Name', 'Age']}
                 fields={['name', 'age']}
                 sorting={'compound'}
-                uniqProp={'_id'}
+                indexField={'_id'}
             />
         );
 
@@ -393,7 +393,7 @@ describe('Rows selecting', () => {
                 headers={['Name', 'Age']}
                 fields={['name', 'age']}
                 sorting={false}
-                uniqProp={'_id'}
+                indexField={'_id'}
             />
         );
         const thead = table.find('table thead');
@@ -414,7 +414,7 @@ describe('Rows selecting', () => {
                 headers={['Name', 'Age']}
                 fields={['name', 'age']}
                 showSortingPanel={false}
-                uniqProp={'_id'}
+                indexField={'_id'}
             />
         );
         const thead = table.find('table thead');

@@ -3,12 +3,14 @@ import {ReactPaginateProps} from "react-paginate";
 import Header from "../store/models/header";
 import Field from "../store/models/field";
 import {XOR} from "./utils";
+import FieldModel from "../store/models/field";
 
 export interface IHeaderPropObject {
     name: string,
     property?: string,
     sortable?: boolean,
     searchable?: boolean,
+    editable?: boolean,
 
     render?(name: string): string | React.ReactElement
 }
@@ -34,9 +36,11 @@ type ITableBase = {
     showSortingPanel?: boolean,
     fields: IFieldsProp[],
     headers?: IHeaderProp[],
-    uniqProp: string,
+    indexField: string,
+    editable?: boolean,
+    onEdit?: (newValue: string | null, propertyName: string, record: IRecord) => void,
     pagination?: IPaginateProps | false,
-    onSelect?: (record: IRecord[]) => void,
+    onSelect?: (records: IRecord[]) => void,
     selectMode?: keyof typeof SelectModes | false,
     loadingComponent?: (isLoading?: boolean) => React.ReactElement
 }
@@ -95,6 +99,8 @@ export interface IStore {
     searchQuery: string
     search: (query: string) => void,
     filterHandlers: () => Function[],
+    editCell: (value: string | null,  record: IRecord, field: FieldModel) => void,
+    isEditableField: (Field: FieldModel) => boolean,
     searchFilter: IFilterFunction<IRecord>,
     sortFilter: IFilterFunction<IRecord>,
     paginateFilter: (data: IRecord[]) => { data: IRecord[], pageCount: number },

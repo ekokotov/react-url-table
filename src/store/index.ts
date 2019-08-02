@@ -8,7 +8,7 @@ import {
     SortingValues
 } from "../@typings/types";
 import {calculatePageCount, paginate} from "../helper/pagination";
-import HeaderModel from "./models/header";
+import HeaderModel, {IHeaderModel} from "./models/header";
 import IFieldModel from "./models/field";
 import {load} from "../helper/http";
 import _orderBy from 'lodash/orderBy';
@@ -37,7 +37,7 @@ export function useRootStore(props: ITableProps): IStore {
 
         searchFilter(data) {
             if (this.searchQuery.length) {
-                data = data.filter(row => this.fields.some(field => {
+                data = data.filter((row: IRecord) => this.fields.some((field: IFieldModel) => {
                         const searchable = this.headers && this.headers[field.index].searchable;
 
                         return searchable && row[field.property].toString().toLowerCase()
@@ -72,15 +72,15 @@ export function useRootStore(props: ITableProps): IStore {
 
         select(row) {
             if (this.props.selectMode) {
-                const uniqPropValue = row[this.props.uniqProp];
+                const indexFieldValue = row[this.props.indexField];
 
-                if (!this.selectedItems.hasOwnProperty(uniqPropValue)) {
+                if (!this.selectedItems.hasOwnProperty(indexFieldValue)) {
                     if (this.props.selectMode === SelectModes.single) {
                         this.selectedItems = {};
                     }
-                    this.selectedItems[uniqPropValue] = row;
+                    this.selectedItems[indexFieldValue] = row;
                 } else {
-                    delete this.selectedItems[uniqPropValue];
+                    delete this.selectedItems[indexFieldValue];
                 }
 
                 if (this.props.onSelect) {
@@ -122,6 +122,22 @@ export function useRootStore(props: ITableProps): IStore {
         removeFromSorting(property) {
             delete this.sorting[property];
             this.currentPage = 0;
+        },
+
+        editCell(newValue, record, model) {
+            record[model.property] = newValue;
+            this.props.onEdit && this.props.onEdit(newValue, model.property, record);
+        },
+
+        isEditableField(field) {
+            if (this.headers && this.headers.length) {
+                const header: IHeaderModel = this.headers[field.index];
+
+                if (typeof header.editable !== "undefined") {
+                    return header.editable;
+                }
+            }
+            return this.props.editable;
         },
 
         get displayData() {

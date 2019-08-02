@@ -14,7 +14,7 @@ jest, enzyme, enzyme-adapter-react-16
     fetchSuccess={(res: any): [] => res.results}
     headers={['Email', 'Gender', 'Cell', 'State']}
     fields={['email', 'gender', 'cell', 'location.state']}
-    uniqProp={'login.uuid'}
+    indexField={'login.uuid'}
     pagination={{
       pageSize: 5
     }}
@@ -43,8 +43,8 @@ jest, enzyme, enzyme-adapter-react-16
 - [x] configurable property sorting
 - [x] client multiple-field sorting
 - [x] sorting order panel
-- [ ] editable cells
-- [ ] editable one column cells and lock others
+- [x] editable cells
+- [x] editable one column cells and lock others
 - [ ] reorder rows (drag-n-drop)
 - [ ] reorder columns (drag-n-drop)
 - [ ] resize column width

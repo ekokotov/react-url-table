@@ -40,7 +40,7 @@ const users = [
 ... 
 <UrlTable
     data={users}
-    uniqProp={'_id'}
+    indexField={'_id'}
     fields={['name', 'address']}
 />
 ```

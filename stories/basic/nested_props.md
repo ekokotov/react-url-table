@@ -69,7 +69,7 @@ const users = [
 ... 
 <UrlTable
         data={data}
-        uniqProp={'_id'}
+        indexField={'_id'}
         headers={['First name', 'Surname', 'Address']}
         fields={['name.firstName', 'name.surName', 'address']}
     />

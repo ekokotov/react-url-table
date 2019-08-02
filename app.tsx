@@ -3,6 +3,7 @@ import {render} from "react-dom";
 import UrlTable from "./src";
 import {data as dataMock} from './__tests__/mocks/mock.json';
 import {load} from "./src/helper/http";
+import {IRecord} from "./src/@typings/types";
 
 const headers = [
     {
@@ -51,6 +52,8 @@ const fieldsPeople = [
 ];
 
 function App(): React.ReactElement {
+    const tableData = dataMock;
+
     return (
         <Fragment>
             {/*<h1>Load by URL</h1>*/}
@@ -60,7 +63,7 @@ function App(): React.ReactElement {
             {/*    sorting={"compound"}*/}
             {/*    // showSortingPanel={true}*/}
             {/*    fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}*/}
-            {/*    uniqProp={'_id'}*/}
+            {/*    indexField={'_id'}*/}
             {/*/>*/}
             {/*<h1>Load by URL with fetchSuccess callback</h1>*/}
             {/*<UrlTable*/}
@@ -74,7 +77,7 @@ function App(): React.ReactElement {
             {/*    }}*/}
             {/*    // selectMode={'single'}*/}
             {/*    // onSelect={(record: object) => console.log('Selected records: ', record)}*/}
-            {/*    uniqProp={'login.uuid'}*/}
+            {/*    indexField={'login.uuid'}*/}
             {/*/>*/}
             {/*<h1>Load by URL with compound sorting</h1>*/}
             {/*<UrlTable*/}
@@ -82,16 +85,26 @@ function App(): React.ReactElement {
             {/*    sorting={'compound'}*/}
             {/*    headers={['Name', 'Age', 'Eyes', 'Phone', 'Favorite fruit']}*/}
             {/*    fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}*/}
-            {/*    uniqProp={'_id'}*/}
+            {/*    indexField={'_id'}*/}
             {/*    pagination={{*/}
             {/*        pageSize: 5,*/}
             {/*    }}*/}
             {/*/>*/}
             <UrlTable
-                data={dataMock}
-                headers={[{name: 'Name', searchable: false}, {name: 'Age'}, {name: 'Company'}, {name: 'Balance'}]}
-                fields={['name', 'age', 'company', 'balance']}
-                uniqProp={'_id'}
+                data={tableData}
+                headers={[{
+                    name: 'Name', searchable: false
+                },
+                    {name: 'Age', editable: true}, 'Company', 'Balance', {name: 'Phone'}, {name: 'Address'}]}
+                fields={[{
+                    property: 'name',
+                    render: function (title: string): React.ReactElement | string {
+                        return title
+                    }
+                }, {property: 'age'}, 'company', 'balance', 'phone', 'address']}
+                indexField={'_id'}
+                // editable={true}
+                onEdit={(newValue: string | null, propertyName: string, record: IRecord) => console.log(tableData)}
                 search={true}
                 selectMode={'single'}
                 sorting={'compound'}

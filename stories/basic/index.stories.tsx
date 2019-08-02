@@ -20,7 +20,7 @@ storiesOf('Basic', module)
     ).add('From local data', () =>
     <UrlTable
         data={data}
-        uniqProp={'_id'}
+        indexField={'_id'}
         fields={['fullname', 'address']}
         headers={['Name', 'Address']}
     />
@@ -35,7 +35,7 @@ storiesOf('Basic', module)
     ).add('Without header', () =>
     <UrlTable
         data={data}
-        uniqProp={'_id'}
+        indexField={'_id'}
         fields={['fullname', 'address']}
     />
 )
@@ -49,7 +49,7 @@ storiesOf('Basic', module)
     ).add('Render nested object fields', () =>
     <UrlTable
         data={data}
-        uniqProp={'_id'}
+        indexField={'_id'}
         headers={['First name', 'Surname', 'Address']}
         fields={['name.firstName', 'name.surName', 'address']}
     />

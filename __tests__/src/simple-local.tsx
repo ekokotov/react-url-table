@@ -8,7 +8,7 @@ describe('Simple example with local data and paging', () => {
         const table = mount(
             <UrlTable
                 data={data}
-                uniqProp={'_id'}
+                indexField={'_id'}
                 fields={['name', 'address']}
                 headers={['Name', 'Address']}
             />
@@ -23,7 +23,7 @@ describe('Simple example with local data and paging', () => {
         const table = mount(
             <UrlTable
                 data={data}
-                uniqProp={'_id'}
+                indexField={'_id'}
                 fields={['name', 'address']}
             />
         );
@@ -35,7 +35,7 @@ describe('Simple example with local data and paging', () => {
         const table = mount(
             <UrlTable
                 data={data}
-                uniqProp={'_id'}
+                indexField={'_id'}
                 fields={['name', 'address']}
                 headers={['Name', 'Address']}
             />
@@ -48,7 +48,7 @@ describe('Simple example with local data and paging', () => {
         const table = mount(
             <UrlTable
                 data={data}
-                uniqProp={'_id'}
+                indexField={'_id'}
                 fields={['name', 'address', 'friends[0].name']}
                 headers={['Name', 'Address', 'Friend']}
             />
@@ -63,7 +63,7 @@ describe('Simple example with local data and paging', () => {
         const table = mount(
             <UrlTable
                 data={data}
-                uniqProp={'_id'}
+                indexField={'_id'}
                 fields={['name', 'address']}
                 headers={['Name', 'Address']}
                 pagination={{
@@ -85,7 +85,7 @@ describe('Simple example with local data and paging', () => {
         const table = mount(
             <UrlTable
                 data={data}
-                uniqProp={'_id'}
+                indexField={'_id'}
                 fields={['name', 'address']}
                 headers={['Name', 'Address']}
                 pagination={false}
@@ -98,7 +98,7 @@ describe('Simple example with local data and paging', () => {
         const table = mount(
             <UrlTable
                 data={data}
-                uniqProp={'_id'}
+                indexField={'_id'}
                 fields={['name', 'address']}
                 headers={['Name', 'Address']}
                 pagination={false}
@@ -113,7 +113,7 @@ describe('Simple example with local data and paging', () => {
         const table = mount(
             <UrlTable
                 data={data}
-                uniqProp={'_id'}
+                indexField={'_id'}
                 fields={['name', 'address']}
                 headers={['Name', 'Address']}
                 pagination={{

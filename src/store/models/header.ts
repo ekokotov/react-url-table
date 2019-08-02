@@ -9,6 +9,7 @@ class HeaderModel implements IHeaderModel {
     index: number;
     sortable: boolean = true;
     searchable: boolean = true;
+    editable: boolean | undefined;
 
     renderHandler?(name: string): string | React.ReactElement
 
@@ -24,6 +25,9 @@ class HeaderModel implements IHeaderModel {
             }
             if (props.sortable === false) {
                 this.sortable = props.sortable;
+            }
+            if (props.hasOwnProperty('editable')) {
+                this.editable = props.editable;
             }
         }
         return this;

@@ -2,10 +2,9 @@ import React from "react";
 import {IFieldsProp, IFieldPropObject, IRecord} from "../../@typings/types";
 import _get from "lodash/get";
 
-interface FieldModel extends IFieldPropObject {}
-class FieldModel {
+class FieldModel implements IFieldPropObject {
     index: number;
-
+    property: string;
     renderHandler?(value: any, object: IRecord): string | React.ReactElement
 
     constructor(props: IFieldsProp, index: number) {

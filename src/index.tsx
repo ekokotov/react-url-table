@@ -28,7 +28,7 @@ UrlTable.defaultProps = {
     fields: [],
     headers: [],
     selectMode: false,
-    onSelect: undefined,
+    editable: false,
     pagination: {
         pageSize: 10,
         pageRangeDisplayed: 5,

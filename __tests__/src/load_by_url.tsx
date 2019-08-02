@@ -23,7 +23,7 @@ describe('Simple load table by URL', () => {
                 pagination={{
                     pageSize: PAGE_SIZE
                 }}
-                uniqProp={'_id'}
+                indexField={'_id'}
             />
         );
         const renderedHeader = table.find('thead th');
@@ -45,7 +45,7 @@ describe('Simple load table by URL', () => {
                 url="https://next.json-generator.com/api/json/get/4k6xmJ21r"
                 headers={['Name', 'Age', 'Eyes', 'Phone', 'Favorite fruit']}
                 fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
-                uniqProp={'_id'}
+                indexField={'_id'}
                 pagination={false}
             />
         );
@@ -68,7 +68,7 @@ describe('Simple load table by URL', () => {
                 fetchSuccess={(res: any): [] => res.data}
                 headers={['Email', 'First name', 'Last name']}
                 fields={['email', 'first_name', 'last_name']}
-                uniqProp={'id'}
+                indexField={'id'}
             />
         );
         const renderedHeader = table.find('thead th');
@@ -91,7 +91,7 @@ describe('Simple load table by URL', () => {
                 fetchSuccess={(res: any): [] => res.data}
                 headers={['Email', 'First name', 'Last name']}
                 fields={['email', 'first_name', 'last_name']}
-                uniqProp={'id'}
+                indexField={'id'}
                 pagination={{
                     pageSize: 2
                 }}
@@ -121,7 +121,7 @@ describe('Simple load table by URL', () => {
                 fetchSuccess={(res: any): [] => res.data}
                 headers={['Email', 'First name', 'Last name']}
                 fields={['email', 'first_name', 'last_name']}
-                uniqProp={'id'}
+                indexField={'id'}
             />
         );
         const loading = table.find('tbody .table__progress');

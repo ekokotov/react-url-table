@@ -18,7 +18,7 @@ storiesOf('Load by Url', module)
         url="https://next.json-generator.com/api/json/get/4k6xmJ21r"
         headers={['Name', 'Age', 'Eyes', 'Phone', 'Favorite fruit']}
         fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
-        uniqProp={'_id'}
+        indexField={'_id'}
     />
 )
 
@@ -33,6 +33,6 @@ storiesOf('Load by Url', module)
         fetchSuccess={res => res.data}
         headers={['Email', 'First name', 'Last name']}
         fields={['email', 'first_name', 'last_name']}
-        uniqProp={'id'}
+        indexField={'id'}
     />
 );

@@ -14,7 +14,7 @@ describe('search', () => {
                 fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
                 selectMode={'single'}
                 search={true}
-                uniqProp={'_id'}
+                indexField={'_id'}
             />
         );
         const input = table.find('input.table__search__input');
@@ -34,7 +34,7 @@ describe('search', () => {
                 fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
                 selectMode={'single'}
                 search={true}
-                uniqProp={'_id'}
+                indexField={'_id'}
             />
         );
 
