@@ -13,6 +13,7 @@ import IFieldModel from "./models/field";
 import {load} from "../helper/http";
 import _orderBy from 'lodash/orderBy';
 import {useAsObservableSource, useLocalStore} from 'mobx-react';
+import {toJS} from "mobx";
 
 export function useRootStore(props: ITableProps): IStore {
     const observableProps = useAsObservableSource<ITableProps>(props);
@@ -125,14 +126,19 @@ export function useRootStore(props: ITableProps): IStore {
         },
 
         editCell(newValue, record, model) {
+            if (record[model.property].toString() === newValue) { // check if new value the same
+                return;
+            }
             record[model.property] = newValue;
-            this.props.onEdit && this.props.onEdit(newValue, model.property, record);
+            this.props.onEdit && this.props.onEdit(newValue, model.property, toJS(record));
         },
 
         isEditableField(field) {
             if (this.headers && this.headers.length) {
                 const header: IHeaderModel = this.headers[field.index];
-
+                if ((header.editable || this.props.editable) && field.renderHandler) {
+                    console.warn(`Please avoid to use editable mode with custom render method for property: ${field.property}`)
+                }
                 if (typeof header.editable !== "undefined") {
                     return header.editable;
                 }

@@ -99,11 +99,11 @@ function App(): React.ReactElement {
                 fields={[{
                     property: 'name',
                     render: function (title: string): React.ReactElement | string {
-                        return title
+                        return <div style={{color: 'red'}} onClick={() => console.log(title)}>-{title}-</div>;
                     }
                 }, {property: 'age'}, 'company', 'balance', 'phone', 'address']}
                 indexField={'_id'}
-                // editable={true}
+                editable={true}
                 onEdit={(newValue: string | null, propertyName: string, record: IRecord) => console.log(tableData)}
                 search={true}
                 selectMode={'single'}

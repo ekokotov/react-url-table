@@ -1,6 +1,7 @@
-import React, {useContext} from 'react';
+import React, {useCallback, useContext, useState} from 'react';
 import FieldModel from "../../store/models/field";
 import {observer} from "mobx-react";
+import classNames from 'classnames';
 import {IRecord, IStore} from "../../@typings/types";
 import {TableContext} from "../../store/context";
 
@@ -11,12 +12,26 @@ interface IProps {
 
 function EditableCell(props: IProps) {
     const store: IStore = useContext(TableContext);
+    const [withFocus, setFocusState] = useState(false);
+    const editHandler = useCallback((e: React.SyntheticEvent): void => {
+        store.editCell(e.currentTarget.textContent, props.record, props.field);
+        setFocusState(false);
+    }, [props.record, props.field]);
+
+    const focusHandler = useCallback((e: React.SyntheticEvent): void => {
+        setFocusState(true);
+    }, []);
 
     return (
         <td contentEditable
+            className={classNames('table__cell__editable', {
+                'table__cell--edit': withFocus
+            })}
             suppressContentEditableWarning={true}
-            onBlur={e => store.editCell(e.currentTarget.textContent, props.record, props.field)}>
-            {props.field.render(props.record)}</td>
+            onFocus={focusHandler}
+            onBlur={editHandler}>
+            {props.field.render(props.record)}
+        </td>
     );
 }
 
