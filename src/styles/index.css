@@ -47,7 +47,8 @@
     color: black;
 }
 
-.url_table__row__cell, .url_table__header {
+.url_table__row__cell, .url_table__header,
+.url_table__progress td, .url_table__empty td{
     border: 1px solid var(--cellBorderColor);
     padding: 7px 11px;
 }
