@@ -11,6 +11,7 @@
     "strict": true,
     "experimentalDecorators": true,
     "outDir": "dist",
+    "lib": ["dom"],
     "importHelpers": true,
     "noImplicitAny": false,
     "suppressImplicitAnyIndexErrors": true,
@@ -18,5 +19,6 @@
     "preserveConstEnums": true
   },
   "include": ["src"],
-  "exclude": ["node_modules", "__tests__/**", "./stories", "./.storybook"]
+  "exclude": ["node_modules",
+    "tests/**", "./stories", "./.storybook"]
 }

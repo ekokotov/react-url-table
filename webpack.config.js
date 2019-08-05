@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const plugins = [
   new HtmlWebpackPlugin({
-    template: path.resolve('./index.html')
+    template: path.resolve('./demo/index.html')
   }),
   new webpack.LoaderOptionsPlugin({
     options: {
@@ -19,7 +19,7 @@ const plugins = [
 const config = {
   devtool: 'source-map',
   entry: {
-    app: './app.tsx'
+    app: './demo/app.tsx'
   },
   output: {
     path: path.resolve('./dist'),
