@@ -5,9 +5,3 @@ import { fetch } from "jest-fetch";
 global.fetch = fetch;
 
 Enzyme.configure({adapter: new ReactAdapter()});
-
-describe('Setup tests', () => {
-    it('Test ENV should be configured', done => {
-        done();
-    })
-});

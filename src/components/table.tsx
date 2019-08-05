@@ -7,9 +7,6 @@ import {TableContext} from "../store/context";
 
 function Table(props: React.PropsWithChildren<any>): React.ReactElement {
     const store: IStore = useContext(TableContext);
-    useEffect(() => {
-        window["__store"] = store;
-    }, []);
 
     useEffect(() => {
         if (store.props.url) {
@@ -18,10 +15,10 @@ function Table(props: React.PropsWithChildren<any>): React.ReactElement {
     }, [store.props.url]);
 
     return (<Fragment>
-            <table className={'table'}>
+            <table className="url_table">
                 {props.children}
             </table>
-            {store.error && <div className="table__error">
+            {store.error && <div className="url_table__error">
               <h3>{store.error}</h3>
             </div>}
         </Fragment>

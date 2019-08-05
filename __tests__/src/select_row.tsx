@@ -30,7 +30,7 @@ describe('Rows selecting', () => {
 
         table.find('tbody tr').first().simulate('click');
         await table.update();
-        expect(table.find('tbody tr.selected').length).toEqual(1);
+        expect(table.find('tbody tr.url_table__row--selected').length).toEqual(1);
         expect(onSelect).toHaveBeenCalled();
         expect(selectedRows.length).toEqual(1);
     });
@@ -47,7 +47,7 @@ describe('Rows selecting', () => {
 
         table.find('tbody tr').first().simulate('click');
         await table.update();
-        expect(table.find('tbody tr.selected').length).toEqual(0);
+        expect(table.find('tbody tr.url_table__row--selected').length).toEqual(0);
         expect(selectedRows.length).toEqual(0);
     });
 
@@ -66,7 +66,7 @@ describe('Rows selecting', () => {
         table.find('tbody tr').first().simulate('click');
         table.find('tbody tr').last().simulate('click');
         await table.update();
-        expect(table.find('tbody tr.selected').length).toEqual(2);
+        expect(table.find('tbody tr.url_table__row--selected').length).toEqual(2);
         expect(onSelect).toHaveBeenCalledTimes(2);
         expect(selectedRows.length).toEqual(2);
     });

@@ -24,8 +24,8 @@ function EditableCell(props: IProps) {
 
     return (
         <td contentEditable
-            className={classNames('table__cell__editable', {
-                'table__cell--edit': withFocus
+            className={classNames('url_table__row__cell', 'url_table__row__cell--editable', {
+                'url_table__row__cell--edit': withFocus
             })}
             suppressContentEditableWarning={true}
             onFocus={focusHandler}

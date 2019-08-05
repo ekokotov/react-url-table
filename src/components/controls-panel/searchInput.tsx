@@ -14,10 +14,10 @@ function SearchInput() {
         }
     }, INPUT_DEBOUNCE_MS);
 
-    return (<div className="table__search">
+    return (<div className="url_table__search">
             <input type="text"
                    ref={inputRef}
-                   className="table__search__input"
+                   className="url_table__search__input"
                    placeholder="Search"
                    onChange={onInputHandler}
             />

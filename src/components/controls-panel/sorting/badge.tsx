@@ -9,9 +9,9 @@ interface IProps extends ISortingOptions {
 
 function Badge(props: IProps): JSX.Element {
     return (
-        <div className={`table__sorting__badge table__sorting__badge--${props.order}`}>
+        <div className={`url_table__sorting_panel__badge url_table__sorting_panel__badge--${props.order}`}>
             {props.headerName}
-            <span className="table__sorting__badge--close" onClick={props.onClose}>X</span>
+            <span className="url_table__sorting_panel__badge__close" onClick={props.onClose}>X</span>
         </div>
     );
 }

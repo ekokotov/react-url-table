@@ -16,7 +16,7 @@ function Row(props: IProps): React.ReactElement {
 
     return (
         <tr onClick={selectRecord} className={classNames({
-            'selected': store.selectedItems[props.record[store.props.indexField]]
+            'url_table__row--selected': store.selectedItems[props.record[store.props.indexField]]
         })}>
             {store.fields.map((field: FieldModel) =>
                 <Cell key={field.property} field={field} record={props.record} editable={store.isEditableField(field)}/>

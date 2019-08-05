@@ -124,7 +124,7 @@ module.exports = {
   // setupFiles: [],
 
   // A list of paths to modules that run some code to configure or set up the testing framework before each __tests__
-  setupFilesAfterEnv: [
+  setupFiles: [
     "<rootDir>/__tests__/_setup.ts"
   ],
 
@@ -141,10 +141,10 @@ module.exports = {
   // testLocationInResults: false,
 
   // The glob patterns Jest uses to detect __tests__ files
-  // testMatch: [
-  //   "**/__tests__/**/*.[jt]s?(x)",
-  //   "**/?(*.)+(spec|__tests__).[tj]s?(x)"
-  // ],
+  testMatch: [
+    "**/__tests__/src/*.tsx",
+    // "**/?(*.)+(spec|__tests__).[tj]s?(x)"
+  ],
 
   // An array of regexp pattern strings that are matched against all __tests__ paths, matched tests are skipped
   // testPathIgnorePatterns: [

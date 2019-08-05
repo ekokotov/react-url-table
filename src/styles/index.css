@@ -11,7 +11,7 @@
     color: var(--fontColor);
 }
 
-.table {
+.url_table {
     width: 100%;
     background-color: var(--backGroundColor);
     border-collapse: collapse;
@@ -19,48 +19,45 @@
     overflow: hidden;
 }
 
-.table thead {
+.url_table thead {
     background-color: var(--accentColor);
 }
 
-.table thead th {
+.url_table__header {
+    outline: none;
     cursor: pointer;
     color: var(--thTextColor);
     text-align: left;
 }
 
-.table__header {
-    outline: none;
-}
-
-.table__header.header__sorted--desc {
+.url_table__header--sorted-desc {
     box-shadow: inset 0 -2px 0;
 }
 
-.table__header.header__sorted--asc {
+.url_table__header--sorted-asc {
     box-shadow: inset 0 2px 0;
 }
 
-.table tbody tr:not(.selected):hover {
+.url_table tbody tr:not(.url_table__row--selected):hover {
     background-color: var(--cellBorderColor);
 }
 
-.table tbody tr.selected {
+.url_table__row--selected {
     background-color: var(--thTextColor);
     color: black;
 }
 
-.table td, .table th {
+.url_table__row__cell, .url_table__header {
     border: 1px solid var(--cellBorderColor);
     padding: 7px 11px;
 }
 
-.table__progress td {
+.url_table__progress td, .url_table__empty td {
     text-align: center;
 }
 
 /* pagination */
-.table__pagination li {
+.url_table__pagination li {
     display: inline-block;
     text-align: center;
     margin-left: 5px;
@@ -71,32 +68,32 @@
     color: var(--backGroundDarkColor);
 }
 
-.table__pagination li:hover, .table__pagination li.disabled {
+li.url_table__pagination__page:hover, li.url_table__pagination__page--disabled {
     color: var(--fontColor);
 }
 
-.table__pagination a {
+.url_table__pagination a {
     outline: none;
 }
 
-.table__pagination li.selected {
+.url_table__pagination__page--selected {
     border-bottom: 1px solid var(--accentColor);
     color: var(--accentColor);
 }
 
 /* controls panel */
-.table__controls-panel {
+.url_table__controls_panel {
     display: flex;
     width: 100%;
     margin-bottom: 10px;
 }
 
 /* sorting panel */
-.table__sorting-panel {
+.url_table__sorting_panel {
     display: flex;
 }
 
-.table__sorting-panel .table__sorting__badge {
+.url_table__sorting_panel__badge {
     font-size: 12px;
     margin-left: 10px;
     padding-left: 5px;
@@ -107,12 +104,7 @@
     border-radius: 25px;
 }
 
-.table__sorting-panel .table__sorting__badge:hover .table__sorting__badge--close {
-    /*visibility: visible;*/
-}
-
-.table__sorting-panel .table__sorting__badge--close {
-    /*visibility: hidden;*/
+.url_table__sorting_panel__badge__close {
     font-size: 10px;
     display: inline-flex;
     align-items: center;
@@ -127,8 +119,8 @@
     cursor: pointer;
 }
 
-.table__sorting-panel .table__sorting__badge.table__sorting__badge--asc:before,
-.table__sorting-panel .table__sorting__badge.table__sorting__badge--desc:before {
+.url_table__sorting_panel__badge--asc:before,
+.url_table__sorting_panel__badge--desc:before {
     content: "";
     -webkit-mask-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 129 129' xmlns:xlink='http://www.w3.org/1999/xlink' enable-background='new 0 0 129 129'%3E%3Cg%3E%3Cpath d='m121.4,61.6l-54-54c-0.7-0.7-1.8-1.2-2.9-1.2s-2.2,0.5-2.9,1.2l-54,54c-1.6,1.6-1.6,4.2 0,5.8 0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2l47-47v98.1c0,2.3 1.8,4.1 4.1,4.1s4.1-1.8 4.1-4.1v-98.1l47,47c1.6,1.6 4.2,1.6 5.8,0s1.5-4.2 1.42109e-14-5.8z'/%3E%3C/g%3E%3C/svg%3E%0A");
     mask-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 129 129' xmlns:xlink='http://www.w3.org/1999/xlink' enable-background='new 0 0 129 129'%3E%3Cg%3E%3Cpath d='m121.4,61.6l-54-54c-0.7-0.7-1.8-1.2-2.9-1.2s-2.2,0.5-2.9,1.2l-54,54c-1.6,1.6-1.6,4.2 0,5.8 0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2l47-47v98.1c0,2.3 1.8,4.1 4.1,4.1s4.1-1.8 4.1-4.1v-98.1l47,47c1.6,1.6 4.2,1.6 5.8,0s1.5-4.2 1.42109e-14-5.8z'/%3E%3C/g%3E%3C/svg%3E%0A");
@@ -139,25 +131,25 @@
     margin-right: 5px;
 }
 
-.table__sorting-panel .table__sorting__badge.table__sorting__badge--desc:before {
+.url_table__sorting_panel__badge--desc:before {
     transform: rotate(180deg);
 }
 
 /* error */
-.table__error {
+.url_table__error {
     color: crimson;
     background-color: lightpink;
     text-align: center;
 }
 
 /* search */
-.table__search {
+.url_table__search {
     flex-basis: 150px;
     margin-left: auto;
     font-size: 14px;
 }
 
-.table__search input {
+.url_table__search__input {
     background-color: transparent;
     border: none;
     border-bottom: 1px solid var(--backGroundColor);
@@ -171,17 +163,17 @@
     background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/PjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNTYuOTY2IDU2Ljk2NiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTYuOTY2IDU2Ljk2NjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGZpbGw9IiMxNWE1ZmIiIGQ9Ik01NS4xNDYsNTEuODg3TDQxLjU4OCwzNy43ODZjMy40ODYtNC4xNDQsNS4zOTYtOS4zNTgsNS4zOTYtMTQuNzg2YzAtMTIuNjgyLTEwLjMxOC0yMy0yMy0yM3MtMjMsMTAuMzE4LTIzLDIzczEwLjMxOCwyMywyMywyM2M0Ljc2MSwwLDkuMjk4LTEuNDM2LDEzLjE3Ny00LjE2MmwxMy42NjEsMTQuMjA4YzAuNTcxLDAuNTkzLDEuMzM5LDAuOTIsMi4xNjIsMC45MmMwLjc3OSwwLDEuNTE4LTAuMjk3LDIuMDc5LTAuODM3QzU2LjI1NSw1NC45ODIsNTYuMjkzLDUzLjA4LDU1LjE0Niw1MS44ODd6IE0yMy45ODQsNmM5LjM3NCwwLDE3LDcuNjI2LDE3LDE3cy03LjYyNiwxNy0xNywxN3MtMTctNy42MjYtMTctMTdTMTQuNjEsNiwyMy45ODQsNnoiLz48L3N2Zz4=);
 }
 
-.table__search input::placeholder {
+.url_table__search__input::placeholder {
     color: var(--accentColor);
 }
 
 /* Edit mode */
-.table .table__cell__editable {
+.url_table__row__cell--editable {
     position: relative;
     outline: 0;
 }
 
-.table .table__cell--edit:before {
+.url_table__row__cell--edit:before {
     position: absolute;
     content: "";
     border: 1px dashed var(--accentColor);
@@ -191,7 +183,6 @@
     height: calc(100% - 4px);
 }
 
-.table tr.selected .table__cell--edit:before {
+.url_table__row--selected .url_table__row__cell--edit:before {
     border: 1px dashed black;
 }
-

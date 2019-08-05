@@ -33,7 +33,7 @@ describe('Simple load table by URL', () => {
 
         await waitUntil(() => table.update());
 
-        expect(table.find('.table__pagination li').length > 3).toEqual(true);
+        expect(table.find('.url_table__pagination li').length > 3).toEqual(true);
         expect(table.find('tbody tr').length).toEqual(PAGE_SIZE);
     });
 
@@ -55,7 +55,7 @@ describe('Simple load table by URL', () => {
         expect(renderedHeader.last().text()).toEqual('Favorite fruit');
 
         await waitUntil(() => table.update());
-        expect(table.find('.table__pagination').exists()).toEqual(false);
+        expect(table.find('.url_table__pagination').exists()).toEqual(false);
         expect(table.find('tbody tr').length > 1).toEqual(true);
     });
 
@@ -78,7 +78,7 @@ describe('Simple load table by URL', () => {
 
         await waitUntil(() => table.update());
 
-        expect(table.find('.table__pagination').exists()).toEqual(false);
+        expect(table.find('.url_table__pagination').exists()).toEqual(false);
         expect(table.find('tbody tr').length > 1).toEqual(true);
     });
 
@@ -97,15 +97,15 @@ describe('Simple load table by URL', () => {
                 }}
             />
         );
-        const loading = table.find('tbody .table__progress');
+        const loading = table.find('tbody .url_table__progress');
 
         expect(loading.exists()).toEqual(true);
         expect(loading.text()).toEqual('Loading...');
-        expect(table.find('.table__pagination').exists()).toEqual(false);
+        expect(table.find('.url_table__pagination').exists()).toEqual(false);
 
         await waitUntil(() => table.update());
 
-        expect(table.find('.table__pagination').exists()).toEqual(true);
+        expect(table.find('.url_table__pagination').exists()).toEqual(true);
         expect(table.find('tbody tr').length > 1).toEqual(true);
         expect(table.find('tbody .table__progress').exists()).toEqual(false);
     });
@@ -124,11 +124,11 @@ describe('Simple load table by URL', () => {
                 indexField={'id'}
             />
         );
-        const loading = table.find('tbody .table__progress');
+        const loading = table.find('tbody .url_table__progress');
 
         expect(loading.exists()).toEqual(true);
         expect(loading.text()).toEqual('loading: true');
-        expect(table.find('.table__pagination').exists()).toEqual(false);
+        expect(table.find('.url_table__pagination').exists()).toEqual(false);
 
         await waitUntil(() => table.update());
 

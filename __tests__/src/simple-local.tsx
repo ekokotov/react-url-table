@@ -73,12 +73,12 @@ describe('Simple example with local data and paging', () => {
             />
         );
 
-        expect(table.find('.table__pagination li').length).toEqual(calculatedPageCount + 2); // for prev and next
+        expect(table.find('.url_table__pagination li').length).toEqual(calculatedPageCount + 2); // for prev and next
 
-        expect(table.find('.table__pagination li.selected').text()).toEqual('1');
-        table.find('.table__pagination li a').last().simulate('click');
+        expect(table.find('.url_table__pagination .url_table__pagination__page--selected').text()).toEqual('1');
+        table.find('.url_table__pagination li a').last().simulate('click');
         await table.update();
-        expect(table.find('.table__pagination li.selected').text()).toEqual('2');
+        expect(table.find('.url_table__pagination .url_table__pagination__page--selected').text()).toEqual('2');
     });
 
     it('should hide paging with pagination={false}', () => {
@@ -91,7 +91,7 @@ describe('Simple example with local data and paging', () => {
                 pagination={false}
             />
         );
-        expect(table.find('.table__pagination').exists()).toEqual(false);
+        expect(table.find('.url_table__pagination').exists()).toEqual(false);
     });
 
     it('should hide paging with local data and pagination={false}', () => {
@@ -104,7 +104,7 @@ describe('Simple example with local data and paging', () => {
                 pagination={false}
             />
         );
-        expect(table.find('.table__pagination').exists()).toEqual(false);
+        expect(table.find('.url_table__pagination').exists()).toEqual(false);
     });
 
     it('should show only specified number of pages even if have more data (pageCount={N})', () => {
@@ -122,7 +122,7 @@ describe('Simple example with local data and paging', () => {
                 }}
             />
         );
-        expect(table.find('.table__pagination li').length).toEqual(PAGE_COUNT + 2); // for prev and next
+        expect(table.find('.url_table__pagination li').length).toEqual(PAGE_COUNT + 2); // for prev and next
     });
 
 });

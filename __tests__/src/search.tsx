@@ -17,7 +17,7 @@ describe('search', () => {
                 indexField={'_id'}
             />
         );
-        const input = table.find('input.table__search__input');
+        const input = table.find('.url_table__search__input');
         expect(input.exists()).toEqual(true);
         // input.simulate('click');
         // input.simulate('change', {value: "Do"});
@@ -38,7 +38,7 @@ describe('search', () => {
             />
         );
 
-        expect(table.find('input.table__search__input').exists()).toEqual(true);
+        expect(table.find('.url_table__search__input').exists()).toEqual(true);
     });
 
 });

@@ -21,9 +21,8 @@ function Header(props: IProps): React.ReactElement {
 
     return (
         <th {...getHeaderEvents}
-            className={classNames('table__header', {
-                [`header__sorted--${sortingOptions && sortingOptions.order}`]: sortingOptions
-            })}>
+            className={classNames('url_table__header',
+                sortingOptions ? `url_table__header--sorted-${sortingOptions.order}` : null)}>
             {header.render()}
         </th>
     )

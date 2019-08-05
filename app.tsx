@@ -97,10 +97,7 @@ function App(): React.ReactElement {
                 },
                     {name: 'Age', editable: true}, 'Company', 'Balance', {name: 'Phone'}, {name: 'Address'}]}
                 fields={[{
-                    property: 'name',
-                    render: function (title: string): React.ReactElement | string {
-                        return <div style={{color: 'red'}} onClick={() => console.log(title)}>-{title}-</div>;
-                    }
+                    property: 'name'
                 }, {property: 'age'}, 'company', 'balance', 'phone', 'address']}
                 indexField={'_id'}
                 editable={true}

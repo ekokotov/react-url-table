@@ -10,7 +10,7 @@ function SortingPanel() {
     const removeFromSorting = (property: string) => () => store.removeFromSorting(property);
 
     return (
-        <div className="table__sorting-panel">
+        <div className="url_table__sorting_panel">
             {sortingOptions.map(([property, sortingOpts]) =>
                 <Badge key={property} property={property} headerName={sortingOpts.headerName}
                        order={sortingOpts.order}

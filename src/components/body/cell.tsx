@@ -16,7 +16,7 @@ function Cell(props: IProps) {
     }
 
     return (
-        <td>{props.field.render(props.record)}</td>
+        <td className="url_table__row__cell">{props.field.render(props.record)}</td>
     );
 }
 

@@ -6,7 +6,7 @@ function NoData() {
     const store: IStore = useContext(TableContext);
 
     return (
-        <tr className="table__progress">
+        <tr className="url_table__empty">
             <td colSpan={store.fields.length}>No Data...</td>
         </tr>
     );

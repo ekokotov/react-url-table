@@ -8,7 +8,7 @@ function Loading() {
     const loadingComponent = store.props.loadingComponent ? store.props.loadingComponent(store.isLoading) : 'Loading...';
 
     return (
-        <tr className="table__progress">
+        <tr className="url_table__progress">
             <td colSpan={store.fields.length}>{loadingComponent}</td>
         </tr>
     );

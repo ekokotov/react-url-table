@@ -10,12 +10,14 @@ function Pagination(): React.ReactElement | null {
         store.currentPage = page.selected;
     };
 
-    if ( store.displayData.pageCount > 1 && !store.isLoading && store.displayData.data.length) {
-        return <div className="table__pagination">
-            <ReactPaginate onPageChange={onPageChange} {...store.props.pagination as ReactPaginateProps}
-                           forcePage={store.currentPage}
-                           pageCount={store.displayData.pageCount}/>
-        </div>;
+    if (store.displayData.pageCount > 1 && !store.isLoading && store.displayData.data.length) {
+        return <ReactPaginate onPageChange={onPageChange} {...store.props.pagination as ReactPaginateProps}
+                              forcePage={store.currentPage}
+                              containerClassName="url_table__pagination"
+                              pageClassName="url_table__pagination__page"
+                              activeClassName="url_table__pagination__page--selected"
+                              disabledClassName="url_table__pagination__page--disabled"
+                              pageCount={store.displayData.pageCount}/>;
     }
 
     return null
