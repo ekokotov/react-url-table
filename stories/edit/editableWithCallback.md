@@ -14,4 +14,4 @@
 ### Callback calls with arguments
  - newValue: string (updated value)
  - propertyName: string (record property name)
- - updatedRecord: Object (Object which was updated from the initial array)
+ - updatedRecord: object (object which was updated from the initial array)

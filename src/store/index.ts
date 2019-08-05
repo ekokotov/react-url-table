@@ -1,3 +1,8 @@
+import _orderBy from 'lodash/orderBy';
+import {toJS} from "mobx";
+import {useAsObservableSource, useLocalStore} from 'mobx-react';
+import {load} from "../helper/http";
+
 import {
     IFieldsProp,
     IHeaderProp, IRecord,
@@ -8,20 +13,16 @@ import {
     SortingValues
 } from "../@typings/types";
 import {calculatePageCount, paginate} from "../helper/pagination";
-import HeaderModel, {IHeaderModel} from "./models/header";
 import IFieldModel from "./models/field";
-import {load} from "../helper/http";
-import _orderBy from 'lodash/orderBy';
-import {useAsObservableSource, useLocalStore} from 'mobx-react';
-import {toJS} from "mobx";
+import HeaderModel, {IHeaderModel} from "./models/header";
 
 export function useRootStore(props: ITableProps): IStore {
     const observableProps = useAsObservableSource<ITableProps>(props);
 
-    return useLocalStore(() => <IStore>({
+    return useLocalStore(() => ({
         props: observableProps,
-        _data: undefined,
         inProgress: false,
+        _loadedData: undefined,
         currentPage: 0,
         selectedItems: {},
         sorting: {},
@@ -31,8 +32,7 @@ export function useRootStore(props: ITableProps): IStore {
         filterHandlers() {
             return [
                 this.searchFilter,
-                this.sortFilter,
-                this.paginateFilter,
+                this.sortFilter
             ]
         },
 
@@ -130,7 +130,9 @@ export function useRootStore(props: ITableProps): IStore {
                 return;
             }
             record[model.property] = newValue;
-            this.props.onEdit && this.props.onEdit(newValue, model.property, toJS(record));
+            if (this.props.onEdit) {
+                this.props.onEdit(newValue, model.property, toJS(record));
+            }
         },
 
         isEditableField(field) {
@@ -147,9 +149,10 @@ export function useRootStore(props: ITableProps): IStore {
         },
 
         get displayData() {
-            return this.filterHandlers().reduce((f: Function, g: Function) => (args: IRecord[]) => g(f(args)))(
-                this._data || this.props.data
+            const filteredData = this.filterHandlers().reduce((f, g) => args => g(f(args)))(
+                this._loadedData || this.props.data as IRecord[]
             );
+            return this.paginateFilter(filteredData);
         },
 
         get headers() {
@@ -170,11 +173,11 @@ export function useRootStore(props: ITableProps): IStore {
             try {
                 const res = await load(this.props.url);
                 this.inProgress = false;
-                this._data = <IRecord[]>(this.props.fetchSuccess ? this.props.fetchSuccess(res) : res);
+                this._loadedData = (this.props.fetchSuccess ? this.props.fetchSuccess(res) : res) as IRecord[];
             } catch (e) {
                 this.error = e.message;
                 console.error(e);
             }
         },
-    }));
+    } as IStore));
 }

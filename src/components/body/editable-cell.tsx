@@ -1,9 +1,9 @@
-import React, {useCallback, useContext, useState} from 'react';
-import FieldModel from "../../store/models/field";
-import {observer} from "mobx-react";
 import classNames from 'classnames';
+import {observer} from "mobx-react";
+import React, {useCallback, useContext, useState} from 'react';
 import {IRecord, IStore} from "../../@typings/types";
 import {TableContext} from "../../store/context";
+import FieldModel from "../../store/models/field";
 
 interface IProps {
     record: IRecord,
@@ -23,7 +23,7 @@ function EditableCell(props: IProps) {
     }, []);
 
     return (
-        <td contentEditable
+        <td contentEditable={true}
             className={classNames('url_table__row__cell', 'url_table__row__cell--editable', {
                 'url_table__row__cell--edit': withFocus
             })}

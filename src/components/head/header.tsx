@@ -1,9 +1,9 @@
-import React, {useContext} from 'react';
 import classNames from 'classnames';
-import HeaderModel from "../../store/models/header";
 import {observer} from "mobx-react";
+import React, {useContext} from 'react';
 import {IStore} from "../../@typings/types";
 import {TableContext} from "../../store/context";
+import HeaderModel from "../../store/models/header";
 
 interface IProps {
     header: HeaderModel
@@ -15,7 +15,7 @@ function Header(props: IProps): React.ReactElement {
     const property = store.fields[header.index].property;
     const sortingOptions = store.sorting[property];
     const sortingEvent = () => store.sort(header);
-    const getHeaderEvents: Object = {
+    const getHeaderEvents: object = {
         onClick: (store.props.sorting && header.sortable ? sortingEvent : null)
     };
 

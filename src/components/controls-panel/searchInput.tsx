@@ -1,5 +1,5 @@
-import React, {useContext, useRef} from 'react';
 import debounce from "lodash/debounce";
+import React, {useContext, useRef} from 'react';
 import {IStore} from "../../@typings/types";
 import {TableContext} from "../../store/context";
 

@@ -1,6 +1,6 @@
+import {observer} from "mobx-react";
 import React from 'react';
 import {ISortingOptions} from "../../../@typings/types";
-import {observer} from "mobx-react";
 
 interface IProps extends ISortingOptions {
     property: string,

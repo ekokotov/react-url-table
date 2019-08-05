@@ -1,9 +1,8 @@
 import React from 'react';
 import {ReactPaginateProps} from "react-paginate";
-import Header from "../store/models/header";
-import Field from "../store/models/field";
-import {XOR} from "./utils";
 import FieldModel from "../store/models/field";
+import Header from "../store/models/header";
+import {XOR} from "./utils";
 
 export interface IHeaderPropObject {
     name: string,
@@ -30,7 +29,7 @@ export interface IPaginateProps extends Partial<ReactPaginateProps> {
     pageSize: number
 }
 
-type ITableBase = {
+interface ITableBase {
     search?: boolean,
     sorting?: keyof typeof SortingModes | false,
     showSortingPanel?: boolean,
@@ -76,17 +75,23 @@ export interface ISortingOptions {
     headerName: string
 }
 
-export type IFilterFunction<T> = (data: T[]) => T[];
+export type IFilterFunction = (data: IRecord[]) => IRecord[];
+export type IPaginateFunction = (data: IRecord[]) => IDisplayData;
 
-export type IRecord = Object;
+export type IRecord = object;
+
+export interface IDisplayData {
+    data: IRecord[],
+    pageCount: number
+}
 
 export interface IStore {
     props: ITableProps,
-    _data: IRecord[] | undefined,
+    _loadedData: IRecord[] | undefined,
     error: undefined | string,
     headers?: Header[],
-    fields: Field[],
-    displayData: { data: IRecord[], pageCount: number },
+    fields: FieldModel[],
+    displayData: IDisplayData,
     inProgress: boolean,
     isLoading: boolean,
     loadByUrl: () => void,
@@ -98,10 +103,10 @@ export interface IStore {
     currentPage: number,
     searchQuery: string
     search: (query: string) => void,
-    filterHandlers: () => Function[],
-    editCell: (value: string | null,  record: IRecord, field: FieldModel) => void,
+    filterHandlers: () =>  IFilterFunction[],
+    editCell: (value: string | null, record: IRecord, field: FieldModel) => void,
     isEditableField: (Field: FieldModel) => boolean,
-    searchFilter: IFilterFunction<IRecord>,
-    sortFilter: IFilterFunction<IRecord>,
-    paginateFilter: (data: IRecord[]) => { data: IRecord[], pageCount: number },
+    searchFilter: IFilterFunction,
+    sortFilter: IFilterFunction,
+    paginateFilter: IPaginateFunction,
 }

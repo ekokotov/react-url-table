@@ -1,8 +1,13 @@
 {
   "name": "react-url-table",
+  "version": "0.0.1",
   "license": "MIT",
   "author": "Yauheni Kokatau",
   "description": "Smart and flexible table component built with React and for React projects. based on React16 hooks and mobx-react-lite",
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/ekokotov/react-url-table"
+  },
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "jsnext:main": "dist/index.es.js",
@@ -13,10 +18,14 @@
     "start": "webpack-dev-server --mode development --config ./webpack.config.js --hot --inline --progress --watch --open",
     "test-watch": "jest --watch",
     "test": "jest",
+    "tslint": "tslint ./src/**/*.{ts,tsx} --fix",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
-  "version": "0.0.1",
+  "engines": {
+    "node": ">=8.5",
+    "npm": ">=6.0"
+  },
   "dependencies": {
     "classnames": "^2.2.6",
     "lodash": "^4.17.11",
@@ -67,7 +76,10 @@
     "ts-jest": "^24.0.2",
     "tslib": "^1.9.3",
     "tslint": "^5.5.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-eslint-rules": "^5.4.0",
     "tslint-loader": "^3.5.3",
+    "tslint-react": "^4.0.0",
     "typescript": "^3.0.1",
     "webpack": "^4.17.0",
     "webpack-cli": "^3.1.0",

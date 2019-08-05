@@ -5,13 +5,11 @@ export interface IHeaderModel extends IHeaderPropObject {
 }
 
 class HeaderModel implements IHeaderModel {
-    name: string;
-    index: number;
-    sortable: boolean = true;
-    searchable: boolean = true;
-    editable: boolean | undefined;
-
-    renderHandler?(name: string): string | React.ReactElement
+    public name: string;
+    public index: number;
+    public sortable: boolean = true;
+    public searchable: boolean = true;
+    public editable: boolean | undefined;
 
     constructor(props: IHeaderProp, index: number) {
         this.index = index;
@@ -33,7 +31,9 @@ class HeaderModel implements IHeaderModel {
         return this;
     }
 
-    render(): string | React.ReactElement {
+    public renderHandler?(name: string): string | React.ReactElement
+
+    public render(): string | React.ReactElement {
         return this.renderHandler ? this.renderHandler(this.name) : this.name;
     }
 }

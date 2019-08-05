@@ -1,9 +1,9 @@
-import React, {Fragment, useContext, useEffect} from 'react';
 import {observer} from "mobx-react";
+import React, {Fragment, useContext, useEffect} from 'react';
 
-import '../styles/index.css';
 import {IStore} from "../@typings/types";
 import {TableContext} from "../store/context";
+import '../styles/index.css';
 
 function Table(props: React.PropsWithChildren<any>): React.ReactElement {
     const store: IStore = useContext(TableContext);

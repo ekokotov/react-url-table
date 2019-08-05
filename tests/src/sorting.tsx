@@ -79,8 +79,8 @@ describe('Rows selecting', () => {
                 headers={['Name', 'Age', 'Eyes', 'Phone', 'Favorite fruit']}
                 fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
                 pagination={{
-                    pageSize: pageSize,
-                    marginPagesDisplayed: 100
+                    marginPagesDisplayed: 100,
+                    pageSize
                 }}
                 indexField={'_id'}
             />
