@@ -9,9 +9,7 @@
     "url": "https://www.github.com/ekokotov/react-url-table"
   },
   "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "jsnext:main": "dist/index.es.js",
-  "typings": "./types/index.d.ts",
+  "typings": "./src/@typings/types.d.ts",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack --mode production --config ./webpack.config.js  --progress  --color --display-error-details --bail",
     "clean": "npm cache clear && rimraf -- dist",

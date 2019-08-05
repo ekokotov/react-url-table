@@ -18,7 +18,8 @@
     "removeComments": true,
     "preserveConstEnums": true
   },
-  "include": ["src"],
+  "files": ["src/index.tsx"],
+//  "include": ["src"],
   "exclude": ["node_modules",
     "tests/**", "./stories", "./.storybook"]
 }

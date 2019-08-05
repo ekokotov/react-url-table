@@ -3,7 +3,7 @@ import React, {Fragment, useContext, useEffect} from 'react';
 
 import {IStore} from "../@typings/types";
 import {TableContext} from "../store/context";
-import '../styles/index.css';
+// import '../styles/index.css';
 
 function Table(props: React.PropsWithChildren<any>): React.ReactElement {
     const store: IStore = useContext(TableContext);

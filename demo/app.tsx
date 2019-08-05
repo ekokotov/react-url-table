@@ -1,9 +1,11 @@
 import React, {useEffect, useState, Fragment} from "react";
 import {render} from "react-dom";
-import UrlTable from "../src";
+import UrlTable from "../dist";
 import {data as dataMock} from '../tests/mocks/mock.json';
 import {load} from "../src/helper/http";
 import {IRecord} from "../src/@typings/types";
+
+import '../src/styles/index.css';
 
 const headers = [
     {

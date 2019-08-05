@@ -9,7 +9,7 @@ function Pagination(): React.ReactElement | null {
     const onPageChange = (page: { selected: number }): void => {
         store.currentPage = page.selected;
     };
-    console.log(store.displayData.pageCount > 1 && !store.isLoading && store.displayData.data.length)
+
     if (store.displayData.pageCount > 1 && !store.isLoading && store.displayData.data.length) {
         return <ReactPaginate onPageChange={onPageChange} {...store.props.pagination as ReactPaginateProps}
                               forcePage={store.currentPage}
