@@ -4,114 +4,110 @@ import FieldModel from "../store/models/field";
 import Header from "../store/models/header";
 import {XOR} from "./utils";
 
-// declare module "react-url-table" {
-    export interface IHeaderPropObject {
-        name: string,
-        property?: string,
-        sortable?: boolean,
-        searchable?: boolean,
-        editable?: boolean,
+export interface IHeaderPropObject {
+    name: string,
+    property?: string,
+    sortable?: boolean,
+    searchable?: boolean,
+    editable?: boolean,
 
-        render?(name: string): string | React.ReactElement
-    }
+    render?(name: string): string | React.ReactElement
+}
 
-    export interface IFieldPropObject {
-        property: string,
+export interface IFieldPropObject {
+    property: string,
 
-        render?(value: any, object: IRecord): string | React.ReactElement
-    }
+    render?(value: any, object: IRecord): string | React.ReactElement
+}
 
-    export type IHeaderProp = IHeaderPropObject | string
-    export type IFieldsProp = IFieldPropObject | string
+export type IHeaderProp = IHeaderPropObject | string
+export type IFieldsProp = IFieldPropObject | string
 
-    export interface IPaginateProps extends Partial<ReactPaginateProps> {
-        pageCount?: number,
-        currentPage?: number,
-        pageSize: number
-    }
+export interface IPaginateProps extends Partial<ReactPaginateProps> {
+    pageCount?: number,
+    currentPage?: number,
+    pageSize: number
+}
 
-    interface ITableBase {
-        search?: boolean,
-        sorting?: keyof typeof SortingModes | false,
-        showSortingPanel?: boolean,
-        fields: IFieldsProp[],
-        headers?: IHeaderProp[],
-        indexField: string,
-        editable?: boolean,
-        onEdit?: (newValue: string | null, propertyName: string, record: IRecord) => void,
-        pagination?: IPaginateProps | false,
-        onSelect?: (records: IRecord[]) => void,
-        selectMode?: keyof typeof SelectModes | false,
-        loadingComponent?: (isLoading?: boolean) => React.ReactElement
-    }
+interface ITableBase {
+    search?: boolean,
+    sorting?: keyof typeof SortingModes | false,
+    showSortingPanel?: boolean,
+    fields: IFieldsProp[],
+    headers?: IHeaderProp[],
+    indexField: string,
+    editable?: boolean,
+    onEdit?: (newValue: string | null, propertyName: string, record: IRecord) => void,
+    pagination?: IPaginateProps | false,
+    onSelect?: (records: IRecord[]) => void,
+    selectMode?: keyof typeof SelectModes | false,
+    loadingComponent?: (isLoading?: boolean) => React.ReactElement
+}
 
-    interface ITableWithUrl {
-        url: string,
-        fetchSuccess?: (res: any) => []
-    }
+interface ITableWithUrl {
+    url: string,
+    fetchSuccess?: (res: any) => []
+}
 
-    interface ITableWithData {
-        data: IRecord[]
-    }
+interface ITableWithData {
+    data: IRecord[]
+}
 
-    export type ITableProps = XOR<ITableWithUrl, ITableWithData> & ITableBase
+export type ITableProps = XOR<ITableWithUrl, ITableWithData> & ITableBase
 
-    export enum SortingModes {
-        compound = 'compound',
-        simple = 'simple'
-    }
+export enum SortingModes {
+    compound = 'compound',
+    simple = 'simple'
+}
 
-    export enum SortingValues {
-        ASC = 'asc',
-        DESC = 'desc'
-    }
+export enum SortingValues {
+    ASC = 'asc',
+    DESC = 'desc'
+}
 
-    export enum SelectModes {
-        single = 'single',
-        multiple = 'multiple'
-    }
+export enum SelectModes {
+    single = 'single',
+    multiple = 'multiple'
+}
 
-    export interface ISortingOptions {
-        order: SortingValues,
-        headerName: string
-    }
+export interface ISortingOptions {
+    order: SortingValues,
+    headerName: string
+}
 
-    export type IFilterFunction = (data: IRecord[]) => IRecord[];
-    export type IPaginateFunction = (data: IRecord[]) => IDisplayData;
+export type IFilterFunction = (data: IRecord[]) => IRecord[];
+export type IPaginateFunction = (data: IRecord[]) => IDisplayData;
 
-    export type IRecord = object;
+export type IRecord = object;
 
-    export interface IDisplayData {
-        data: IRecord[],
-        pageCount: number
-    }
+export interface IDisplayData {
+    data: IRecord[],
+    pageCount: number
+}
 
-    export interface IStore {
-        props: ITableProps,
-        _loadedData: IRecord[] | undefined,
-        error: undefined | string,
-        headers?: Header[],
-        fields: FieldModel[],
-        displayData: IDisplayData,
-        inProgress: boolean,
-        isLoading: boolean,
-        loadByUrl: () => void,
-        selectedItems: { [x: string]: IRecord; },
-        sorting: { [property: string]: ISortingOptions },
-        removeFromSorting: (property: string) => void,
-        select: (row: IRecord) => void,
-        sort: (header: Header) => void,
-        currentPage: number,
-        searchQuery: string
-        search: (query: string) => void,
-        filterHandlers: () => IFilterFunction[],
-        editCell: (value: string | null, record: IRecord, field: FieldModel) => void,
-        isEditableField: (Field: FieldModel) => boolean,
-        searchFilter: IFilterFunction,
-        sortFilter: IFilterFunction,
-        paginateFilter: IPaginateFunction,
-    }
+export interface IStore {
+    props: ITableProps,
+    _loadedData: IRecord[] | undefined,
+    error: undefined | string,
+    headers?: Header[],
+    fields: FieldModel[],
+    displayData: IDisplayData,
+    inProgress: boolean,
+    isLoading: boolean,
+    loadByUrl: () => void,
+    selectedItems: { [x: string]: IRecord; },
+    sorting: { [property: string]: ISortingOptions },
+    removeFromSorting: (property: string) => void,
+    select: (row: IRecord) => void,
+    sort: (header: Header) => void,
+    currentPage: number,
+    searchQuery: string
+    search: (query: string) => void,
+    filterHandlers: () => IFilterFunction[],
+    editCell: (value: string | null, record: IRecord, field: FieldModel) => void,
+    isEditableField: (Field: FieldModel) => boolean,
+    searchFilter: IFilterFunction,
+    sortFilter: IFilterFunction,
+    paginateFilter: IPaginateFunction,
+}
 
-//     export default class UrlTable extends React.Component<ITableProps, any> {
-//     }
-// }
