@@ -1,5 +1,7 @@
-table.table {
-    width: 850px;
+@import "../styles/index.css";
+
+table.url_table {
+    max-width: 950px;
 }
 
 /* hide overlay */

@@ -1,6 +1,6 @@
 import React, {useEffect, useState, Fragment} from "react";
 import {render} from "react-dom";
-import UrlTable from "../dist";
+import UrlTable from "../src";
 import {data as dataMock} from '../tests/mocks/mock.json';
 import {load} from "../src/helper/http";
 import {IRecord} from "../src/@typings/types";
@@ -103,6 +103,7 @@ function App(): React.ReactElement {
             {/*    indexField={'_id'}*/}
             {/*/>*/}
 
+
             <UrlTable
                 data={tableData}
                 headers={[{
@@ -114,13 +115,22 @@ function App(): React.ReactElement {
                 }, {property: 'age'}, 'company', 'balance', 'phone', 'address']}
                 indexField={'_id'}
                 editable={true}
-                onEdit={(newValue: string | null, propertyName: string, record: IRecord) => console.log(tableData)}
+                onEdit={console.log}
                 search={true}
                 selectMode={'single'}
                 sorting={'compound'}
                 pagination={{
                     pageSize: 5,
                 }}
+            />
+            <UrlTable
+                url="https://next.json-generator.com/api/json/get/4k6xmJ21r"
+                headers={['Name', 'Age', 'Eyes', 'Phone', 'Favorite fruit']}
+                fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
+                pagination={{
+                    pageSize: 5
+                }}
+                indexField={'_id'}
             />
         </Fragment>
 

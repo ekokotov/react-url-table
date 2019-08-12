@@ -16,13 +16,20 @@ jest, enzyme, enzyme-adapter-react-16
     headers={['Name', 'Age', 'Eyes', 'Phone', 'Favorite fruit']}
     fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
     pagination={{
-        marginPagesDisplayed: 100,
         pageSize: 5
     }}
     indexField={'_id'}
 />
 ```
-
+## Features
+- load by URK or display local data
+- pagination
+- sorting by multiple columns
+- global search
+- search by specified column
+- custom render components
+- select single or multiple rows
+- edit cells
 
 ### Component Props
 
@@ -79,6 +86,9 @@ interface IPaginateProps extends Partial<ReactPaginateProps> {
     pageSize: number
 }
 ```
+
+## Styles
+import react-url-table/styles/index.css into your component. BTw you can override table styles by passing your custom className.
 
 > Note: `pageSize` property is required
 ### Features TODO:

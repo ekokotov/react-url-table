@@ -92,6 +92,7 @@ li.url_table__pagination__page:hover, li.url_table__pagination__page--disabled {
 /* sorting panel */
 .url_table__sorting_panel {
     display: flex;
+    min-height: 25px;
 }
 
 .url_table__sorting_panel__badge {
