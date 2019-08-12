@@ -1,6 +1,6 @@
 # react-url-table
 [![Build Status](https://api.travis-ci.com/ekokotov/redux2hooks.svg?branch=master)](https://travis-ci.com/ekokotov/react-url-table)
-> Build data grid just by URL. Based on React16 hooks and [mobx-react](https://github.com/mobxjs/mobx-react-lite){:target="_blank" rel="noopener"}. MIT License.
+> Build data grid just by URL. Based on React16 hooks and [mobx-react](https://github.com/mobxjs/mobx-react-lite). MIT License.
 
 ![Screenshot](./react-url-table.PNG)
 <a href="https://ekokotov.github.io/react-url-table" target="_blank">Check Component storybook</a>
