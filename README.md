@@ -1,10 +1,9 @@
 # react-url-table
-[![Build Status](https://api.travis-ci.com/ekokotov/redux2hooks.svg?branch=master)](https://travis-ci.com/ekokotov/redux2hooks)
-> Build data grid just by URL. Based on React16 hooks and [mobx-react](https://github.com/mobxjs/mobx-react-lite). MIT License.
+[![Build Status](https://api.travis-ci.com/ekokotov/redux2hooks.svg?branch=master)](https://travis-ci.com/ekokotov/react-url-table)
+> Build data grid just by URL. Based on React16 hooks and [mobx-react](https://github.com/mobxjs/mobx-react-lite){:target="_blank" rel="noopener"}. MIT License.
 
 ![Screenshot](./react-url-table.PNG)
-
-[Check Component storybook](https://ekokotov.github.io/react-url-table)
+<a href="https://ekokotov.github.io/react-url-table" target="_blank">Check Component storybook</a>
 
 ### ENV:
 Typescript, Webpack, React 16 hooks, Mobx-react (for optimized store management)
@@ -26,7 +25,7 @@ jest, enzyme, enzyme-adapter-react-16
 ```
 
 ## Features
-- load by URK or display local data
+- load by URL or display local data
 - pagination
 - sorting by multiple columns
 - global search
