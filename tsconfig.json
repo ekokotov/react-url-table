@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "esnext",
+    "module": "commonjs",
     "declaration": true,
     "sourceMap": true,
     "esModuleInterop": true,
@@ -11,7 +11,7 @@
     "strict": true,
     "experimentalDecorators": true,
     "outDir": "dist",
-    "lib": ["dom"],
+    "lib": ["es2015","dom"],
     "importHelpers": true,
     "noImplicitAny": false,
     "suppressImplicitAnyIndexErrors": true,
@@ -19,7 +19,6 @@
     "preserveConstEnums": true
   },
   "files": ["src/index.tsx"],
-//  "include": ["src"],
   "exclude": ["node_modules",
     "tests/**", "./stories", "./.storybook"]
 }

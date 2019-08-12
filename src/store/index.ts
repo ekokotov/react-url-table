@@ -5,7 +5,7 @@ import {load} from "../helper/http";
 
 import {
     IFieldsProp,
-    IHeaderProp, IRecord,
+    IHeaderProp, IHeaderPropObject, IRecord,
     IStore,
     ITableProps,
     SelectModes,
@@ -14,7 +14,7 @@ import {
 } from "../@typings/types";
 import {calculatePageCount, paginate} from "../helper/pagination";
 import IFieldModel from "./models/field";
-import HeaderModel, {IHeaderModel} from "./models/header";
+import HeaderModel from "./models/header";
 
 export function useRootStore(props: ITableProps): IStore {
     const observableProps = useAsObservableSource<ITableProps>(props);
@@ -137,7 +137,7 @@ export function useRootStore(props: ITableProps): IStore {
 
         isEditableField(field) {
             if (this.headers && this.headers.length) {
-                const header: IHeaderModel = this.headers[field.index];
+                const header: IHeaderPropObject = this.headers[field.index];
                 if ((header.editable || this.props.editable) && field.renderHandler) {
                     console.warn(`Please avoid to use editable mode with custom render method for property: ${field.property}`)
                 }

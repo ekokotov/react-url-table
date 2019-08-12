@@ -5,7 +5,7 @@ import {data as dataMock} from '../tests/mocks/mock.json';
 import {load} from "../src/helper/http";
 import {IRecord} from "../src/@typings/types";
 
-import '../src/styles/index.css';
+import '../styles/index.css';
 
 const headers = [
     {
@@ -92,16 +92,16 @@ function App(): React.ReactElement {
             {/*        pageSize: 5,*/}
             {/*    }}*/}
             {/*/>*/}
-            <UrlTable
-                url="https://next.json-generator.com/api/json/get/4k6xmJ21r"
-                headers={['Name', 'Age', 'Eyes', 'Phone', 'Favorite fruit']}
-                fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}
-                pagination={{
-                    marginPagesDisplayed: 100,
-                    pageSize: 1
-                }}
-                indexField={'_id'}
-            />
+            {/*<UrlTable*/}
+            {/*    url="https://next.json-generator.com/api/json/get/4k6xmJ21r"*/}
+            {/*    headers={['Name', 'Age', 'Eyes', 'Phone', 'Favorite fruit']}*/}
+            {/*    fields={['name', 'age', 'eyeColor', 'phone', 'favoriteFruit']}*/}
+            {/*    pagination={{*/}
+            {/*        marginPagesDisplayed: 100,*/}
+            {/*        pageSize: 1*/}
+            {/*    }}*/}
+            {/*    indexField={'_id'}*/}
+            {/*/>*/}
 
             <UrlTable
                 data={tableData}

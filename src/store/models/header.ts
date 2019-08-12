@@ -1,10 +1,7 @@
 import React from "react";
 import {IHeaderProp, IHeaderPropObject} from "../../@typings/types";
 
-export interface IHeaderModel extends IHeaderPropObject {
-}
-
-class HeaderModel implements IHeaderModel {
+class HeaderModel implements IHeaderPropObject {
     public name: string;
     public index: number;
     public sortable: boolean = true;
