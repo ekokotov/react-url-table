@@ -4,6 +4,7 @@
   "license": "MIT",
   "author": "Yauheni Kokatau",
   "description": "Smart and flexible table component built with React and for React projects. based on React16 hooks and mobx-react-lite",
+  "homepage": "https://ekokotov.github.io/react-url-table",
   "repository": {
     "type": "git",
     "url": "https://www.github.com/ekokotov/react-url-table"
@@ -20,7 +21,8 @@
     "test": "jest",
     "tslint": "tslint ./src/**/*.{ts,tsx} --fix",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "deploy-storybook": "build-storybook && gh-pages -d storybook-static && rimraf storybook-static"
   },
   "peerDependencies": {
     "mobx": "^5.10.0",
@@ -74,6 +76,7 @@
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "eslint": "^5.4.0",
+    "gh-pages": "^2.1.1",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "identity-obj-proxy": "^3.0.0",

@@ -3,6 +3,8 @@
 
 ![Screenshot](./react-url-table.PNG)
 
+[Check Component storybook](https://ekokotov.github.io/react-url-table)
+
 ### ENV:
 Typescript, Webpack, React 16 hooks, Mobx-react (for optimized store management)
 ### Tests:
@@ -21,6 +23,7 @@ jest, enzyme, enzyme-adapter-react-16
     indexField={'_id'}
 />
 ```
+
 ## Features
 - load by URK or display local data
 - pagination
