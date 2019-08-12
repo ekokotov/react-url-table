@@ -5,6 +5,15 @@
 ![Screenshot](./react-url-table.PNG)
 <a href="https://ekokotov.github.io/react-url-table" target="_blank">Check Component storybook</a>
 
+## Install
+```bash
+# Yarn
+yarn add react-url-table
+
+# NPM
+npm install --save react-url-table
+```
+
 ### ENV:
 Typescript, Webpack, React 16 hooks, Mobx-react (for optimized store management)
 ### Tests:

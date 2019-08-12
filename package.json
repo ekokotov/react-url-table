@@ -1,6 +1,6 @@
 {
   "name": "react-url-table",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "license": "MIT",
   "author": "Yauheni Kokatau",
   "description": "Smart and flexible table component built with React and for React projects. based on React16 hooks and mobx-react-lite",
@@ -9,6 +9,14 @@
     "type": "git",
     "url": "https://www.github.com/ekokotov/react-url-table"
   },
+  "keywords": [
+    "react-url-table",
+    "react",
+    "table",
+    "grid",
+    "ui-table",
+    "react-grid"
+  ],
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
