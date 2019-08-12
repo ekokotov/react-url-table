@@ -1,4 +1,5 @@
 # react-url-table
+[![Build Status](https://api.travis-ci.com/ekokotov/redux2hooks.svg?branch=master)](https://travis-ci.com/ekokotov/redux2hooks)
 > Build data grid just by URL. Based on React16 hooks and [mobx-react](https://github.com/mobxjs/mobx-react-lite). MIT License.
 
 ![Screenshot](./react-url-table.PNG)
