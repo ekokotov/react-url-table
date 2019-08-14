@@ -7,7 +7,8 @@ import FieldModel from "../../store/models/field";
 import Cell from "./cell";
 
 interface IProps {
-    record: IRecord
+    record: IRecord,
+    rowIndex: number
 }
 
 function Row(props: IProps): React.ReactElement {
@@ -19,7 +20,9 @@ function Row(props: IProps): React.ReactElement {
             'url_table__row--selected': store.selectedItems[props.record[store.props.indexField]]
         })}>
             {store.fields.map((field: FieldModel) =>
-                <Cell key={field.property} field={field} record={props.record} editable={store.isEditableField(field)}/>
+                <Cell rowIndex={props.rowIndex}
+                      key={field.property}
+                      field={field} record={props.record} editable={store.isEditableField(field)}/>
             )}
         </tr>
     );

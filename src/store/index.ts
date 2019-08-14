@@ -27,6 +27,7 @@ export function useRootStore(props: ITableProps): IStore {
         selectedItems: {},
         sorting: {},
         error: undefined,
+        focusCell: undefined,
         searchQuery: '',
 
         filterHandlers() {
@@ -146,6 +147,35 @@ export function useRootStore(props: ITableProps): IStore {
                 }
             }
             return this.props.editable;
+        },
+
+        setFocus(cellIndex, rowIndex) {
+            this.focusCell = {cellIndex, rowIndex};
+        },
+
+        moveFocus(keyCode) {
+            if (this.focusCell) {
+                switch (keyCode) {
+                    // left arrow
+                    case 37:
+                        this.focusCell.cellIndex > 0 && this.focusCell.cellIndex--;
+                        break;
+                    // up arrow
+                    case 38:
+                        this.focusCell.rowIndex > 0 && this.focusCell.rowIndex--;
+                        break;
+                    // right arrow
+                    case 39:
+                        this.focusCell.cellIndex < this.fields.length - 1 && this.focusCell.cellIndex++;
+                        break;
+                    // down arrow
+                    case 40:
+                        this.focusCell.rowIndex < this.displayData.data.length - 1 && this.focusCell.rowIndex++;
+                        break;
+                    default:
+                        return;
+                }
+            }
         },
 
         get displayData() {

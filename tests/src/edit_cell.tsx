@@ -18,10 +18,14 @@ describe('Editable cells', () => {
                 indexField={'_id'}
             />
         );
-        const row = table.find('tbody tr td');
+        const cell = table.find('tbody tr td');
 
-        expect(row.length > 0).toBe(true);
-        expect(row.first().getDOMNode().getAttribute('contenteditable')).toEqual("true");
+        expect(cell.length > 0).toBe(true);
+        cell.first().simulate('click');
+        expect(cell.first().render().hasClass('url_table__row__cell--focus')).toEqual(true);
+        cell.first().simulate('click');
+        expect(cell.first().getDOMNode().getAttribute('contenteditable')).toEqual("true");
+        expect(cell.first().render().hasClass('url_table__row__cell--edit')).toEqual(true);
     });
 
     it('allow prevent to edit with global editable={true} and headers options editable={false})', () => {
@@ -42,6 +46,9 @@ describe('Editable cells', () => {
         const row = table.find('tbody tr:first-child td');
 
         expect(row.length > 0).toBe(true);
+
+        row.at(0).simulate('click');
+        row.at(0).simulate('click');
         // Name cell
         expect(row.at(0).getDOMNode().getAttribute('contenteditable')).toEqual("true");
         // Age cell
@@ -78,11 +85,9 @@ describe('Editable cells', () => {
         );
         const row = table.find('tbody tr td:first-child');
         const nameCell = row.first();
-        // nameCell.simulate('click');
         nameCell.getDOMNode().textContent = 'lorem';
         nameCell.simulate('blur');
 
-        // expect(mockEditCallback).toHaveBeenCalledWith("lorem", "name", dataMock[0]);
         expect(nameCell.text()).toBe("lorem");
         expect(dataMock[0].name).toBe("lorem");
     });

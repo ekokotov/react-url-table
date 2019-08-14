@@ -175,6 +175,10 @@ li.url_table__pagination__page:hover, li.url_table__pagination__page--disabled {
     outline: 0;
 }
 
+.url_table__row__cell--focus {
+    box-shadow: inset 0 0 0 1px var(--accentColor);
+}
+
 .url_table__row__cell--edit:before {
     position: absolute;
     content: "";
@@ -188,3 +192,4 @@ li.url_table__pagination__page:hover, li.url_table__pagination__page--disabled {
 .url_table__row--selected .url_table__row__cell--edit:before {
     border: 1px dashed black;
 }
+

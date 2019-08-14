@@ -3,6 +3,7 @@ import {ReactPaginateProps} from "react-paginate";
 import FieldModel from "../store/models/field";
 import Header from "../store/models/header";
 import {XOR} from "./utils";
+import {MoveFocusKeyCodes} from "../components/body/editable-cell";
 
 export interface IHeaderPropObject {
     name: string,
@@ -85,6 +86,8 @@ export interface IDisplayData {
     pageCount: number
 }
 
+export type MoveFocusKeyCodesType = typeof MoveFocusKeyCodes[number] ;
+
 export interface IStore {
     props: ITableProps,
     _loadedData: IRecord[] | undefined,
@@ -109,5 +112,8 @@ export interface IStore {
     searchFilter: IFilterFunction,
     sortFilter: IFilterFunction,
     paginateFilter: IPaginateFunction,
+    setFocus: (cellIndex: number, rowIndex: number) => void,
+    focusCell: {cellIndex: number, rowIndex: number} | undefined,
+    moveFocus: (keyCode: MoveFocusKeyCodesType) => void
 }
 

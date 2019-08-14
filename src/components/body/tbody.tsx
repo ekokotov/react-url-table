@@ -15,7 +15,10 @@ function Tbody(props: React.PropsWithChildren<{}>): React.ReactElement {
         <tbody>
         {!store.isLoading && !store.displayData.data.length && <NoData/>}
         {store.isLoading ? <Loading/> :
-            store.displayData.data.map((record: any) => <Row key={_get(record, store.props.indexField)} record={record}/>)
+            store.displayData.data.map((record: any, index: number) =>
+                <Row key={_get(record, store.props.indexField)}
+                     rowIndex={index}
+                     record={record}/>)
         }
         </tbody>
     );

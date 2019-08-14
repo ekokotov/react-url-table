@@ -6,6 +6,7 @@ import EditableCell from "./editable-cell";
 
 interface IProps {
     record: IRecord,
+    rowIndex: number,
     field: FieldModel,
     editable: boolean | undefined
 }
