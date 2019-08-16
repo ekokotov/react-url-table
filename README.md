@@ -100,7 +100,8 @@ interface IPaginateProps extends Partial<ReactPaginateProps> {
 ```
 
 ## Styles
-import react-url-table/styles/index.css into your component. BTw you can override table styles by passing your custom className.
+import react-url-table/styles/index.css into your component.
+BTW you can override table styles by passing your custom className. Themes are based on CSS variables.
 
 > Note: `pageSize` property is required
 ### Features TODO:

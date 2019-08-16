@@ -1,12 +1,13 @@
 :root {
     --accentColor: #15a5fb;
     --backGroundColor: #1d324b;
-    --backGroundDarkColor: #0e2440;;
+    --backGroundDarkColor: #0e2440;
     --cellBorderColor: #263a55;
     --thTextColor: #9de4ff;
     --sortedThBorder: 2px solid var(--thTextColor);
     --baseFont: Helvetica-light, Helvetica Neue, Helvetica, Arial, sans-serif;
     --fontColor: #617da1;
+    --baseRowHeight: 33px;
     font-family: var(--baseFont);
     color: var(--fontColor);
 }
@@ -102,7 +103,7 @@ li.url_table__pagination__page:hover, li.url_table__pagination__page--disabled {
     display: flex;
     align-items: center;
     border: 1px solid var(--accentColor);
-    color: var(--accentColor);
+    color: var(--thTextColor);
     border-radius: 25px;
 }
 
@@ -111,7 +112,7 @@ li.url_table__pagination__page:hover, li.url_table__pagination__page--disabled {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-left: 5px;
+    margin-left: 7px;
     width: 25px;
     height: 100%;
     border: 1px solid var(--accentColor);
@@ -126,7 +127,7 @@ li.url_table__pagination__page:hover, li.url_table__pagination__page--disabled {
     content: "";
     -webkit-mask-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 129 129' xmlns:xlink='http://www.w3.org/1999/xlink' enable-background='new 0 0 129 129'%3E%3Cg%3E%3Cpath d='m121.4,61.6l-54-54c-0.7-0.7-1.8-1.2-2.9-1.2s-2.2,0.5-2.9,1.2l-54,54c-1.6,1.6-1.6,4.2 0,5.8 0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2l47-47v98.1c0,2.3 1.8,4.1 4.1,4.1s4.1-1.8 4.1-4.1v-98.1l47,47c1.6,1.6 4.2,1.6 5.8,0s1.5-4.2 1.42109e-14-5.8z'/%3E%3C/g%3E%3C/svg%3E%0A");
     mask-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 129 129' xmlns:xlink='http://www.w3.org/1999/xlink' enable-background='new 0 0 129 129'%3E%3Cg%3E%3Cpath d='m121.4,61.6l-54-54c-0.7-0.7-1.8-1.2-2.9-1.2s-2.2,0.5-2.9,1.2l-54,54c-1.6,1.6-1.6,4.2 0,5.8 0.8,0.8 1.8,1.2 2.9,1.2s2.1-0.4 2.9-1.2l47-47v98.1c0,2.3 1.8,4.1 4.1,4.1s4.1-1.8 4.1-4.1v-98.1l47,47c1.6,1.6 4.2,1.6 5.8,0s1.5-4.2 1.42109e-14-5.8z'/%3E%3C/g%3E%3C/svg%3E%0A");
-    background-color: var(--accentColor);
+    background-color: var(--thTextColor);
     height: 15px;
     width: 15px;
     background-repeat: no-repeat;
@@ -141,22 +142,24 @@ li.url_table__pagination__page:hover, li.url_table__pagination__page--disabled {
 .url_table__error {
     color: crimson;
     background-color: lightpink;
-    text-align: center;
+    height: var(--baseRowHeight);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* search */
 .url_table__search {
     flex-basis: 150px;
     margin-left: auto;
-    font-size: 14px;
 }
 
 .url_table__search__input {
     background-color: transparent;
     border: none;
-    border-bottom: 1px solid var(--backGroundColor);
-    color: var(--accentColor);
+    border-bottom: 1px solid var(--accentColor);
     padding: 5px;
+    font-size: 14px;
     outline: none;
     text-indent: 15px;
     background-repeat: no-repeat;
@@ -165,8 +168,8 @@ li.url_table__pagination__page:hover, li.url_table__pagination__page--disabled {
     background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/PjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNTYuOTY2IDU2Ljk2NiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTYuOTY2IDU2Ljk2NjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwYXRoIGZpbGw9IiMxNWE1ZmIiIGQ9Ik01NS4xNDYsNTEuODg3TDQxLjU4OCwzNy43ODZjMy40ODYtNC4xNDQsNS4zOTYtOS4zNTgsNS4zOTYtMTQuNzg2YzAtMTIuNjgyLTEwLjMxOC0yMy0yMy0yM3MtMjMsMTAuMzE4LTIzLDIzczEwLjMxOCwyMywyMywyM2M0Ljc2MSwwLDkuMjk4LTEuNDM2LDEzLjE3Ny00LjE2MmwxMy42NjEsMTQuMjA4YzAuNTcxLDAuNTkzLDEuMzM5LDAuOTIsMi4xNjIsMC45MmMwLjc3OSwwLDEuNTE4LTAuMjk3LDIuMDc5LTAuODM3QzU2LjI1NSw1NC45ODIsNTYuMjkzLDUzLjA4LDU1LjE0Niw1MS44ODd6IE0yMy45ODQsNmM5LjM3NCwwLDE3LDcuNjI2LDE3LDE3cy03LjYyNiwxNy0xNywxN3MtMTctNy42MjYtMTctMTdTMTQuNjEsNiwyMy45ODQsNnoiLz48L3N2Zz4=);
 }
 
-.url_table__search__input::placeholder {
-    color: var(--accentColor);
+.url_table__search__input, .url_table__search__input::placeholder {
+    color: var(--thTextColor);
 }
 
 /* Edit mode */

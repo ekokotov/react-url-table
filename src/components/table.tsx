@@ -3,7 +3,7 @@ import React, {Fragment, useContext, useEffect} from 'react';
 
 import {IStore} from "../@typings/types";
 import {TableContext} from "../store/context";
-// import '../styles/index.css';
+// import '../styles/blue.css';
 
 function Table(props: React.PropsWithChildren<any>): React.ReactElement {
     const store: IStore = useContext(TableContext);
@@ -19,7 +19,7 @@ function Table(props: React.PropsWithChildren<any>): React.ReactElement {
                 {props.children}
             </table>
             {store.error && <div className="url_table__error">
-              <h3>{store.error}</h3>
+              <h4>{store.error}</h4>
             </div>}
         </Fragment>
     );

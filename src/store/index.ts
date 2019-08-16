@@ -207,6 +207,8 @@ export function useRootStore(props: ITableProps): IStore {
             } catch (e) {
                 this.error = e.message;
                 console.error(e);
+            } finally {
+                this.inProgress = false;
             }
         },
     } as IStore));

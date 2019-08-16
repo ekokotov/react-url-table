@@ -9,7 +9,7 @@
     onEdit={(newValue, propertyName, updatedRecord) => console.log(newValue, propertyName, updatedRecord)}
 />
 ```
-> NOTE: open Actions tab and edit 'Age' property
+> NOTE: open Actions tab and edit 'Age' property. use cell focus to navigate.
 
 ### Callback calls with arguments
  - newValue: string (updated value)

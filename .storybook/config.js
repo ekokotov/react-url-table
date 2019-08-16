@@ -2,10 +2,10 @@ import {addDecorator, addParameters, configure} from '@storybook/react';
 import centered from '@storybook/addon-centered/react';
 import {create} from '@storybook/theming';
 import {addReadme} from 'storybook-readme';
-
+import {version} from '../package.json';
 const basicTheme = create({
   base: 'light',
-  brandTitle: 'React-URl-Table Examples',
+  brandTitle: `React-URl-Table <br/>(v.${version})`,
   // brandUrl: 'https://github.com/tuchk4/storybook-readme',
   brandImage: null,
 });

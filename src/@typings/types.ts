@@ -3,7 +3,7 @@ import {ReactPaginateProps} from "react-paginate";
 import FieldModel from "../store/models/field";
 import Header from "../store/models/header";
 import {XOR} from "./utils";
-import {MoveFocusKeyCodes} from "../components/body/editable-cell";
+import {MoveFocusKeyCodes} from "../helper/editable";
 
 export interface IHeaderPropObject {
     name: string,

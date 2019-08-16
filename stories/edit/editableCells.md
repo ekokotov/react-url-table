@@ -1,5 +1,8 @@
 > NOTE: pass editable={true} as root attribute or as header attribute. If you pass editable={true} as root attribute all cells in the table will be editable.
 
+> Enter Edit mode: double click or click + Enter
+
+> exit from editing: Escape or blur (click outside)
 
 ```javascript
 <UrlTable
