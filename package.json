@@ -1,6 +1,6 @@
 {
   "name": "react-url-table",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "license": "MIT",
   "author": "Yauheni Kokatau",
   "description": "Smart and flexible table component built with React and for React projects. based on React16 hooks and mobx-react-lite",
